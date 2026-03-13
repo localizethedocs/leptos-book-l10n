@@ -1,0 +1,298 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/deployment/binary_size.md:1
+msgid "Optimizing WASM Binary Size"
+msgstr ""
+
+#: src/deployment/binary_size.md:3
+msgid ""
+"WebAssembly binaries are significantly larger than the JavaScript bundles "
+"you’d expect for the equivalent application. Because the WASM format is "
+"designed for streaming compilation, WASM files are much faster to compile "
+"per kilobyte than JavaScript files. (For a deeper look, you can [read this "
+"great article from the Mozilla team](https://hacks.mozilla.org/2018/01/"
+"making-webassembly-even-faster-firefoxs-new-streaming-and-tiering-compiler/) "
+"on streaming WASM compilation.) Still, it’s important to ship the smallest "
+"WASM binary to users that you can, as it will reduce their network usage and "
+"make your app interactive as quickly as possible."
+msgstr ""
+
+#: src/deployment/binary_size.md:5
+msgid "So what are some practical steps?"
+msgstr ""
+
+#: src/deployment/binary_size.md:7
+msgid "Things to Do"
+msgstr ""
+
+#: src/deployment/binary_size.md:9
+msgid ""
+"Make sure you’re looking at a release build. (Debug builds are much, much "
+"larger.)"
+msgstr ""
+
+#: src/deployment/binary_size.md:10
+msgid "Add a release profile for WASM that optimizes for size, not speed."
+msgstr ""
+
+#: src/deployment/binary_size.md:12
+msgid ""
+"For a `cargo-leptos` project, for example, you can add this to your `Cargo."
+"toml`:"
+msgstr ""
+
+#: src/deployment/binary_size.md:14
+msgid ""
+"```toml\n"
+"[profile.wasm-release]\n"
+"inherits = \"release\"\n"
+"opt-level = 'z'\n"
+"lto = true\n"
+"codegen-units = 1\n"
+"\n"
+"# ....\n"
+"\n"
+"[package.metadata.leptos]\n"
+"# ....\n"
+"lib-profile-release = \"wasm-release\"\n"
+"```"
+msgstr ""
+
+#: src/deployment/binary_size.md:28
+msgid ""
+"This will hyper-optimize the WASM for your release build for size, while "
+"keeping your server build optimized for speed. (For a pure client-rendered "
+"app without server considerations, just use the `[profile.wasm-release]` "
+"block as your `[profile.release]`.)"
+msgstr ""
+
+#: src/deployment/binary_size.md:30
+msgid ""
+"Always serve compressed WASM in production. WASM tends to compress very "
+"well, typically shrinking to less than 50% its uncompressed size, and it’s "
+"trivial to enable compression for static files being served from Actix or "
+"Axum."
+msgstr ""
+
+#: src/deployment/binary_size.md:32
+msgid ""
+"If you’re using nightly Rust, you can rebuild the standard library with this "
+"same profile rather than the prebuilt standard library that’s distributed "
+"with the `wasm32-unknown-unknown` target."
+msgstr ""
+
+#: src/deployment/binary_size.md:34
+msgid "To do this, create a file in your project at `.cargo/config.toml`"
+msgstr ""
+
+#: src/deployment/binary_size.md:36
+msgid ""
+"```toml\n"
+"[unstable]\n"
+"build-std = [\"std\", \"panic_abort\", \"core\", \"alloc\"]\n"
+"build-std-features = [\"panic_immediate_abort\"]\n"
+"```"
+msgstr ""
+
+#: src/deployment/binary_size.md:42
+msgid ""
+"Note that if you're using this with SSR too, the same Cargo profile will be "
+"applied. You'll need to explicitly specify your target:"
+msgstr ""
+
+#: src/deployment/binary_size.md:43
+msgid ""
+"```toml\n"
+"[build]\n"
+"target = \"x86_64-unknown-linux-gnu\" # or whatever\n"
+"```"
+msgstr ""
+
+#: src/deployment/binary_size.md:48
+msgid ""
+"Also note that in some cases, the cfg feature `has_std` will not be set, "
+"which may cause build errors with some dependencies which check for "
+"`has_std`. You may fix any build errors due to this by adding:"
+msgstr ""
+
+#: src/deployment/binary_size.md:49
+msgid ""
+"```toml\n"
+"[build]\n"
+"rustflags = [\"--cfg=has_std\"]\n"
+"```"
+msgstr ""
+
+#: src/deployment/binary_size.md:54
+msgid ""
+"And you'll need to add `panic = \"abort\"` to `[profile.release]` in `Cargo."
+"toml`. Note that this applies the same `build-std` and panic settings to "
+"your server binary, which may not be desirable. Some further exploration is "
+"probably needed here."
+msgstr ""
+
+#: src/deployment/binary_size.md:56
+msgid ""
+"One of the sources of binary size in WASM binaries can be `serde` "
+"serialization/deserialization code. Leptos uses `serde` by default to "
+"serialize and deserialize resources created with `Resource::new()`. "
+"`leptos_server` includes additional features to activate alternative "
+"encodings by adding additional `new_` methods. For example, activating the "
+"`miniserde` feature on the `leptos_server` crate adds a `Resource::"
+"new_miniserde()` method, and the `serde-lite` feature adds `new_serde_lite`. "
+"`miniserde` and `serde-lite` only implement subsets of `serde`’s "
+"functionality, but typically optimize for binary size over speed."
+msgstr ""
+
+#: src/deployment/binary_size.md:58
+msgid "Things to Avoid"
+msgstr ""
+
+#: src/deployment/binary_size.md:60
+msgid ""
+"There are certain crates that tend to inflate binary sizes. For example, the "
+"`regex` crate with its default features adds about 500kb to a WASM binary "
+"(largely because it has to pull in Unicode table data!). In a size-conscious "
+"setting, you might consider avoiding regexes in general, or even dropping "
+"down and calling browser APIs to use the built-in regex engine instead. "
+"(This is what `leptos_router` does on the few occasions it needs a regular "
+"expression.)"
+msgstr ""
+
+#: src/deployment/binary_size.md:62
+msgid ""
+"In general, Rust’s commitment to runtime performance is sometimes at odds "
+"with a commitment to a small binary. For example, Rust monomorphizes generic "
+"functions, meaning it creates a distinct copy of the function for each "
+"generic type it’s called with. This is significantly faster than dynamic "
+"dispatch, but increases binary size. Leptos tries to balance runtime "
+"performance with binary size considerations pretty carefully; but you might "
+"find that writing code that uses many generics tends to increase binary "
+"size. For example, if you have a generic component with a lot of code in its "
+"body and call it with four different types, remember that the compiler could "
+"include four copies of that same code. Refactoring to use a concrete inner "
+"function or helper can often maintain performance and ergonomics while "
+"reducing binary size."
+msgstr ""
+
+#: src/deployment/binary_size.md:64
+msgid "Code Splitting"
+msgstr ""
+
+#: src/deployment/binary_size.md:66
+msgid ""
+"`cargo-leptos` and the Leptos framework and router have support for WASM "
+"binary splitting. (Note that this support was released during the summer of "
+"2025; depending on when you’re reading this, we may still be ironing out "
+"bugs.)"
+msgstr ""
+
+#: src/deployment/binary_size.md:68
+msgid ""
+"This can be used through the combination of three tools: `cargo leptos "
+"(serve|watch|build) --split`, the [`#[lazy]`](https://docs.rs/leptos/latest/"
+"leptos/attr.lazy.html) macro, and the [`#[lazy_route]`](https://docs.rs/"
+"leptos_router/latest/leptos_router/attr.lazy_route.html) macro (paired with "
+"the [`LazyRoute`](https://docs.rs/leptos_router/latest/leptos_router/trait."
+"LazyRoute.html) trait)."
+msgstr ""
+
+#: src/deployment/binary_size.md:70
+msgid "`#[lazy]`"
+msgstr ""
+
+#: src/deployment/binary_size.md:72
+msgid ""
+"The `#[lazy]` macro indicates that a function can be lazy-loaded from a "
+"separate WebAssembly (WASM) binary. It can be used to annotate a synchronous "
+"or async function; in either case, it will produce an async function. The "
+"first time you call the lazy-loaded function, that separate chunk of code "
+"will be loaded from the server and called. Subsequently, it will be called "
+"without an additional loading step."
+msgstr ""
+
+#: src/deployment/binary_size.md:77
+msgid "\"Hello, lazy world!\""
+msgstr ""
+
+#: src/deployment/binary_size.md:82
+msgid "/* do something that requires async work */"
+msgstr ""
+
+#: src/deployment/binary_size.md:83
+msgid "\"Hello, lazy async world!\""
+msgstr ""
+
+#: src/deployment/binary_size.md:87
+msgid "// synchronous function has been converted to async\n"
+msgstr ""
+
+#: src/deployment/binary_size.md:90
+msgid "// async function is still async\n"
+msgstr ""
+
+#: src/deployment/binary_size.md:95
+msgid ""
+"This can be useful for one-off lazy functions. But lazy-loading is most "
+"powerful when it’s paired with the router."
+msgstr ""
+
+#: src/deployment/binary_size.md:97
+msgid "`#[lazy_route]`"
+msgstr ""
+
+#: src/deployment/binary_size.md:99
+msgid ""
+"Lazy routes allow you to split out the code for a route’s view, and to "
+"lazily load it concurrently with data for that route while navigating. "
+"Through the use of nested routing, multiple lazy-loaded routes can be "
+"nested: each will load its own data and its own lazy view concurrently."
+msgstr ""
+
+#: src/deployment/binary_size.md:101
+msgid ""
+"Splitting the data loading from the (lazy-loaded) view allows you to prevent "
+"a “waterfall,” in which you wait for the lazy view to load, then begin "
+"loading data."
+msgstr ""
+
+#: src/deployment/binary_size.md:106
+msgid "// the route definition\n"
+msgstr ""
+
+#: src/deployment/binary_size.md:118
+msgid "/* todo: load blog posts */"
+msgstr ""
+
+#: src/deployment/binary_size.md:123
+msgid "// this function will be lazy-loaded, concurrently with data()\n"
+msgstr ""
+
+#: src/deployment/binary_size.md:127
+msgid ""
+"// ... now you can use the `posts` resource with Suspense, etc.,\n"
+"        // and return AnyView by calling .into_any() on a view\n"
+msgstr ""
+
+#: src/deployment/binary_size.md:133
+msgid "Examples and More Information"
+msgstr ""
+
+#: src/deployment/binary_size.md:135
+msgid ""
+"You can find more in-depth discussion in [this YouTube video](https://www."
+"youtube.com/watch?v=w5fhcoxQnII), and a full [`lazy_routes`](https://github."
+"com/leptos-rs/leptos/blob/main/examples/lazy_routes/src/app.rs) example in "
+"the repo."
+msgstr ""

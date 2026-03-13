@@ -1,0 +1,153 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/reactivity/interlude_functions.md:1
+msgid "Interlude: Reactivity and Functions"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:3
+msgid ""
+"One of our core contributors said to me recently: “I never used closures "
+"this often until I started using Leptos.” And it’s true. Closures are at the "
+"heart of any Leptos application. It sometimes looks a little silly:"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:8
+msgid "// a signal holds a value, and can be updated\n"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:10
+msgid "// a derived signal is a function that accesses other signals\n"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:15
+msgid "\"odd\""
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:17
+msgid "\"even\""
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:19
+msgid ""
+"// an effect automatically tracks the signals it depends on\n"
+"// and reruns when they change\n"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:23
+msgid "\"text = {}\""
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:31
+msgid "Closures, closures everywhere!"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:33
+msgid "But why?"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:35
+msgid "Functions and UI Frameworks"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:37
+msgid ""
+"Functions are at the heart of every UI framework. And this makes perfect "
+"sense. Creating a user interface is basically divided into two phases:"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:39
+msgid "initial rendering"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:40
+msgid "updates"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:42
+msgid ""
+"In a web framework, the framework does some kind of initial rendering. Then "
+"it hands control back over to the browser. When certain events fire (like a "
+"mouse click) or asynchronous tasks finish (like an HTTP request finishing), "
+"the browser wakes the framework back up to update something. The framework "
+"runs some kind of code to update your user interface, and goes back asleep "
+"until the browser wakes it up again."
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:44
+msgid ""
+"The key phrase here is “runs some kind of code.” The natural way to “run "
+"some kind of code” at an arbitrary point in time—in Rust or in any other "
+"programming language—is to call a function. And in fact every UI framework "
+"is based on rerunning some kind of function over and over:"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:46
+msgid ""
+"virtual DOM (VDOM) frameworks like React, Yew, or Dioxus rerun a component "
+"or render function over and over, to generate a virtual DOM tree that can be "
+"reconciled with the previous result to patch the DOM"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:47
+msgid ""
+"compiled frameworks like Angular and Svelte divide your component templates "
+"into “create” and “update” functions, rerunning the update function when "
+"they detect a change to the component’s state"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:48
+msgid ""
+"in fine-grained reactive frameworks like SolidJS, Sycamore, or Leptos, _you_ "
+"define the functions that rerun"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:50
+msgid "That’s what all our components are doing."
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:52
+msgid "Take our typical `<SimpleCounter/>` example in its simplest form:"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:69
+msgid ""
+"The `SimpleCounter` function itself runs once. The `value` signal is created "
+"once. The framework hands off the `increment` function to the browser as an "
+"event listener. When you click the button, the browser calls `increment`, "
+"which updates `value` via `set_value`. And that updates the single text node "
+"represented in our view by `{value}`."
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:71
+msgid ""
+"Functions are key to reactivity. They provide the framework with the ability "
+"to rerun the smallest possible unit of your application in response to a "
+"change."
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:73
+msgid "So remember two things:"
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:75
+msgid ""
+"Your component function is a setup function, not a render function: it only "
+"runs once."
+msgstr ""
+
+#: src/reactivity/interlude_functions.md:76
+msgid ""
+"For values in your view template to be reactive, they must be reactive "
+"functions: either signals or closures that capture and read from signals."
+msgstr ""

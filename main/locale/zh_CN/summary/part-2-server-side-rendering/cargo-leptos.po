@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ssr/21_cargo_leptos.md:1
+msgid "Introducing `cargo-leptos`"
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:3
+msgid ""
+"So far, we’ve just been running code in the browser and using Trunk to "
+"coordinate the build process and run a local development process. If we’re "
+"going to add server-side rendering, we’ll need to run our application code "
+"on the server as well. This means we’ll need to build two separate binaries, "
+"one compiled to native code and running the server, the other compiled to "
+"WebAssembly (WASM) and running in the user’s browser. Additionally, the "
+"server needs to know how to serve this WASM version (and the JavaScript "
+"required to initialize it) to the browser."
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:5
+msgid ""
+"This is not an insurmountable task but it adds some complication. For "
+"convenience and an easier developer experience, we built the [`cargo-leptos`]"
+"(https://github.com/leptos-rs/cargo-leptos) build tool. `cargo-leptos` "
+"basically exists to coordinate the build process for your app, handling "
+"recompiling the server and client halves when you make changes, and adding "
+"some built-in support for things like Tailwind, SASS, and testing."
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:7
+msgid "Getting started is pretty easy. Just run"
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:13
+msgid "And then to create a new project, you can run either"
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:16
+msgid "# for an Actix template\n"
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:20
+msgid "or"
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:23
+msgid "# for an Axum template\n"
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:27
+msgid ""
+"Make sure you've added the wasm32-unknown-unknown target so that Rust can "
+"compile your code to WebAssembly to run in the browser."
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:32
+msgid "Now `cd` into the directory you’ve created and run"
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:38
+msgid ""
+"Once your app has compiled you can open up your browser to [`http://"
+"localhost:3000`](http://localhost:3000) to see it."
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:40
+msgid ""
+"`cargo-leptos` has lots of additional features and built in tools. You can "
+"learn more [in its `README`](https://github.com/leptos-rs/cargo-leptos/blob/"
+"main/README.md)."
+msgstr ""
+
+#: src/ssr/21_cargo_leptos.md:42
+msgid ""
+"But what exactly is happening when you open your browser to "
+"`localhost:3000`? Well, read on to find out."
+msgstr ""

@@ -1,0 +1,314 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/router/19_a.md:1
+msgid "The `<A/>` Component"
+msgstr ""
+
+#: src/router/19_a.md:3
+msgid ""
+"Client-side navigation works perfectly fine with ordinary HTML `<a>` "
+"elements. The router adds a listener that handles every click on a `<a>` "
+"element and tries to handle it on the client side, i.e., without doing "
+"another round trip to the server to request HTML. This is what enables the "
+"snappy “single-page app” navigations you’re probably familiar with from most "
+"modern web apps."
+msgstr ""
+
+#: src/router/19_a.md:5
+msgid ""
+"The router will bail out of handling an `<a>` click under a number of "
+"situations"
+msgstr ""
+
+#: src/router/19_a.md:7
+msgid "the click event has had `prevent_default()` called on it"
+msgstr ""
+
+#: src/router/19_a.md:8
+msgid ""
+"the <kbd>Meta</kbd>, <kbd>Alt</kbd>, <kbd>Ctrl</kbd>, or <kbd>Shift</kbd> "
+"keys were held during click"
+msgstr ""
+
+#: src/router/19_a.md:9
+msgid "the `<a>` has a `target` or `download` attribute, or `rel=\"external\"`"
+msgstr ""
+
+#: src/router/19_a.md:10
+msgid "the link has a different origin from the current location"
+msgstr ""
+
+#: src/router/19_a.md:12
+msgid ""
+"In other words, the router will only try to do a client-side navigation when "
+"it’s pretty sure it can handle it, and it will upgrade every `<a>` element "
+"to get this special behavior."
+msgstr ""
+
+#: src/router/19_a.md:14
+msgid ""
+"This also means that if you need to opt out of client-side routing, you can "
+"do so easily. For example, if you have a link to another page on the same "
+"domain, but which isn’t part of your Leptos app, you can just use `<a "
+"rel=\"external\">` to tell the router it isn’t something it can handle."
+msgstr ""
+
+#: src/router/19_a.md:16
+msgid ""
+"The router also provides an [`<A>`](https://docs.rs/leptos_router/latest/"
+"leptos_router/components/fn.A.html) component, which does two additional "
+"things:"
+msgstr ""
+
+#: src/router/19_a.md:18
+msgid ""
+"Correctly resolves relative nested routes. Relative routing with ordinary "
+"`<a>` tags can be tricky. For example, if you have a route like `/post/:id`, "
+"`<A href=\"1\">` will generate the correct relative route, but `<a "
+"href=\"1\">` likely will not (depending on where it appears in your view.) "
+"`<A/>` resolves routes relative to the path of the nested route within which "
+"it appears."
+msgstr ""
+
+#: src/router/19_a.md:19
+msgid ""
+"Sets the `aria-current` attribute to `page` if this link is the active link "
+"(i.e., it’s a link to the page you’re on). This is helpful for accessibility "
+"and for styling. For example, if you want to set the link a different color "
+"if it’s a link to the page you’re currently on, you can match this attribute "
+"with a CSS selector."
+msgstr ""
+
+#: src/router/19_a.md:21
+msgid "Navigating Programmatically"
+msgstr ""
+
+#: src/router/19_a.md:23
+msgid ""
+"Your most-used methods of navigating between pages should be with `<a>` and "
+"`<form>` elements or with the enhanced `<A/>` and `<Form/>` components. "
+"Using links and forms to navigate is the best solution for accessibility and "
+"graceful degradation."
+msgstr ""
+
+#: src/router/19_a.md:25
+msgid ""
+"On occasion, though, you’ll want to navigate programmatically, i.e., call a "
+"function that can navigate to a new page. In that case, you should use the "
+"[`use_navigate`](https://docs.rs/leptos_router/latest/leptos_router/hooks/fn."
+"use_navigate.html) function."
+msgstr ""
+
+#: src/router/19_a.md:29
+msgid "\"/somewhere\""
+msgstr ""
+
+#: src/router/19_a.md:32
+msgid ""
+"You should almost never do something like `<button on:click=move |_| "
+"navigate(/* ... */)>`. Any `on:click` that navigates should be an `<a>`, for "
+"reasons of accessibility."
+msgstr ""
+
+#: src/router/19_a.md:34
+msgid ""
+"The second argument here is a set of [`NavigateOptions`](https://docs.rs/"
+"leptos_router/latest/leptos_router/struct.NavigateOptions.html), which "
+"includes options to resolve the navigation relative to the current route as "
+"the `<A/>` component does, replace it in the navigation stack, include some "
+"navigation state, and maintain the current scroll state on navigation."
+msgstr ""
+
+#: src/router/19_a.md:36
+msgid ""
+"Once again, this is the same example. Check out the relative `<A/>` "
+"components, and take a look at the CSS in `index.html` to see the ARIA-based "
+"styling."
+msgstr ""
+
+#: src/router/19_a.md:38
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/16-router-0-7-"
+"csm8t5?file=%2Fsrc%2Fmain.rs)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/16-router-0-7-csm8t5?"
+"file=%2Fsrc%2Fmain.rs\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"```"
+msgstr ""
+
+#: src/router/19_a.md:64
+msgid "\"Contact App\""
+msgstr ""
+
+#: src/router/19_a.md:65
+msgid ""
+"// this <nav> will show on every route,\n"
+"            // because it's outside the <Routes/>\n"
+"            // note: we can just use normal <a> tags\n"
+"            // and the router will use client-side navigation\n"
+msgstr ""
+
+#: src/router/19_a.md:70 src/router/19_a.md:76
+msgid "\"/\""
+msgstr ""
+
+#: src/router/19_a.md:70 src/router/19_a.md:77
+msgid "\"Home\""
+msgstr ""
+
+#: src/router/19_a.md:71 src/router/19_a.md:81
+msgid "\"/contacts\""
+msgstr ""
+
+#: src/router/19_a.md:71 src/router/19_a.md:115
+msgid "\"Contacts\""
+msgstr ""
+
+#: src/router/19_a.md:74
+msgid "\"Not found.\""
+msgstr ""
+
+#: src/router/19_a.md:75
+msgid "// / just has an un-nested \"Home\"\n"
+msgstr ""
+
+#: src/router/19_a.md:79
+msgid "// /contacts has nested routes\n"
+msgstr ""
+
+#: src/router/19_a.md:84 src/router/19_a.md:97
+msgid "// if no id specified, fall back\n"
+msgstr ""
+
+#: src/router/19_a.md:85
+msgid "\":id\""
+msgstr ""
+
+#: src/router/19_a.md:86 src/router/19_a.md:98 src/router/19_a.md:148
+msgid "\"\""
+msgstr ""
+
+#: src/router/19_a.md:87 src/router/19_a.md:92
+msgid "\"tab\""
+msgstr ""
+
+#: src/router/19_a.md:88
+msgid "\"(Contact Info)\""
+msgstr ""
+
+#: src/router/19_a.md:91 src/router/19_a.md:149
+msgid "\"conversations\""
+msgstr ""
+
+#: src/router/19_a.md:93
+msgid "\"(Conversations)\""
+msgstr ""
+
+#: src/router/19_a.md:99
+msgid "\"select-user\""
+msgstr ""
+
+#: src/router/19_a.md:100
+msgid "\"Select a user to view contact info.\""
+msgstr ""
+
+#: src/router/19_a.md:113
+msgid "\"contact-list\""
+msgstr ""
+
+#: src/router/19_a.md:114
+msgid "// here's our contact list component itself\n"
+msgstr ""
+
+#: src/router/19_a.md:116
+msgid "\"contact-list-contacts\""
+msgstr ""
+
+#: src/router/19_a.md:117 src/router/19_a.md:138
+msgid "\"alice\""
+msgstr ""
+
+#: src/router/19_a.md:117 src/router/19_a.md:138
+msgid "\"Alice\""
+msgstr ""
+
+#: src/router/19_a.md:118 src/router/19_a.md:139
+msgid "\"bob\""
+msgstr ""
+
+#: src/router/19_a.md:118 src/router/19_a.md:139
+msgid "\"Bob\""
+msgstr ""
+
+#: src/router/19_a.md:119 src/router/19_a.md:140
+msgid "\"steve\""
+msgstr ""
+
+#: src/router/19_a.md:119 src/router/19_a.md:140
+msgid "\"Steve\""
+msgstr ""
+
+#: src/router/19_a.md:122
+msgid ""
+"// <Outlet/> will show the nested child route\n"
+"            // we can position this outlet wherever we want\n"
+"            // within the layout\n"
+msgstr ""
+
+#: src/router/19_a.md:132
+msgid "// we can access the :id param reactively with `use_params_map`\n"
+msgstr ""
+
+#: src/router/19_a.md:134
+msgid "\"id\""
+msgstr ""
+
+#: src/router/19_a.md:136
+msgid "// imagine we're loading data from an API here\n"
+msgstr ""
+
+#: src/router/19_a.md:141
+msgid "\"User not found.\""
+msgstr ""
+
+#: src/router/19_a.md:146
+msgid "\"contact-info\""
+msgstr ""
+
+#: src/router/19_a.md:147
+msgid "\"tabs\""
+msgstr ""
+
+#: src/router/19_a.md:148
+msgid "\"Contact Info\""
+msgstr ""
+
+#: src/router/19_a.md:149
+msgid "\"Conversations\""
+msgstr ""
+
+#: src/router/19_a.md:152
+msgid ""
+"// <Outlet/> here is the tabs that are nested\n"
+"            // underneath the /contacts/:id route\n"
+msgstr ""

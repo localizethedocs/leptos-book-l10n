@@ -1,0 +1,347 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/router/18_params_and_queries.md:1
+msgid "Params and Queries"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:3
+msgid ""
+"Static paths are useful for distinguishing between different pages, but "
+"almost every application wants to pass data through the URL at some point."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:5
+msgid "There are two ways you can do this:"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:7
+msgid "named route **params** like `id` in `/users/:id`"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:8
+msgid "named route **queries** like `q` in `/search?q=Foo`"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:10
+msgid ""
+"Because of the way URLs are built, you can access the query from _any_ "
+"`<Route/>` view. You can access route params from the `<Route/>` that "
+"defines them or any of its nested children."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:12
+msgid "Accessing params and queries is pretty simple with a couple of hooks:"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:14
+msgid ""
+"[`use_query`](https://docs.rs/leptos_router/latest/leptos_router/hooks/fn."
+"use_query.html) or [`use_query_map`](https://docs.rs/leptos_router/latest/"
+"leptos_router/hooks/fn.use_query_map.html)"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:15
+msgid ""
+"[`use_params`](https://docs.rs/leptos_router/latest/leptos_router/hooks/fn."
+"use_params.html) or [`use_params_map`](https://docs.rs/leptos_router/latest/"
+"leptos_router/hooks/fn.use_params_map.html)"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:17
+msgid ""
+"Each of these comes with a typed option (`use_query` and `use_params`) and "
+"an untyped option (`use_query_map` and `use_params_map`)."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:19
+msgid ""
+"The untyped versions hold a simple key-value map. To use the typed versions, "
+"derive the [`Params`](https://docs.rs/leptos_router/latest/leptos_router/"
+"params/trait.Params.html) trait on a struct."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:21
+msgid ""
+"`Params` is a very lightweight trait to convert a flat key-value map of "
+"strings into a struct by applying `FromStr` to each field. Because of the "
+"flat structure of route params and URL queries, it’s significantly less "
+"flexible than something like `serde`; it also adds much less weight to your "
+"binary."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:38
+msgid ""
+"Note: The `Params` derive macro is located at `leptos_router::params::"
+"Params`."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:40
+msgid ""
+"Using stable, you can only use `Option<T>` in params. If you are using the "
+"`nightly` feature, you can use either `T` or `Option<T>`."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:43
+msgid ""
+"Now we can use them in a component. Imagine a URL that has both params and a "
+"query, like `/contacts/:id?q=Search`."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:45
+msgid ""
+"The typed versions return `Memo<Result<T, _>>`. It’s a `Memo` so it reacts "
+"to changes in the URL. It’s a `Result` because the params or query need to "
+"be parsed from the URL, and may or may not be valid."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:52
+msgid "// id: || -> usize\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:64
+msgid ""
+"The untyped versions return `Memo<ParamsMap>`. Again, it’s a `Memo` to react "
+"to changes in the URL. [`ParamsMap`](https://docs.rs/leptos_router/latest/"
+"leptos_router/params/struct.ParamsMap.html) behaves a lot like any other map "
+"type, with a `.get()` method that returns `Option<String>`."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:71
+msgid "// id: || -> Option<String>\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:73
+#: src/router/18_params_and_queries.md:180
+msgid "\"id\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:76
+msgid ""
+"This can get a little messy: deriving a signal that wraps an `Option<_>` or "
+"`Result<_>` can involve a couple steps. But it’s worth doing this for two "
+"reasons:"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:78
+msgid ""
+"It’s correct, i.e., it forces you to consider the cases, “What if the user "
+"doesn’t pass a value for this query field? What if they pass an invalid "
+"value?”"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:79
+msgid ""
+"It’s performant. Specifically, when you navigate between different paths "
+"that match the same `<Route/>` with only params or the query changing, you "
+"can get fine-grained updates to different parts of your app without "
+"rerendering. For example, navigating between different contacts in our "
+"contact-list example does a targeted update to the name field (and "
+"eventually contact info) without needing to replace or rerender the wrapping "
+"`<Contact/>`. This is what fine-grained reactivity is for."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:81
+msgid ""
+"This is the same example from the previous section. The router is such an "
+"integrated system that it makes sense to provide a single example "
+"highlighting multiple features, even if we haven’t explained them all yet."
+msgstr ""
+
+#: src/router/18_params_and_queries.md:83
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/16-router-0-7-"
+"csm8t5?file=%2Fsrc%2Fmain.rs)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/16-router-0-7-csm8t5?"
+"file=%2Fsrc%2Fmain.rs\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:110
+msgid "\"Contact App\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:111
+msgid ""
+"// this <nav> will show on every routes,\n"
+"            // because it's outside the <Routes/>\n"
+"            // note: we can just use normal <a> tags\n"
+"            // and the router will use client-side navigation\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:116
+#: src/router/18_params_and_queries.md:122
+msgid "\"/\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:116
+#: src/router/18_params_and_queries.md:123
+msgid "\"Home\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:117
+#: src/router/18_params_and_queries.md:127
+msgid "\"/contacts\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:117
+#: src/router/18_params_and_queries.md:161
+msgid "\"Contacts\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:120
+msgid "\"Not found.\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:121
+msgid "// / just has an un-nested \"Home\"\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:125
+msgid "// /contacts has nested routes\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:130
+#: src/router/18_params_and_queries.md:143
+msgid "// if no id specified, fall back\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:131
+msgid "\":id\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:132
+#: src/router/18_params_and_queries.md:144
+#: src/router/18_params_and_queries.md:194
+msgid "\"\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:133
+#: src/router/18_params_and_queries.md:138
+msgid "\"tab\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:134
+msgid "\"(Contact Info)\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:137
+#: src/router/18_params_and_queries.md:195
+msgid "\"conversations\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:139
+msgid "\"(Conversations)\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:145
+msgid "\"select-user\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:146
+msgid "\"Select a user to view contact info.\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:159
+msgid "\"contact-list\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:160
+msgid "// here's our contact list component itself\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:162
+msgid "\"contact-list-contacts\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:163
+#: src/router/18_params_and_queries.md:184
+msgid "\"alice\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:163
+#: src/router/18_params_and_queries.md:184
+msgid "\"Alice\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:164
+#: src/router/18_params_and_queries.md:185
+msgid "\"bob\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:164
+#: src/router/18_params_and_queries.md:185
+msgid "\"Bob\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:165
+#: src/router/18_params_and_queries.md:186
+msgid "\"steve\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:165
+#: src/router/18_params_and_queries.md:186
+msgid "\"Steve\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:168
+msgid ""
+"// <Outlet/> will show the nested child route\n"
+"            // we can position this outlet wherever we want\n"
+"            // within the layout\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:178
+msgid "// we can access the :id param reactively with `use_params_map`\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:182
+msgid "// imagine we're loading data from an API here\n"
+msgstr ""
+
+#: src/router/18_params_and_queries.md:187
+msgid "\"User not found.\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:192
+msgid "\"contact-info\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:193
+msgid "\"tabs\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:194
+msgid "\"Contact Info\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:195
+msgid "\"Conversations\""
+msgstr ""
+
+#: src/router/18_params_and_queries.md:198
+msgid ""
+"// <Outlet/> here is the tabs that are nested\n"
+"            // underneath the /contacts/:id route\n"
+msgstr ""

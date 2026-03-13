@@ -1,0 +1,415 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ssr/24_hydration_bugs.md:1
+msgid "Hydration Bugs _(and how to avoid them)_"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:3
+msgid "A Thought Experiment"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:5
+msgid ""
+"Let’s try an experiment to test your intuitions. Open up an app you’re "
+"server-rendering with `cargo-leptos`. (If you’ve just been using `trunk` so "
+"far to play with examples, go [clone a `cargo-leptos` template]"
+"(./21_cargo_leptos.md) just for the sake of this exercise.)"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:7
+msgid ""
+"Put a log somewhere in your root component. (I usually call mine `<App/>`, "
+"but anything will do.)"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:12
+msgid "\"where do I run?\""
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:13
+msgid "// ... whatever\n"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:17
+msgid "And let’s fire it up"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:23
+msgid "Where do you expect `where do I run?` to log?"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:25
+msgid "In the command line where you’re running the server?"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:26
+msgid "In the browser console when you load the page?"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:27
+msgid "Neither?"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:28
+msgid "Both?"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:30
+msgid "Try it out."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:32 src/ssr/24_hydration_bugs.md:34
+#: src/ssr/24_hydration_bugs.md:36
+msgid "..."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:38
+msgid "Okay, consider the spoiler alerted."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:40
+msgid ""
+"You’ll notice of course that it logs in both places, assuming everything "
+"goes according to plan. In fact on the server it logs twice—first during the "
+"initial server startup, when Leptos renders your app once to extract the "
+"route tree, then a second time when you make a request. Each time you reload "
+"the page, `where do I run?` should log once on the server and once on the "
+"client."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:42
+msgid ""
+"If you think about the description in the last couple sections, hopefully "
+"this makes sense. Your application runs once on the server, where it builds "
+"up a tree of HTML which is sent to the client. During this initial render, "
+"`where do I run?` logs on the server."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:44
+msgid ""
+"Once the WASM binary has loaded in the browser, your application runs a "
+"second time, walking over the same user interface tree and adding "
+"interactivity."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:46
+msgid ""
+"Does that sound like a waste? It is, in a sense. But reducing that waste is "
+"a genuinely hard problem. It’s what some JS frameworks like Qwik are "
+"intended to solve, although it’s probably too early to tell whether it’s a "
+"net performance gain as opposed to other approaches."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:48
+msgid "The Potential for Bugs"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:50
+msgid ""
+"Okay, hopefully all of that made sense. But what does it have to do with the "
+"title of this chapter, which is “Hydration bugs (and how to avoid them)”?"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:52
+msgid ""
+"Remember that the application needs to run on both the server and the "
+"client. This generates a few different sets of potential issues you need to "
+"know how to avoid."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:54
+msgid "Mismatches between server and client code"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:56
+msgid ""
+"One way to create a bug is by creating a mismatch between the HTML that’s "
+"sent down by the server and what’s rendered on the client. It’s actually "
+"fairly hard to do this unintentionally, I think (at least judging by the bug "
+"reports I get from people.) But imagine I do something like this"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:61
+msgid "\"wasm32\""
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:72
+msgid ""
+"In other words, if this is being compiled to WASM, it has three items; "
+"otherwise it’s empty."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:74
+msgid ""
+"When I load the page in the browser, I see nothing. If I open the console I "
+"see a panic:"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:81
+msgid ""
+"The WASM version of your app, running in the browser, is expecting to find "
+"an element (in fact, it’s expecting three elements!) But the HTML sent from "
+"the server has none."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:83 src/ssr/24_hydration_bugs.md:202
+msgid "Solution"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:85
+msgid ""
+"It’s pretty rare that you do this intentionally, but it could happen from "
+"somehow running different logic on the server and in the browser. If you’re "
+"seeing warnings like this and you don’t think it’s your fault, it’s much "
+"more likely that it’s a bug with `<Suspense/>` or something. Feel free to go "
+"ahead and open an [issue](https://github.com/leptos-rs/leptos/issues) or "
+"[discussion](https://github.com/leptos-rs/leptos/discussions) on GitHub for "
+"help."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:87
+msgid "Invalid/edge-case HTML, and mismatches between HTML and the DOM"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:89
+msgid ""
+"Servers respond to requests with HTML. The browser then parses that HTML "
+"into a tree called the Document Object Model (DOM). During hydration, Leptos "
+"walks over the view tree of your application, hydrating an element, then "
+"moving into its children, hydrating the first child, then moving to its "
+"siblings, and so on. This assumes that the tree of HTML produced by the your "
+"application on the server maps directly onto the DOM tree into which the "
+"browser parses that HTML."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:91
+msgid ""
+"There are a few cases to be aware of in which the tree of HTML created by "
+"your `view` and the DOM tree might not correspond exactly: these can cause "
+"hydration errors."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:93
+msgid "Invalid HTML"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:95
+msgid "Here’s a very simple application that causes a hydration error:"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:104 src/ssr/24_hydration_bugs.md:152
+#: src/ssr/24_hydration_bugs.md:171
+msgid "\"First\""
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:111
+msgid "This will give an error message like"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:120
+msgid ""
+"(In most browser devtools, you can right-click on that `<p></p>` to show "
+"where it appears in the DOM, which is handy.)"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:122
+msgid ""
+"If you look in the DOM inspector, you’ll see that it instead of a `<div>` "
+"inside a `<p>`, it shows:"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:128
+msgid ""
+"That’s because this is invalid HTML! A `<div>` cannot go inside a `<p>`. "
+"When the browser parses that `<div>`, it actually closes the preceding "
+"`<p>`, then opens the `<div>`; then, when it sees the (now-unmatched) "
+"closing `</p>`, it treats it as a new, empty `<p>`."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:130
+msgid ""
+"As a result, our DOM tree no longer matches the expected view tree, and a "
+"hydration error ensues."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:132
+msgid ""
+"Unfortunately, it is difficult to ensure the validity of HTML in the view at "
+"compile time using our current model, and without an effect on compile times "
+"across the board. For now, if you run into issues like this, consider "
+"running the HTML output through a validator. (In the case above, the W3C "
+"HTML Validator does in fact show an error!)"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:140
+msgid "`<table>` without `<tbody>`"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:142
+msgid ""
+"There’s one additional edge case I’m aware of, in which _valid_ HTML "
+"produces a DOM tree that differs from the view tree, and that’s `<table>`. "
+"When (most) browsers parse an HTML `<table>`, they insert a `<tbody>` into "
+"the DOM, whether you included one or not."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:159
+msgid ""
+"Again, this generates a hydration error, because the browser has inserted an "
+"additional `<tbody>` into the DOM tree that was not in your view."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:161
+msgid "Here, the fix is simple: adding `<tbody>`:"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:179
+msgid ""
+"(It would be worth exploring in the future whether we can lint for this "
+"particular quirk more easily than linting for valid HTML.)"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:181
+msgid "General Advice"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:183
+msgid ""
+"These kind of mismatches can be tricky. In general, my recommendation for "
+"debugging:"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:184
+msgid ""
+"Right-click on the element in the message to see where the framework first "
+"_notices_ the problem."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:185
+msgid ""
+"Compare the DOM at that point and above it, checking for mismatches with "
+"your view tree. Are there extra elements? Missing elements?"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:188
+msgid "Not all client code can run on the server"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:190
+msgid ""
+"Imagine you happily import a dependency like `gloo-net` that you’ve been "
+"used to using to make requests in the browser, and use it in a "
+"`create_resource` in a server-rendered app."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:192
+msgid "You’ll probably instantly see the dreaded message"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:198
+msgid "Uh-oh."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:200
+msgid ""
+"But of course this makes sense. We’ve just said that your app needs to run "
+"on the client and the server."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:204
+msgid "There are a few ways to avoid this:"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:206
+msgid ""
+"Only use libraries that can run on both the server and the client. "
+"[`reqwest`](https://docs.rs/reqwest/latest/reqwest/), for example, works for "
+"making HTTP requests in both settings."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:207
+msgid ""
+"Use different libraries on the server and the client, and gate them using "
+"the `#[cfg]` macro. ([Click here for an example](https://github.com/leptos-"
+"rs/leptos/blob/main/examples/hackernews/src/api.rs).)"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:208
+msgid ""
+"Wrap client-only code in `Effect::new`. Because effects only run on the "
+"client, this can be an effective way to access browser APIs that are not "
+"needed for initial rendering."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:210
+msgid ""
+"For example, say that I want to store something in the browser’s "
+"`localStorage` whenever a signal changes."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:217 src/ssr/24_hydration_bugs.md:231
+msgid "\"{storage:?}\""
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:221
+msgid ""
+"This panics because I can’t access `LocalStorage` during server rendering."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:223
+msgid "But if I wrap it in an effect..."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:236
+msgid ""
+"It’s fine! This will render appropriately on the server, ignoring the client-"
+"only code, and then access the storage and log a message on the browser."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:238
+msgid "Not all server code can run on the client"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:240
+msgid ""
+"WebAssembly running in the browser is a pretty limited environment. You "
+"don’t have access to a file-system or to many of the other things the "
+"standard library may be used to having. Not every crate can even be compiled "
+"to WASM, let alone run in a WASM environment."
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:242
+msgid ""
+"In particular, you’ll sometimes see errors about the crate `mio` or missing "
+"things from `core`. This is generally a sign that you are trying to compile "
+"something to WASM that can’t be compiled to WASM. If you’re adding server-"
+"only dependencies, you’ll want to mark them `optional = true` in your `Cargo."
+"toml` and then enable them in the `ssr` feature definition. (Check out one "
+"of the template `Cargo.toml` files to see more details.)"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:244
+msgid ""
+"You can create an [`Effect`](https://docs.rs/leptos/latest/leptos/prelude/"
+"struct.Effect.html) to specify that something should only run on the client, "
+"and not on the server. Is there a way to specify that something should run "
+"only on the server, and not the client?"
+msgstr ""
+
+#: src/ssr/24_hydration_bugs.md:246
+msgid ""
+"In fact, there is. The next chapter will cover the topic of server functions "
+"in some detail. (In the meantime, you can check out their docs [here]"
+"(https://docs.rs/leptos/latest/leptos/attr.server.html).)"
+msgstr ""

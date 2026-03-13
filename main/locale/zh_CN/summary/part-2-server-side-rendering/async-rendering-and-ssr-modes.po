@@ -1,0 +1,403 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ssr/23_ssr_modes.md:1
+msgid "Async Rendering and SSR “Modes”"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:3
+msgid ""
+"Server-rendering a page that uses only synchronous data is pretty simple: "
+"You just walk down the component tree, rendering each element to an HTML "
+"string. But this is a pretty big caveat: it doesn’t answer the question of "
+"what we should do with pages that includes asynchronous data, i.e., the sort "
+"of stuff that would be rendered under a `<Suspense/>` node on the client."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:5
+msgid ""
+"When a page loads async data that it needs to render, what should we do? "
+"Should we wait for all the async data to load, and then render everything at "
+"once? (Let’s call this “async” rendering) Should we go all the way in the "
+"opposite direction, just sending the HTML we have immediately down to the "
+"client and letting the client load the resources and fill them in? (Let’s "
+"call this “synchronous” rendering) Or is there some middle-ground solution "
+"that somehow beats them both? (Hint: There is.)"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:7
+msgid ""
+"If you’ve ever listened to streaming music or watched a video online, I’m "
+"sure you realize that HTTP supports streaming, allowing a single connection "
+"to send chunks of data one after another without waiting for the full "
+"content to load. You may not realize that browsers are also really good at "
+"rendering partial HTML pages. Taken together, this means that you can "
+"actually enhance your users’ experience by **streaming HTML**: and this is "
+"something that Leptos supports out of the box, with no configuration at all. "
+"And there’s actually more than one way to stream HTML: you can stream the "
+"chunks of HTML that make up your page in order, like frames of a video, or "
+"you can stream them... well, out of order."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:9
+msgid "Let me say a little more about what I mean."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:11
+msgid ""
+"Leptos supports all the major ways of rendering HTML that includes "
+"asynchronous data:"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:13
+msgid "[Synchronous Rendering](#synchronous-rendering)"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:14
+msgid "[Async Rendering](#async-rendering)"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:15
+msgid "[In-Order streaming](#in-order-streaming)"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:16
+msgid ""
+"[Out-of-Order Streaming](#out-of-order-streaming) (and a partially-blocked "
+"variant)"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:18
+msgid "Synchronous Rendering"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:20
+msgid ""
+"**Synchronous**: Serve an HTML shell that includes `fallback` for any "
+"`<Suspense/>`. Load data on the client using `create_local_resource`, "
+"replacing `fallback` once resources are loaded."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:22
+msgid ""
+"_Pros_: App shell appears very quickly: great TTFB (time to first byte)."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:23 src/ssr/23_ssr_modes.md:51
+#: src/ssr/23_ssr_modes.md:75
+msgid "_Cons_"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:24
+msgid ""
+"Resources load relatively slowly; you need to wait for JS + WASM to load "
+"before even making a request."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:25
+msgid ""
+"No ability to include data from async resources in the `<title>` or other "
+"`<meta>` tags, hurting SEO and things like social media link previews."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:27
+msgid ""
+"If you’re using server-side rendering, the synchronous mode is almost never "
+"what you actually want, from a performance perspective. This is because it "
+"misses out on an important optimization. If you’re loading async resources "
+"during server rendering, you can actually begin loading the data on the "
+"server. Rather than waiting for the client to receive the HTML response, "
+"then loading its JS + WASM, _then_ realize it needs the resources and begin "
+"loading them, server rendering can actually begin loading the resources when "
+"the client first makes the response. In this sense, during server rendering "
+"an async resource is like a `Future` that begins loading on the server and "
+"resolves on the client. As long as the resources are actually serializable, "
+"this will always lead to a faster total load time."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:29
+msgid ""
+"This is why a `Resource` needs its data to be serializable, and why you "
+"should use `LocalResource` for any async data that is not serializable and "
+"should therefore only be loaded in the browser itself. Creating a local "
+"resource when you could create a serializable resource is always a "
+"deoptimization."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:31
+msgid "Async Rendering"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:37
+msgid ""
+"**`async`**: Load all resources on the server. Wait until all data are "
+"loaded, and render HTML in one sweep."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:39
+msgid ""
+"_Pros_: Better handling for meta tags (because you know async data even "
+"before you render the `<head>`). Faster complete load than **synchronous** "
+"because async resources begin loading on server."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:40
+msgid ""
+"_Cons_: Slower load time/TTFB: you need to wait for all async resources to "
+"load before displaying anything on the client. The page is totally blank "
+"until everything is loaded."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:42
+msgid "In-Order Streaming"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:48
+msgid ""
+"**In-order streaming**: Walk through the component tree, rendering HTML "
+"until you hit a `<Suspense/>`. Send down all the HTML you’ve got so far as a "
+"chunk in the stream, wait for all the resources accessed under the "
+"`<Suspense/>` to load, then render it to HTML and keep walking until you hit "
+"another `<Suspense/>` or the end of the page."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:50
+msgid ""
+"_Pros_: Rather than a blank screen, shows at least _something_ before the "
+"data are ready."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:52
+msgid ""
+"Loads the shell more slowly than synchronous rendering (or out-of-order "
+"streaming) because it needs to pause at every `<Suspense/>`."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:53
+msgid "Unable to show fallback states for `<Suspense/>`."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:54
+msgid ""
+"Can’t begin hydration until the entire page has loaded, so earlier pieces of "
+"the page will not be interactive until the suspended chunks have loaded."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:56
+msgid "Out-of-Order Streaming"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:62
+msgid ""
+"**Out-of-order streaming**: Like synchronous rendering, serve an HTML shell "
+"that includes `fallback` for any `<Suspense/>`. But load data on the "
+"**server**, streaming it down to the client as it resolves, and streaming "
+"down HTML for `<Suspense/>` nodes, which is swapped in to replace the "
+"fallback."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:64
+msgid "_Pros_: Combines the best of **synchronous** and **`async`**."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:65
+msgid ""
+"Fast initial response/TTFB because it immediately sends the whole "
+"synchronous shell"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:66
+msgid "Fast total time because resources begin loading on the server."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:67
+msgid ""
+"Able to show the fallback loading state and dynamically replace it, instead "
+"of showing blank sections for un-loaded data."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:68
+msgid ""
+"_Cons_: Requires JavaScript to be enabled for suspended fragments to appear "
+"in correct order. (This small chunk of JS streamed down in a `<script>` tag "
+"alongside the `<template>` tag that contains the rendered `<Suspense/>` "
+"fragment, so it does not need to load any additional JS files.)"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:70
+msgid ""
+"**Partially-blocked streaming**: “Partially-blocked” streaming is useful "
+"when you have multiple separate `<Suspense/>` components on the page.  It is "
+"triggered by setting `ssr=SsrMode::PartiallyBlocked` on a route, and "
+"depending on blocking resources within the view.   If one of the `<Suspense/"
+">` components reads from one or more “blocking resources” (see below), the "
+"fallback will not be sent; rather, the server will wait until that "
+"`<Suspense/>` has resolved and then replace the fallback with the resolved "
+"fragment on the server, which means that it is included in the initial HTML "
+"response and appears even if JavaScript is disabled or not supported. Other "
+"`<Suspense/>` stream in out of order, similar to the `SsrMode::OutOfOrder` "
+"default."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:72
+msgid ""
+"This is useful when you have multiple `<Suspense/>` on the page, and one is "
+"more important than the other: think of a blog post and comments, or product "
+"information and reviews. It is _not_ useful if there’s only one `<Suspense/"
+">`, or if every `<Suspense/>` reads from blocking resources. In those cases "
+"it is a slower form of `async` rendering."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:74
+msgid ""
+"_Pros_: Works if JavaScript is disabled or not supported on the user’s "
+"device."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:76
+msgid "Slower initial response time than out-of-order."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:77
+msgid ""
+"Marginally slower overall response due to additional work on the server."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:78
+msgid "No fallback state shown."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:80
+msgid "Using SSR Modes"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:82
+msgid ""
+"Because it offers the best blend of performance characteristics, Leptos "
+"defaults to out-of-order streaming. But it’s really simple to opt into these "
+"different modes. You do it by adding an `ssr` property onto one or more of "
+"your `<Route/>` components, like in the [`ssr_modes` example](https://github."
+"com/leptos-rs/leptos/blob/main/examples/ssr_modes/src/app.rs)."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:85 src/ssr/23_ssr_modes.md:144
+msgid "\"Not found.\""
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:86 src/ssr/23_ssr_modes.md:145
+msgid ""
+"// We’ll load the home page with out-of-order streaming and <Suspense/>\n"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:87 src/ssr/23_ssr_modes.md:146
+msgid "\"\""
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:89 src/ssr/23_ssr_modes.md:148
+msgid ""
+"// We'll load the posts with async rendering, so they can set\n"
+"\t// the title and metadata *after* loading the data\n"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:92 src/ssr/23_ssr_modes.md:151
+msgid "\"/post/:id\""
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:99
+msgid ""
+"For a path that includes multiple nested routes, the most restrictive mode "
+"will be used: i.e., if even a single nested route asks for `async` "
+"rendering, the whole initial request will be rendered `async`. `async` is "
+"the most restricted requirement, followed by in-order, and then out-of-"
+"order. (This probably makes sense if you think about it for a few minutes.)"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:101
+msgid "Blocking Resources"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:103
+msgid ""
+"Blocking resources can be created with `Resource::new_blocking`. A blocking "
+"resource still loads asynchronously like any other `async`/`.await` in Rust. "
+"It doesn’t block a server thread, or anything like that. Instead, reading "
+"from a blocking resource under a `<Suspense/>` blocks the HTML _stream_ from "
+"returning anything, including its initial synchronous shell, until that "
+"`<Suspense/>` has resolved."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:105
+msgid ""
+"From a performance perspective, this is not ideal. None of the synchronous "
+"shell for your page will load until that resource is ready. However, "
+"rendering nothing means that you can do things like set the `<title>` or "
+"`<meta>` tags in your `<head>` in actual HTML. This sounds a lot like "
+"`async` rendering, but there’s one big difference: if you have multiple "
+"`<Suspense/>` sections, you can block on _one_ of them but still render a "
+"placeholder and then stream in the other."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:107
+msgid ""
+"For example, think about a blog post. For SEO and for social sharing, I "
+"definitely want my blog post’s title and metadata in the initial HTML "
+"`<head>`. But I really don’t care whether comments have loaded yet or not; "
+"I’d like to load those as lazily as possible."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:109
+msgid "With blocking resources, I can do something like this:"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:114
+msgid "/* load blog post */"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:115
+msgid "/* load blog comments */"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:122
+msgid "\"description\""
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:124
+msgid "/* render the post content */"
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:129
+msgid "\"Loading comments...\""
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:139
+msgid ""
+"The first `<Suspense/>`, with the body of the blog post, will block my HTML "
+"stream, because it reads from a blocking resource.  Meta tags and other head "
+"elements awaiting the blocking resource will be rendered before the stream "
+"is sent."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:141
+msgid ""
+"Combined with the following route definition, which uses `SsrMode::"
+"PartiallyBlocked`, the blocking resource will be fully rendered on the "
+"server side, making it accessible to users who disable WebAssembly or "
+"JavaScript."
+msgstr ""
+
+#: src/ssr/23_ssr_modes.md:158
+msgid ""
+"The second `<Suspense/>`, with the comments, will not block the stream. "
+"Blocking resources gave me exactly the power and granularity I needed to "
+"optimize my page for SEO and user experience."
+msgstr ""

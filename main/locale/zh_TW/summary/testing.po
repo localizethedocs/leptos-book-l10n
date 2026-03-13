@@ -1,0 +1,273 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/testing.md:1
+msgid "Testing Your Components"
+msgstr ""
+
+#: src/testing.md:3
+msgid ""
+"Testing user interfaces can be relatively tricky, but really important. This "
+"article will discuss a couple principles and approaches for testing a Leptos "
+"app."
+msgstr ""
+
+#: src/testing.md:6
+msgid "1. Test business logic with ordinary Rust tests"
+msgstr ""
+
+#: src/testing.md:8
+msgid ""
+"In many cases, it makes sense to pull the logic out of your components and "
+"test it separately. For some simple components, there’s no particular logic "
+"to test, but for many it’s worth using a testable wrapping type and "
+"implementing the logic in ordinary Rust `impl` blocks."
+msgstr ""
+
+#: src/testing.md:13
+msgid ""
+"For example, instead of embedding logic in a component directly like this:"
+msgstr ""
+
+#: src/testing.md:18 src/testing.md:45
+msgid "/* ... */"
+msgstr ""
+
+#: src/testing.md:19
+msgid "// ⚠️ this is hard to test because it's embedded in the component\n"
+msgstr ""
+
+#: src/testing.md:24
+msgid ""
+"You could pull that logic out into a separate data structure and test it:"
+msgstr ""
+
+#: src/testing.md:39
+msgid "// ...\n"
+msgstr ""
+
+#: src/testing.md:46
+msgid "// ✅ this has a test associated with it\n"
+msgstr ""
+
+#: src/testing.md:51
+msgid ""
+"In general, the less of your logic is wrapped into your components "
+"themselves, the more idiomatic your code will feel and the easier it will be "
+"to test."
+msgstr ""
+
+#: src/testing.md:54
+msgid "2. Test components with end-to-end (`e2e`) testing"
+msgstr ""
+
+#: src/testing.md:56
+msgid ""
+"Our [`examples`](https://github.com/leptos-rs/leptos/tree/main/examples) "
+"directory has several examples with extensive end-to-end testing, using "
+"different testing tools."
+msgstr ""
+
+#: src/testing.md:58
+msgid ""
+"The easiest way to see how to use these is to take a look at the test "
+"examples themselves:"
+msgstr ""
+
+#: src/testing.md:60
+msgid ""
+"`wasm-bindgen-test` with [`counter`](https://github.com/leptos-rs/leptos/"
+"blob/main/examples/counter/tests/web.rs)"
+msgstr ""
+
+#: src/testing.md:62
+msgid ""
+"This is a fairly simple manual testing setup that uses the [`wasm-pack test`]"
+"(https://rustwasm.github.io/wasm-pack/book/commands/test.html) command."
+msgstr ""
+
+#: src/testing.md:64 src/testing.md:142
+msgid "Sample Test"
+msgstr ""
+
+#: src/testing.md:70 src/testing.md:128
+msgid "\"section\""
+msgstr ""
+
+#: src/testing.md:73
+msgid ""
+"// start by rendering our counter and mounting it to the DOM\n"
+"    // note that we start at the initial value of 10\n"
+msgstr ""
+
+#: src/testing.md:80
+msgid ""
+"// now we extract the buttons by iterating over the DOM\n"
+"    // this would be easier if they had IDs\n"
+msgstr ""
+
+#: src/testing.md:82
+msgid "\"div\""
+msgstr ""
+
+#: src/testing.md:84
+msgid "\"button\""
+msgstr ""
+
+#: src/testing.md:89
+msgid "// now let's click the `clear` button\n"
+msgstr ""
+
+#: src/testing.md:92
+msgid ""
+"// the reactive system is built on top of the async system, so changes are "
+"not reflected\n"
+"    // synchronously in the DOM\n"
+"    // in order to detect the changes here, we'll just yield for a brief "
+"time after each change,\n"
+"    // allowing the effects that update the view to run\n"
+msgstr ""
+
+#: src/testing.md:98
+msgid ""
+"// now let's test the <div> against the expected value\n"
+"    // we can do this by testing its `outerHTML`\n"
+msgstr ""
+
+#: src/testing.md:101
+msgid "// it's as if we're creating it with a value of 0, right?\n"
+msgstr ""
+
+#: src/testing.md:104
+msgid ""
+"// we can remove the event listeners because they're not rendered to HTML\n"
+msgstr ""
+
+#: src/testing.md:107
+msgid "\"Clear\""
+msgstr ""
+
+#: src/testing.md:108
+msgid "\"-1\""
+msgstr ""
+
+#: src/testing.md:109
+msgid "\"Value: \""
+msgstr ""
+
+#: src/testing.md:109
+msgid "\"!\""
+msgstr ""
+
+#: src/testing.md:110
+msgid "\"+1\""
+msgstr ""
+
+#: src/testing.md:113
+msgid ""
+"// Leptos supports multiple backend renderers for HTML elements\n"
+"        // .into_view() here is just a convenient way of specifying \"use "
+"the regular DOM renderer\"\n"
+msgstr ""
+
+#: src/testing.md:116
+msgid ""
+"// views are lazy -- they describe a DOM tree but don't create it yet\n"
+"        // calling .build() will actually build the DOM elements\n"
+msgstr ""
+
+#: src/testing.md:119
+msgid ""
+"// .build() returned an ElementState, which is a smart pointer for\n"
+"        // a DOM element. So we can still just call .outer_html(), which "
+"access the outerHTML on\n"
+"        // the actual DOM element\n"
+msgstr ""
+
+#: src/testing.md:125
+msgid ""
+"// There's actually an easier way to do this...\n"
+"    // We can just test against a <SimpleCounter/> with the initial value 0\n"
+msgstr ""
+
+#: src/testing.md:138
+msgid ""
+"[Playwright with `counters`](https://github.com/leptos-rs/leptos/tree/main/"
+"examples/counters/e2e)"
+msgstr ""
+
+#: src/testing.md:140
+msgid ""
+"These tests use the common JavaScript testing tool Playwright to run end-to-"
+"end tests on the same example, using a library and testing approach familiar "
+"to many who have done frontend development before."
+msgstr ""
+
+#: src/testing.md:145
+msgid "\"Increment Count\""
+msgstr ""
+
+#: src/testing.md:146
+msgid "\"should increase the total count\""
+msgstr ""
+
+#: src/testing.md:155
+msgid "\"3\""
+msgstr ""
+
+#: src/testing.md:160
+msgid ""
+"[Gherkin/Cucumber Tests with `todo_app_sqlite`](https://github.com/leptos-rs/"
+"leptos/blob/main/examples/todo_app_sqlite/e2e/README.md)"
+msgstr ""
+
+#: src/testing.md:162
+msgid ""
+"You can integrate any testing tool you’d like into this flow. This example "
+"uses Cucumber, a testing framework based on natural language."
+msgstr ""
+
+#: src/testing.md:184
+msgid "The definitions for these actions are defined in Rust code."
+msgstr ""
+
+#: src/testing.md:191
+msgid "\"I see the app\""
+msgstr ""
+
+#: src/testing.md:192
+msgid "\"I open the app\""
+msgstr ""
+
+#: src/testing.md:195
+msgid "\"\""
+msgstr ""
+
+#: src/testing.md:200 src/testing.md:201
+msgid "\"^I add a todo as (.*)$\""
+msgstr ""
+
+#: src/testing.md:208
+msgid "// etc.\n"
+msgstr ""
+
+#: src/testing.md:212
+msgid "Learning More"
+msgstr ""
+
+#: src/testing.md:214
+msgid ""
+"Feel free to check out the CI setup in the Leptos repo to learn more about "
+"how to use these tools in your own application. All of these testing methods "
+"are run regularly against actual Leptos example apps."
+msgstr ""

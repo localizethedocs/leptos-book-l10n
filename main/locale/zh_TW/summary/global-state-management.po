@@ -1,0 +1,246 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/15_global_state.md:1
+msgid "Global State Management"
+msgstr ""
+
+#: src/15_global_state.md:3
+msgid ""
+"So far, we've only been working with local state in components, and we’ve "
+"seen how to coordinate state between parent and child components. On "
+"occasion, there are times when people look for a more general solution for "
+"global state management that can work throughout an application."
+msgstr ""
+
+#: src/15_global_state.md:5
+msgid ""
+"In general, **you do not need this chapter.** The typical pattern is to "
+"compose your application out of components, each of which manages its own "
+"local state, not to store all state in a global structure. However, there "
+"are some cases (like theming, saving user settings, or sharing data between "
+"components in different parts of your UI) in which you may want to use some "
+"kind of global state management."
+msgstr ""
+
+#: src/15_global_state.md:7
+msgid "The three best approaches to global state are"
+msgstr ""
+
+#: src/15_global_state.md:9
+msgid "Using the router to drive global state via the URL"
+msgstr ""
+
+#: src/15_global_state.md:10
+msgid "Passing signals through context"
+msgstr ""
+
+#: src/15_global_state.md:11
+msgid "Creating a global state struct using stores"
+msgstr ""
+
+#: src/15_global_state.md:13
+msgid "Option #1: URL as Global State"
+msgstr ""
+
+#: src/15_global_state.md:15
+msgid ""
+"In many ways, the URL is actually the best way to store global state. It can "
+"be accessed from any component, anywhere in your tree. There are native HTML "
+"elements like `<form>` and `<a>` that exist solely to update the URL. And it "
+"persists across page reloads and between devices; you can share a URL with a "
+"friend or send it from your phone to your laptop and any state stored in it "
+"will be replicated."
+msgstr ""
+
+#: src/15_global_state.md:17
+msgid ""
+"The next few sections of the tutorial will be about the router, and we’ll "
+"get much more into these topics."
+msgstr ""
+
+#: src/15_global_state.md:19
+msgid "But for now, we'll just look at options #2 and #3."
+msgstr ""
+
+#: src/15_global_state.md:21
+msgid "Option #2: Passing Signals through Context"
+msgstr ""
+
+#: src/15_global_state.md:23
+msgid ""
+"In the section on [parent-child communication](view/08_parent_child.md), we "
+"saw that you can use `provide_context` to pass signal from a parent "
+"component to a child, and `use_context` to read it in the child. But "
+"`provide_context` works across any distance. If you want to create a global "
+"signal that holds some piece of state, you can provide it and access it via "
+"context anywhere in the descendants of the component where you provide it."
+msgstr ""
+
+#: src/15_global_state.md:25
+msgid ""
+"A signal provided via context only causes reactive updates where it is read, "
+"not in any of the components in between, so it maintains the power of fine-"
+"grained reactive updates, even at a distance."
+msgstr ""
+
+#: src/15_global_state.md:27
+msgid ""
+"We start by creating a signal in the root of the app and providing it to all "
+"its children and descendants using `provide_context`."
+msgstr ""
+
+#: src/15_global_state.md:33
+msgid ""
+"// here we create a signal in the root that can be consumed\n"
+"    // anywhere in the app.\n"
+msgstr ""
+
+#: src/15_global_state.md:36
+msgid ""
+"// we'll pass the setter to specific components,\n"
+"    // but provide the count itself to the whole app via context\n"
+msgstr ""
+
+#: src/15_global_state.md:41
+msgid "// SetterButton is allowed to modify the count\n"
+msgstr ""
+
+#: src/15_global_state.md:43
+msgid ""
+"// These consumers can only read from it\n"
+"        // But we could give them write access by passing `set_count` if we "
+"wanted\n"
+msgstr ""
+
+#: src/15_global_state.md:51
+msgid ""
+"`<SetterButton/>` is the kind of counter we’ve written several times now."
+msgstr ""
+
+#: src/15_global_state.md:53
+msgid ""
+"`<FancyMath/>` and `<ListItems/>` both consume the signal we’re providing "
+"via `use_context` and do something with it."
+msgstr ""
+
+#: src/15_global_state.md:57
+msgid "/// A component that does some \"fancy\" math with the global count\n"
+msgstr ""
+
+#: src/15_global_state.md:60
+msgid "// here we consume the global count signal with `use_context`\n"
+msgstr ""
+
+#: src/15_global_state.md:62
+msgid "// we know we just provided this in the parent component\n"
+msgstr ""
+
+#: src/15_global_state.md:63
+msgid "\"there to be a `count` signal provided\""
+msgstr ""
+
+#: src/15_global_state.md:67 src/15_global_state.md:118
+msgid "\"consumer blue\""
+msgstr ""
+
+#: src/15_global_state.md:68
+msgid "\"The number \""
+msgstr ""
+
+#: src/15_global_state.md:71
+msgid "\" is\""
+msgstr ""
+
+#: src/15_global_state.md:73
+msgid "\" is not\""
+msgstr ""
+
+#: src/15_global_state.md:75
+msgid "\" even.\""
+msgstr ""
+
+#: src/15_global_state.md:81
+msgid "Option #3: Create a Global State Store"
+msgstr ""
+
+#: src/15_global_state.md:83
+msgid ""
+"Some of this content is duplicated from the section on complex iteration "
+"with stores [here](../view/04b_iteration.md#option-4-stores). Both sections "
+"are intermediate/optional content, so I thought some duplication couldn’t "
+"hurt."
+msgstr ""
+
+#: src/15_global_state.md:85
+msgid ""
+"Stores are a new reactive primitive, available in Leptos 0.7 through the "
+"accompanying `reactive_stores` crate. (This crate is shipped separately for "
+"now so we can continue to develop it without requiring a version change to "
+"the whole framework.)"
+msgstr ""
+
+#: src/15_global_state.md:87
+msgid ""
+"Stores allow you to wrap an entire struct, and reactively read from and "
+"update individual fields without tracking changes to other fields."
+msgstr ""
+
+#: src/15_global_state.md:89
+msgid ""
+"They are used by adding `#[derive(Store)]` onto a struct. (You can `use "
+"reactive_stores::Store;` to import the macro.) This creates an extension "
+"trait with a getter for each field of the struct, when the struct is wrapped "
+"in a `Store<_>`."
+msgstr ""
+
+#: src/15_global_state.md:99
+msgid ""
+"This creates a trait named `GlobalStateStoreFields` which adds with methods "
+"`count` and `name` to a `Store<GlobalState>`. Each method returns a reactive "
+"store _field_."
+msgstr ""
+
+#: src/15_global_state.md:106
+msgid "// etc.\n"
+msgstr ""
+
+#: src/15_global_state.md:108
+msgid "/// A component that updates the count in the global state.\n"
+msgstr ""
+
+#: src/15_global_state.md:114
+msgid "// this gives us reactive access to the `count` field only\n"
+msgstr ""
+
+#: src/15_global_state.md:124
+msgid "\"Increment Global Count\""
+msgstr ""
+
+#: src/15_global_state.md:127
+msgid "\"Count is: \""
+msgstr ""
+
+#: src/15_global_state.md:133
+msgid ""
+"Clicking this button only updates `state.count`. If we read from `state."
+"name` somewhere else, click the button won’t notify it. This allows you to "
+"combine the benefits of a top-down data flow and of fine-grained reactive "
+"updates."
+msgstr ""
+
+#: src/15_global_state.md:137
+msgid ""
+"Check out the [`stores` example](https://github.com/leptos-rs/leptos/blob/"
+"main/examples/stores/src/lib.rs) in the repo for a more extensive example."
+msgstr ""

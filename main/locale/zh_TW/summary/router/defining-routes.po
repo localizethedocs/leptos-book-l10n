@@ -1,0 +1,178 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/router/16_routes.md:1
+msgid "Defining Routes"
+msgstr ""
+
+#: src/router/16_routes.md:3
+msgid "Getting Started"
+msgstr ""
+
+#: src/router/16_routes.md:5
+msgid "It’s easy to get started with the router."
+msgstr ""
+
+#: src/router/16_routes.md:7
+msgid ""
+"First things first, make sure you’ve added the `leptos_router` package to "
+"your dependencies. Unlike `leptos`, this does not have separate `csr` and "
+"`hydrate` features; it does have an `ssr` feature, intended for use only on "
+"the server side, so activate that for your server-side build."
+msgstr ""
+
+#: src/router/16_routes.md:9
+msgid ""
+"It’s important that the router is a separate package from `leptos` itself. "
+"This means that everything in the router can be defined in user-land code. "
+"If you want to create your own router, or use no router, you’re completely "
+"free to do that!"
+msgstr ""
+
+#: src/router/16_routes.md:11
+msgid ""
+"And import the relevant types from the router, either with something like"
+msgstr ""
+
+#: src/router/16_routes.md:17
+msgid "Providing the `<Router/>`"
+msgstr ""
+
+#: src/router/16_routes.md:19
+msgid ""
+"Routing behavior is provided by the [`<Router/>`](https://docs.rs/"
+"leptos_router/latest/leptos_router/components/fn.Router.html) component. "
+"This should usually be somewhere near the root of your application, wrapping "
+"the rest of the app."
+msgstr ""
+
+#: src/router/16_routes.md:21
+msgid ""
+"You shouldn’t try to use multiple `<Router/>`s in your app. Remember that "
+"the router drives global state: if you have multiple routers, which one "
+"decides what to do when the URL changes?"
+msgstr ""
+
+#: src/router/16_routes.md:23
+msgid "Let’s start with a simple `<App/>` component using the router:"
+msgstr ""
+
+#: src/router/16_routes.md:34 src/router/16_routes.md:37
+#: src/router/16_routes.md:60 src/router/16_routes.md:65
+msgid "/* ... */"
+msgstr ""
+
+#: src/router/16_routes.md:45
+msgid "Defining `<Routes/>`"
+msgstr ""
+
+#: src/router/16_routes.md:47
+msgid ""
+"The [`<Routes/>`](https://docs.rs/leptos_router/latest/leptos_router/"
+"components/fn.Routes.html) component is where you define all the routes to "
+"which a user can navigate in your application. Each possible route is "
+"defined by a [`<Route/>`](https://docs.rs/leptos_router/latest/leptos_router/"
+"components/fn.Route.html) component."
+msgstr ""
+
+#: src/router/16_routes.md:49
+msgid ""
+"You should place the `<Routes/>` component at the location within your app "
+"where you want routes to be rendered. Everything outside `<Routes/>` will be "
+"present on every page, so you can leave things like a navigation bar or menu "
+"outside the `<Routes/>`."
+msgstr ""
+
+#: src/router/16_routes.md:63
+msgid "// all our routes will appear inside <main>\n"
+msgstr ""
+
+#: src/router/16_routes.md:64 src/router/16_routes.md:86
+msgid "\"Not found.\""
+msgstr ""
+
+#: src/router/16_routes.md:73
+msgid ""
+"`<Routes/>` should also have a `fallback`, a function that defines what "
+"should be shown if no route is matched."
+msgstr ""
+
+#: src/router/16_routes.md:75
+msgid ""
+"Individual routes are defined by providing children to `<Routes/>` with the "
+"`<Route/>` component. `<Route/>` takes a `path` and a `view`. When the "
+"current location matches `path`, the `view` will be created and displayed."
+msgstr ""
+
+#: src/router/16_routes.md:77
+msgid ""
+"The `path` is most easily defined using the `path` macro, and can include"
+msgstr ""
+
+#: src/router/16_routes.md:79
+msgid "a static path (`/users`),"
+msgstr ""
+
+#: src/router/16_routes.md:80
+msgid "dynamic, named parameters beginning with a colon (`/:id`),"
+msgstr ""
+
+#: src/router/16_routes.md:81
+msgid "and/or a wildcard beginning with an asterisk (`/user/*any`)"
+msgstr ""
+
+#: src/router/16_routes.md:83
+msgid ""
+"The `view` is a function that returns a view. Any component with no props "
+"works here, as does a closure that returns some view."
+msgstr ""
+
+#: src/router/16_routes.md:87
+msgid "\"/\""
+msgstr ""
+
+#: src/router/16_routes.md:88
+msgid "\"/users\""
+msgstr ""
+
+#: src/router/16_routes.md:89
+msgid "\"/users/:id\""
+msgstr ""
+
+#: src/router/16_routes.md:90
+msgid "\"/*any\""
+msgstr ""
+
+#: src/router/16_routes.md:90
+msgid "\"Not Found\""
+msgstr ""
+
+#: src/router/16_routes.md:94
+msgid ""
+"`view` takes a `Fn() -> impl IntoView`. If a component has no props, it can "
+"be passed directly into the `view`. In this case, `view=Home` is just a "
+"shorthand for `view=|| view! { <Home/> }`."
+msgstr ""
+
+#: src/router/16_routes.md:96
+msgid ""
+"Now if you navigate to `/` or to `/users` you’ll get the home page or the "
+"`<Users/>`. If you go to `/users/3` or `/blahblah` you’ll get a user profile "
+"or your 404 page (`<NotFound/>`). On every navigation, the router determines "
+"which `<Route/>` should be matched, and therefore what content should be "
+"displayed where the `<Routes/>` component is defined."
+msgstr ""
+
+#: src/router/16_routes.md:98
+msgid "Simple enough?"
+msgstr ""

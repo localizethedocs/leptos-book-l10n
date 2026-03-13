@@ -13,22 +13,22 @@
     },
     "zh_CN" : 
     {
-      "branch" : "",
+      "branch" : "main",
       "commit" : 
       {
-        "date" : "",
-        "hash" : "",
-        "title" : ""
+        "date" : "2026-03-06 14:03:38 -0500",
+        "hash" : "ff42f3cd45899934b308cbe1d3436448deb9eb70",
+        "title" : "chore: update GitHub actions (#258)"
       }
     },
     "zh_TW" : 
     {
-      "branch" : "",
+      "branch" : "main",
       "commit" : 
       {
-        "date" : "",
-        "hash" : "",
-        "title" : ""
+        "date" : "2026-03-06 14:03:38 -0500",
+        "hash" : "ff42f3cd45899934b308cbe1d3436448deb9eb70",
+        "title" : "chore: update GitHub actions (#258)"
       }
     }
   },

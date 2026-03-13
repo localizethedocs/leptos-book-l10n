@@ -1,0 +1,163 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/metadata.md:1
+msgid "Metadata"
+msgstr ""
+
+#: src/metadata.md:3
+msgid ""
+"So far, everything we’ve rendered has been inside the `<body>` of the HTML "
+"document. And this makes sense. After all, everything you can see on a web "
+"page lives inside the `<body>`."
+msgstr ""
+
+#: src/metadata.md:5
+msgid ""
+"However, there are plenty of occasions where you might want to update "
+"something inside the `<head>` of the document using the same reactive "
+"primitives and component patterns you use for your UI."
+msgstr ""
+
+#: src/metadata.md:7
+msgid ""
+"That’s where the [`leptos_meta`](https://docs.rs/leptos_meta/latest/"
+"leptos_meta/) package comes in."
+msgstr ""
+
+#: src/metadata.md:9
+msgid "Metadata Components"
+msgstr ""
+
+#: src/metadata.md:11
+msgid ""
+"`leptos_meta` provides special components that let you inject data from "
+"inside components anywhere in your application into the `<head>`:"
+msgstr ""
+
+#: src/metadata.md:13
+msgid ""
+"[`<Title/>`](https://docs.rs/leptos_meta/latest/leptos_meta/fn.Title.html) "
+"allows you to set the document’s title from any component. It also takes a "
+"`formatter` function that can be used to apply the same format to the title "
+"set by other pages. So, for example, if you put `<Title formatter=|text| "
+"format!(\"{text} — My Awesome Site\")/>` in your `<App/>` component, and "
+"then `<Title text=\"Page 1\"/>` and `<Title text=\"Page 2\"/>` on your "
+"routes, you’ll get `Page 1 — My Awesome Site` and `Page 2 — My Awesome Site`."
+msgstr ""
+
+#: src/metadata.md:15
+msgid ""
+"[`<Link/>`](https://docs.rs/leptos_meta/latest/leptos_meta/fn.Link.html) "
+"injects a `<link>` element into the `<head>`."
+msgstr ""
+
+#: src/metadata.md:17
+msgid ""
+"[`<Stylesheet/>`](https://docs.rs/leptos_meta/latest/leptos_meta/fn."
+"Stylesheet.html) creates a `<link rel=\"stylesheet\">` with the `href` you "
+"give."
+msgstr ""
+
+#: src/metadata.md:19
+msgid ""
+"[`<Style/>`](https://docs.rs/leptos_meta/latest/leptos_meta/fn.Style.html) "
+"creates a `<style>` with the children you pass in (usually a string). You "
+"can use this to import some custom CSS from another file at compile time "
+"`<Style>{include_str!(\"my_route.css\")}</Style>`."
+msgstr ""
+
+#: src/metadata.md:21
+msgid ""
+"[`<Meta/>`](https://docs.rs/leptos_meta/latest/leptos_meta/fn.Meta.html) "
+"lets you set `<meta>` tags with descriptions and other metadata."
+msgstr ""
+
+#: src/metadata.md:27
+msgid "`<Script/>` and `<script>`"
+msgstr ""
+
+#: src/metadata.md:29
+msgid ""
+"`leptos_meta` also provides a [`<Script/>`](https://docs.rs/leptos_meta/"
+"latest/leptos_meta/fn.Script.html) component, and it’s worth pausing here "
+"for a second. All of the other components we’ve considered inject `<head>`\\-"
+"only elements in the `<head>`. But a `<script>` can also be included in the "
+"body."
+msgstr ""
+
+#: src/metadata.md:31
+msgid ""
+"There’s a very simple way to determine whether you should use a capital-S "
+"`<Script/>` component or a lowercase-s `<script>` element: the `<Script/>` "
+"component will be rendered in the `<head>`, and the `<script>` element will "
+"be rendered wherever in the `<body>` of your user interface you put it in, "
+"alongside other normal HTML elements. These cause JavaScript to load and run "
+"at different times, so use whichever is appropriate to your needs."
+msgstr ""
+
+#: src/metadata.md:33
+msgid "`<Body/>` and `<Html/>`"
+msgstr ""
+
+#: src/metadata.md:35
+msgid ""
+"There are even a couple elements designed to make semantic HTML and styling "
+"easier. `<Body/>` and `<Html/>` are designed to allow you to add arbitrary "
+"attributes to the `<html>` and `<body>` tags on your page. You can add any "
+"number of attributes using the usual Leptos syntax after the spread operator "
+"(`{..}`) and those will be added directly to the appropriate element."
+msgstr ""
+
+#: src/metadata.md:40
+msgid "\"he\""
+msgstr ""
+
+#: src/metadata.md:41
+msgid "\"rtl\""
+msgstr ""
+
+#: src/metadata.md:42
+msgid "\"dark\""
+msgstr ""
+
+#: src/metadata.md:46
+msgid "Metadata and Server Rendering"
+msgstr ""
+
+#: src/metadata.md:48
+msgid ""
+"Now, some of this is useful in any scenario, but some of it is especially "
+"important for search-engine optimization (SEO). Making sure you have things "
+"like appropriate `<title>` and `<meta>` tags is crucial. Modern search "
+"engine crawlers do handle client-side rendering, i.e., apps that are shipped "
+"as an empty `index.html` and rendered entirely in JS/WASM. But they prefer "
+"to receive pages in which your app has been rendered to actual HTML, with "
+"metadata in the `<head>`."
+msgstr ""
+
+#: src/metadata.md:50
+msgid ""
+"This is exactly what `leptos_meta` is for. And in fact, during server "
+"rendering, this is exactly what it does: collect all the `<head>` content "
+"you’ve declared by using its components throughout your application, and "
+"then inject it into the actual `<head>`."
+msgstr ""
+
+#: src/metadata.md:52
+msgid ""
+"But I’m getting ahead of myself. We haven’t actually talked about server-"
+"side rendering yet. The next chapter will talk about integrating with "
+"JavaScript libraries. Then we’ll wrap up the discussion of the client side, "
+"and move onto server side rendering."
+msgstr ""

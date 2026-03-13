@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/csr_wrapping_up.md:1
+msgid "Wrapping Up Part 1: Client-Side Rendering"
+msgstr ""
+
+#: src/csr_wrapping_up.md:3
+msgid ""
+"So far, everything we’ve written has been rendered almost entirely in the "
+"browser. When we create an app using Trunk, it’s served using a local "
+"development server. If you build it for production and deploy it, it’s "
+"served by whatever server or CDN you’re using. In either case, what’s served "
+"is an HTML page with"
+msgstr ""
+
+#: src/csr_wrapping_up.md:5
+msgid ""
+"the URL of your Leptos app, which has been compiled to WebAssembly (WASM)"
+msgstr ""
+
+#: src/csr_wrapping_up.md:6
+msgid "the URL of the JavaScript used to initialize this WASM blob"
+msgstr ""
+
+#: src/csr_wrapping_up.md:7
+msgid "an empty `<body>` element"
+msgstr ""
+
+#: src/csr_wrapping_up.md:9
+msgid ""
+"When the JS and WASM have loaded, Leptos will render your app into the "
+"`<body>`. This means that nothing appears on the screen until JS/WASM have "
+"loaded and run. This has some drawbacks:"
+msgstr ""
+
+#: src/csr_wrapping_up.md:11
+msgid ""
+"It increases load time, as your user’s screen is blank until additional "
+"resources have been downloaded."
+msgstr ""
+
+#: src/csr_wrapping_up.md:12
+msgid ""
+"It’s bad for SEO, as load times are longer and the HTML you serve has no "
+"meaningful content."
+msgstr ""
+
+#: src/csr_wrapping_up.md:13
+msgid ""
+"It’s broken for users for whom JS/WASM don’t load for some reason (e.g., "
+"they’re on a train and just went into a tunnel before WASM finished loading; "
+"they’re using an older device that doesn’t support WASM; they have "
+"JavaScript or WASM turned off for some reason; etc.)"
+msgstr ""
+
+#: src/csr_wrapping_up.md:15
+msgid ""
+"These downsides apply across the web ecosystem, but especially to WASM apps."
+msgstr ""
+
+#: src/csr_wrapping_up.md:17
+msgid ""
+"However, depending on the requirements of your project, you may be fine with "
+"these limitations."
+msgstr ""
+
+#: src/csr_wrapping_up.md:19
+msgid ""
+"If you just want to deploy your Client-Side Rendered website, skip ahead to "
+"the chapter on [\"Deployment\"](https://leptos-rs.github.io/leptos/"
+"deployment/index.html) - there, you'll find directions on how best to deploy "
+"your Leptos CSR site."
+msgstr ""
+
+#: src/csr_wrapping_up.md:22
+msgid ""
+"But what do you do if you want to return more than just an empty `<body>` "
+"tag in your `index.html` page? Use “Server-Side Rendering”!"
+msgstr ""
+
+#: src/csr_wrapping_up.md:24
+msgid ""
+"Whole books could be (and probably have been) written about this topic, but "
+"at its core, it’s really simple: rather than returning an empty `<body>` "
+"tag, with SSR, you'll return an initial HTML page that reflects the actual "
+"starting state of your app or site, so that while JS/WASM are loading, and "
+"until they load, the user can access the plain HTML version."
+msgstr ""
+
+#: src/csr_wrapping_up.md:26
+msgid ""
+"Part 2 of this book, on Leptos SSR, will cover this topic in some detail!"
+msgstr ""

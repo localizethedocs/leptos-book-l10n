@@ -1,0 +1,448 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/view/06_control_flow.md:1
+msgid "Control Flow"
+msgstr ""
+
+#: src/view/06_control_flow.md:3
+msgid ""
+"In most applications, you sometimes need to make a decision: Should I render "
+"this part of the view, or not? Should I render `<ButtonA/>` or `<WidgetB/>`? "
+"This is **control flow**."
+msgstr ""
+
+#: src/view/06_control_flow.md:7
+msgid "A Few Tips"
+msgstr ""
+
+#: src/view/06_control_flow.md:9
+msgid ""
+"When thinking about how to do this with Leptos, it’s important to remember a "
+"few things:"
+msgstr ""
+
+#: src/view/06_control_flow.md:12
+msgid ""
+"Rust is an expression-oriented language: control-flow expressions like `if "
+"x() { y } else { z }` and `match x() { ... }` return their values. This "
+"makes them very useful for declarative user interfaces."
+msgstr ""
+
+#: src/view/06_control_flow.md:15
+msgid ""
+"For any `T` that implements `IntoView`—in other words, for any type that "
+"Leptos knows how to render—`Option<T>` and `Result<T, impl Error>` _also_ "
+"implement `IntoView`. And just as `Fn() -> T` renders a reactive `T`, `Fn() -"
+"> Option<T>` and `Fn() -> Result<T, impl Error>` are reactive."
+msgstr ""
+
+#: src/view/06_control_flow.md:19
+msgid ""
+"Rust has lots of handy helpers like [Option::map](https://doc.rust-lang.org/"
+"std/option/enum.Option.html#method.map), [Option::and_then](https://doc.rust-"
+"lang.org/std/option/enum.Option.html#method.and_then), [Option::ok_or]"
+"(https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or), "
+"[Result::map](https://doc.rust-lang.org/std/result/enum.Result.html#method."
+"map), [Result::ok](https://doc.rust-lang.org/std/result/enum.Result."
+"html#method.ok), and [bool::then](https://doc.rust-lang.org/std/primitive."
+"bool.html#method.then) that allow you to convert, in a declarative way, "
+"between a few different standard types, all of which can be rendered. "
+"Spending time in the `Option` and `Result` docs in particular is one of the "
+"best ways to level up your Rust game."
+msgstr ""
+
+#: src/view/06_control_flow.md:28
+msgid ""
+"And always remember: to be reactive, values must be functions. You’ll see me "
+"constantly wrap things in a `move ||` closure, below. This is to ensure that "
+"they actually rerun when the signal they depend on changes, keeping the UI "
+"reactive."
+msgstr ""
+
+#: src/view/06_control_flow.md:32
+msgid "So What?"
+msgstr ""
+
+#: src/view/06_control_flow.md:34
+msgid ""
+"To connect the dots a little: this means that you can actually implement "
+"most of your control flow with native Rust code, without any control-flow "
+"components or special knowledge."
+msgstr ""
+
+#: src/view/06_control_flow.md:38
+msgid "For example, let’s start with a simple signal and derived signal:"
+msgstr ""
+
+#: src/view/06_control_flow.md:45
+msgid "We can use these signals and ordinary Rust to build most control flow."
+msgstr ""
+
+#: src/view/06_control_flow.md:47
+msgid "`if` statements"
+msgstr ""
+
+#: src/view/06_control_flow.md:49
+msgid ""
+"Let’s say I want to render some text if the number is odd, and some other "
+"text if it’s even. Well, how about this?"
+msgstr ""
+
+#: src/view/06_control_flow.md:56 src/view/06_control_flow.md:107
+#: src/view/06_control_flow.md:329
+msgid "\"Odd\""
+msgstr ""
+
+#: src/view/06_control_flow.md:58 src/view/06_control_flow.md:108
+#: src/view/06_control_flow.md:331
+msgid "\"Even\""
+msgstr ""
+
+#: src/view/06_control_flow.md:64
+msgid ""
+"An `if` expression returns its value, and a `&str` implements `IntoView`, so "
+"a `Fn() -> &str` implements `IntoView`, so this... just works!"
+msgstr ""
+
+#: src/view/06_control_flow.md:67
+msgid "`Option<T>`"
+msgstr ""
+
+#: src/view/06_control_flow.md:69
+msgid ""
+"Let’s say we want to render some text if it’s odd, and nothing if it’s even."
+msgstr ""
+
+#: src/view/06_control_flow.md:74 src/view/06_control_flow.md:88
+msgid "\"Ding ding ding!\""
+msgstr ""
+
+#: src/view/06_control_flow.md:85
+msgid ""
+"This works fine. We can make it a little shorter if we’d like, using `bool::"
+"then()`."
+msgstr ""
+
+#: src/view/06_control_flow.md:94
+msgid ""
+"You could even inline this if you’d like, although personally I sometimes "
+"like the better `cargo fmt` and `rust-analyzer` support I get by pulling "
+"things out of the `view`."
+msgstr ""
+
+#: src/view/06_control_flow.md:97
+msgid "`match` statements"
+msgstr ""
+
+#: src/view/06_control_flow.md:99
+msgid ""
+"We’re still just writing ordinary Rust code, right? So you have all the "
+"power of Rust’s pattern matching at your disposal."
+msgstr ""
+
+#: src/view/06_control_flow.md:105
+msgid "\"Zero\""
+msgstr ""
+
+#: src/view/06_control_flow.md:106 src/view/06_control_flow.md:230
+#: src/view/06_control_flow.md:258 src/view/06_control_flow.md:365
+msgid "\"One\""
+msgstr ""
+
+#: src/view/06_control_flow.md:116
+msgid "And why not? YOLO, right?"
+msgstr ""
+
+#: src/view/06_control_flow.md:118
+msgid "Preventing Over-Rendering"
+msgstr ""
+
+#: src/view/06_control_flow.md:120
+msgid "Not so YOLO."
+msgstr ""
+
+#: src/view/06_control_flow.md:122
+msgid ""
+"Everything we’ve just done is basically fine. But there’s one thing you "
+"should remember and try to be careful with. Each one of the control-flow "
+"functions we’ve created so far is basically a derived signal: it will rerun "
+"every time the value changes. In the examples above, where the value "
+"switches from even to odd on every change, this is fine."
+msgstr ""
+
+#: src/view/06_control_flow.md:127
+msgid "But consider the following example:"
+msgstr ""
+
+#: src/view/06_control_flow.md:133 src/view/06_control_flow.md:148
+msgid "\"Big\""
+msgstr ""
+
+#: src/view/06_control_flow.md:135 src/view/06_control_flow.md:151
+msgid "\"Small\""
+msgstr ""
+
+#: src/view/06_control_flow.md:143
+msgid "This _works_, for sure. But if you added a log, you might be surprised"
+msgstr ""
+
+#: src/view/06_control_flow.md:147
+msgid "\"{}: rendering Big\""
+msgstr ""
+
+#: src/view/06_control_flow.md:150
+msgid "\"{}: rendering Small\""
+msgstr ""
+
+#: src/view/06_control_flow.md:155
+msgid ""
+"As a user repeatedly clicks a button incrementing `value`, you’d see "
+"something like this:"
+msgstr ""
+
+#: src/view/06_control_flow.md:169
+msgid ""
+"Every time `value` changes, it reruns the `if` statement. This makes sense, "
+"with how reactivity works. But it has a downside. For a simple text node, "
+"rerunning the `if` statement and rerendering isn’t a big deal. But imagine "
+"it were like this:"
+msgstr ""
+
+#: src/view/06_control_flow.md:182
+msgid ""
+"This rerenders `<Small/>` five times, then `<Big/>` infinitely. If they’re "
+"loading resources, creating signals, or even just creating DOM nodes, this "
+"is unnecessary work."
+msgstr ""
+
+#: src/view/06_control_flow.md:186
+msgid "`<Show/>`"
+msgstr ""
+
+#: src/view/06_control_flow.md:188
+msgid ""
+"The [`<Show/>`](https://docs.rs/leptos/latest/leptos/control_flow/fn.Show."
+"html) component is the answer. You pass it a `when` condition function, a "
+"`fallback` to be shown if the `when` function returns `false`, and children "
+"to be rendered if `when` is `true`."
+msgstr ""
+
+#: src/view/06_control_flow.md:205
+msgid ""
+"`<Show/>` memoizes the `when` condition, so it only renders its `<Small/>` "
+"once, continuing to show the same component until `value` is greater than "
+"five; then it renders `<Big/>` once, continuing to show it indefinitely or "
+"until `value` goes below five and then renders `<Small/>` again."
+msgstr ""
+
+#: src/view/06_control_flow.md:210
+msgid ""
+"This is a helpful tool to avoid rerendering when using dynamic `if` "
+"expressions. As always, there's some overhead: for a very simple node (like "
+"updating a single text node, or updating a class or attribute), a `move || "
+"if ...` will be more efficient. But if it’s at all expensive to render "
+"either branch, reach for `<Show/>`."
+msgstr ""
+
+#: src/view/06_control_flow.md:216
+msgid "Note: Type Conversions"
+msgstr ""
+
+#: src/view/06_control_flow.md:218
+msgid "There’s one final thing it’s important to say in this section."
+msgstr ""
+
+#: src/view/06_control_flow.md:220
+msgid ""
+"Leptos uses a statically-typed view tree. The `view` macro returns different "
+"types for different kinds of view."
+msgstr ""
+
+#: src/view/06_control_flow.md:223
+msgid ""
+"This won’t compile, because the different HTML elements are different types."
+msgstr ""
+
+#: src/view/06_control_flow.md:233 src/view/06_control_flow.md:262
+#: src/view/06_control_flow.md:370
+msgid "\"Two\""
+msgstr ""
+
+#: src/view/06_control_flow.md:235 src/view/06_control_flow.md:264
+msgid "// returns HtmlElement<Textarea>\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:242
+msgid ""
+"This strong typing is very powerful, because it enables all sorts of compile-"
+"time optimizations. But it can be a little annoying in conditional logic "
+"like this, because you can’t return different types from different branches "
+"of a condition in Rust. There are two ways to get yourself out of this "
+"situation:"
+msgstr ""
+
+#: src/view/06_control_flow.md:247
+msgid ""
+"Use the enum `Either` (and `EitherOf3`, `EitherOf4`, etc.) to convert the "
+"different types to the same type."
+msgstr ""
+
+#: src/view/06_control_flow.md:248
+msgid ""
+"Use `.into_any()` to convert multiple types into one typed-erased `AnyView`."
+msgstr ""
+
+#: src/view/06_control_flow.md:250
+msgid "Here’s the same example, with the conversion added:"
+msgstr ""
+
+#: src/view/06_control_flow.md:257
+msgid "// returns HtmlElement<Pre>\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:261
+msgid "// returns HtmlElement<P>\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:271
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/6-control-"
+"flow-0-7-3m4c9j?file=%2Fsrc%2Fmain."
+"rs%3A1%2C1-91%2C2&workspaceId=478437f3-1f86-4b1e-b665-5c27a31451fb)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/6-control-flow-0-7-3m4c9j?"
+"file=%2Fsrc%2Fmain.rs%3A1%2C1-91%2C2&workspaceId=478437f3-1f86-4b1e-"
+"b665-5c27a31451fb\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/view/06_control_flow.md:296
+msgid "\"How odd!\""
+msgstr ""
+
+#: src/view/06_control_flow.md:302
+msgid "\"Control Flow\""
+msgstr ""
+
+#: src/view/06_control_flow.md:304
+msgid "// Simple UI to update and show a value\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:306
+msgid "\"+1\""
+msgstr ""
+
+#: src/view/06_control_flow.md:308
+msgid "\"Value is: \""
+msgstr ""
+
+#: src/view/06_control_flow.md:312
+msgid "\"Option<T>\""
+msgstr ""
+
+#: src/view/06_control_flow.md:313
+msgid ""
+"// For any `T` that implements `IntoView`,\n"
+"        // so does `Option<T>`\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:317
+msgid "// This means you can use `Option` methods on it\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:320
+msgid "\"Conditional Logic\""
+msgstr ""
+
+#: src/view/06_control_flow.md:321
+msgid ""
+"// You can do dynamic conditional if-then-else\n"
+"        // logic in several ways\n"
+"        //\n"
+"        // a. An \"if\" expression in a function\n"
+"        //    This will simply re-render every time the value\n"
+"        //    changes, which makes it good for lightweight UI\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:335
+msgid ""
+"// b. Toggling some kind of class\n"
+"        //    This is smart for an element that's going to\n"
+"        //    toggled often, because it doesn't destroy\n"
+"        //    it in between states\n"
+"        //    (you can find the `hidden` class in `index.html`)\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:340
+msgid "\"Appears if even.\""
+msgstr ""
+
+#: src/view/06_control_flow.md:342
+msgid ""
+"// c. The <Show/> component\n"
+"        //    This only renders the fallback and the child\n"
+"        //    once, lazily, and toggles between them when\n"
+"        //    needed. This makes it more efficient in many cases\n"
+"        //    than a {move || if ...} block\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:348
+msgid "\"Even steven\""
+msgstr ""
+
+#: src/view/06_control_flow.md:350
+msgid "\"Oddment\""
+msgstr ""
+
+#: src/view/06_control_flow.md:353
+msgid ""
+"// d. Because `bool::then()` converts a `bool` to\n"
+"        //    `Option`, you can use it to create a show/hide toggled\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:355
+msgid "\"Oddity!\""
+msgstr ""
+
+#: src/view/06_control_flow.md:357
+msgid "\"Converting between Types\""
+msgstr ""
+
+#: src/view/06_control_flow.md:358
+msgid ""
+"// e. Note: if branches return different types,\n"
+"        //    you can convert between them with\n"
+"        //    `.into_any()` or using the `Either` enums\n"
+"        //    (`Either`, `EitherOf3`, `EitherOf4`, etc.)\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:364
+msgid "// <pre> returns HtmlElement<Pre>\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:368
+msgid ""
+"// <p> returns HtmlElement<P>\n"
+"                // so we convert into a more generic type\n"
+msgstr ""

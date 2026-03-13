@@ -1,0 +1,176 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/interlude_projecting_children.md:1
+msgid "Projecting Children"
+msgstr ""
+
+#: src/interlude_projecting_children.md:3
+msgid ""
+"As you build components you may occasionally find yourself wanting to "
+"“project” children through multiple layers of components."
+msgstr ""
+
+#: src/interlude_projecting_children.md:5
+msgid "The Problem"
+msgstr ""
+
+#: src/interlude_projecting_children.md:7
+msgid "Consider the following:"
+msgstr ""
+
+#: src/interlude_projecting_children.md:31
+msgid ""
+"This is pretty straightforward: if the inner condition is `true`, we want to "
+"show `children`. If not, we want to show `fallback`. And if the outer "
+"condition is `false`, we just render `()`, i.e., nothing."
+msgstr ""
+
+#: src/interlude_projecting_children.md:33
+msgid ""
+"In other words, we want to pass the children of `<NestedShow/>` _through_ "
+"the outer `<Show/>` component to become the children of the inner `<Show/>`. "
+"This is what I mean by “projection.”"
+msgstr ""
+
+#: src/interlude_projecting_children.md:35
+msgid "This won’t compile."
+msgstr ""
+
+#: src/interlude_projecting_children.md:41
+msgid ""
+"Each `<Show/>` needs to be able to construct its `children` multiple times. "
+"The first time you construct the outer `<Show/>`’s children, it takes "
+"`fallback` and `children` to move them into the invocation of the inner "
+"`<Show/>`, but then they're not available for future outer-`<Show/>` "
+"children construction."
+msgstr ""
+
+#: src/interlude_projecting_children.md:43
+msgid "The Details"
+msgstr ""
+
+#: src/interlude_projecting_children.md:45
+msgid "Feel free to skip ahead to the solution."
+msgstr ""
+
+#: src/interlude_projecting_children.md:47
+msgid ""
+"If you want to really understand the issue here, it may help to look at the "
+"expanded `view` macro. Here’s a cleaned-up version:"
+msgstr ""
+
+#: src/interlude_projecting_children.md:55
+msgid "// children and fallback are moved into a closure here\n"
+msgstr ""
+
+#: src/interlude_projecting_children.md:60
+msgid "// fallback is consumed here\n"
+msgstr ""
+
+#: src/interlude_projecting_children.md:63
+msgid "// children is captured here\n"
+msgstr ""
+
+#: src/interlude_projecting_children.md:76
+msgid ""
+"All components own their props; so the `<Show/>` in this case can’t be "
+"called because it only has captured references to `fallback` and `children`."
+msgstr ""
+
+#: src/interlude_projecting_children.md:78
+msgid "Solution"
+msgstr ""
+
+#: src/interlude_projecting_children.md:80
+msgid ""
+"However, both `<Suspense/>` and `<Show/>` take `ChildrenFn`, i.e., their "
+"`children` should implement the `Fn` type so they can be called multiple "
+"times with only an immutable reference. This means we don’t need to own "
+"`children` or `fallback`; we just need to be able to pass `'static` "
+"references to them."
+msgstr ""
+
+#: src/interlude_projecting_children.md:82
+msgid ""
+"We can solve this problem by using the [`StoredValue`](https://docs.rs/"
+"leptos/latest/leptos/reactive/owner/struct.StoredValue.html) primitive. This "
+"essentially stores a value in the reactive system, handing ownership off to "
+"the framework in exchange for a reference that is, like signals, `Copy` and "
+"`'static`, which we can access or modify through certain methods."
+msgstr ""
+
+#: src/interlude_projecting_children.md:84
+msgid "In this case, it’s really simple:"
+msgstr ""
+
+#: src/interlude_projecting_children.md:101
+msgid ""
+"// check whether user is verified\n"
+"                // by reading from the resource\n"
+msgstr ""
+
+#: src/interlude_projecting_children.md:113
+msgid ""
+"At the top level, we store both `fallback` and `children` in the reactive "
+"scope owned by `NestedShow`. Now we can simply move those references down "
+"through the other layers into the `<Show/>` component and call them there."
+msgstr ""
+
+#: src/interlude_projecting_children.md:115
+msgid "A Final Note"
+msgstr ""
+
+#: src/interlude_projecting_children.md:117
+msgid ""
+"Note that this works because `<Show/>` only needs an immutable reference to "
+"their children (which `.read_value` can give), not ownership."
+msgstr ""
+
+#: src/interlude_projecting_children.md:119
+msgid ""
+"In other cases, you may need to project owned props through a function that "
+"takes `ChildrenFn` and therefore needs to be called more than once. In this "
+"case, you may find the `clone:` helper in the`view` macro helpful."
+msgstr ""
+
+#: src/interlude_projecting_children.md:121
+msgid "Consider this example"
+msgstr ""
+
+#: src/interlude_projecting_children.md:126
+msgid "\"Alice\""
+msgstr ""
+
+#: src/interlude_projecting_children.md:154
+msgid "Even with `name=name.clone()`, this gives the error"
+msgstr ""
+
+#: src/interlude_projecting_children.md:160
+msgid ""
+"It’s captured through multiple levels of children that need to run more than "
+"once, and there’s no obvious way to clone it _into_ the children."
+msgstr ""
+
+#: src/interlude_projecting_children.md:162
+msgid ""
+"In this case, the `clone:` syntax comes in handy. Calling `clone:name` will "
+"clone `name` _before_ moving it into `<Inner/>`’s children, which solves our "
+"ownership issue."
+msgstr ""
+
+#: src/interlude_projecting_children.md:174
+msgid ""
+"These issues can be a little tricky to understand or debug, because of the "
+"opacity of the `view` macro. But in general, they can always be solved."
+msgstr ""

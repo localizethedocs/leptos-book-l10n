@@ -1,0 +1,343 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/view/02_dynamic_attributes.md:1
+msgid "`view`: Dynamic Classes, Styles and Attributes"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:3
+msgid ""
+"So far we’ve seen how to use the `view` macro to create event listeners and "
+"to create dynamic text by passing a function (such as a signal) into the "
+"view."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:6
+msgid ""
+"But of course there are other things you might want to update in your user "
+"interface. In this section, we’ll look at how to update classes, styles and "
+"attributes dynamically, and we’ll introduce the concept of a **derived "
+"signal**."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:10
+msgid ""
+"Let’s start with a simple component that should be familiar: click a button "
+"to increment a counter."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:24
+msgid "\"Click me: \""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:31
+msgid "So far, we’ve covered all of this in the previous chapter."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:33
+msgid "Dynamic Classes"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:35
+msgid ""
+"Now let’s say I’d like to update the list of CSS classes on this element "
+"dynamically. For example, let’s say I want to add the class `red` when the "
+"count is odd. I can do this using the `class:` syntax."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:43
+msgid "`class:` attributes take"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:45
+msgid "the class name, following the colon (`red`)"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:46
+msgid "a value, which can be a `bool` or a function that returns a `bool`"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:48
+msgid ""
+"When the value is `true`, the class is added. When the value is `false`, the "
+"class is removed. And if the value is a function that accesses a signal, the "
+"class will reactively update when the signal changes."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:52
+msgid ""
+"Now every time I click the button, the text should toggle between red and "
+"black as the number switches between even and odd."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:60
+msgid ""
+"// the class: syntax reactively updates a single class\n"
+"    // here, we'll set the `red` class when `count` is odd\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:64 src/view/02_dynamic_attributes.md:235
+msgid "\"Click me\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:68
+msgid ""
+"If you’re following along, make sure you go into your `index.html` and add "
+"something like this:"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:78
+msgid ""
+"Some CSS class names can’t be directly parsed by the `view` macro, "
+"especially if they include a mix of dashes and numbers or other characters. "
+"In that case, you can use a tuple syntax: `class=(\"name\", value)` still "
+"directly updates a single class."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:81 src/view/02_dynamic_attributes.md:87
+#: src/view/02_dynamic_attributes.md:233
+msgid "\"button-20\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:84
+msgid ""
+"The tuple syntax also allows specifying multiple classes under a single "
+"condition using an array as the first tuple element."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:87
+msgid "\"rounded\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:90
+msgid "Dynamic Styles"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:92
+msgid ""
+"Individual CSS properties can be directly updated with a similar `style:` "
+"syntax."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:102
+msgid "// set the `style` attribute\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:103
+msgid "\"position: absolute\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:104
+msgid "// and toggle individual CSS properties with `style:`\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:105
+msgid "\"{}px\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:106
+msgid "\"rgb({}, {}, 100)\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:107
+msgid "\"400px\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:108
+msgid "// Set a CSS variable for stylesheet use\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:109
+msgid "\"--columns\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:111
+msgid "\"Click to Move\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:116
+msgid "Dynamic Attributes"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:118
+msgid ""
+"The same applies to plain attributes. Passing a plain string or primitive "
+"value to an attribute gives it a static value. Passing a function (including "
+"a signal) to an attribute causes it to update its value reactively. Let’s "
+"add another element to our view:"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:125 src/view/02_dynamic_attributes.md:146
+#: src/view/02_dynamic_attributes.md:159 src/view/02_dynamic_attributes.md:243
+#: src/view/02_dynamic_attributes.md:257
+msgid "\"50\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:126
+msgid ""
+"// signals are functions, so `value=count` and `value=move || count.get()`\n"
+"    // are interchangeable.\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:132
+msgid ""
+"Now every time we set the count, not only will the `class` of the `<button>` "
+"be toggled, but the `value` of the `<progress>` bar will increase, which "
+"means that our progress bar will move forward."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:136
+msgid "Derived Signals"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:138
+msgid "Let’s go one layer deeper, just for fun."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:140
+msgid ""
+"You already know that we create reactive interfaces just by passing "
+"functions into the `view`. This means that we can easily change our progress "
+"bar. For example, suppose we want it to move twice as fast:"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:151
+msgid ""
+"But imagine we want to reuse that calculation in more than one place. You "
+"can do this using a **derived signal**: a closure that accesses a signal."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:156
+msgid "/* insert the rest of the view */"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:160
+msgid "// we use it once here\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:164 src/view/02_dynamic_attributes.md:264
+msgid "\"Double Count: \""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:165
+msgid "// and again here\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:170
+msgid ""
+"Derived signals let you create reactive computed values that can be used in "
+"multiple places in your application with minimal overhead."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:173
+msgid ""
+"Note: Using a derived signal like this means that the calculation runs once "
+"per signal change (when `count()` changes) and once per place we access "
+"`double_count`; in other words, twice. This is a very cheap calculation, so "
+"that’s fine. We’ll look at memos in a later chapter, which were designed to "
+"solve this problem for expensive calculations."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:179
+msgid "Advanced Topic: Injecting Raw HTML"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:181
+msgid ""
+"The `view` macro provides support for an additional attribute, `inner_html`, "
+"which can be used to directly set the HTML contents of any element, wiping "
+"out any other children you’ve given it. Note that this does _not_ escape the "
+"HTML you provide. You should make sure that it only contains trusted input "
+"or that any HTML entities are escaped, to prevent cross-site scripting (XSS) "
+"attacks."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:188
+msgid "\"<p>This HTML will be injected.</p>\""
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:194
+msgid ""
+"[Click here for the full `view` macros docs](https://docs.rs/leptos/latest/"
+"leptos/macro.view.html)."
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:196
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/2-dynamic-"
+"attributes-0-7-wddqfp?file=%2Fsrc%2Fmain.rs%3A1%2C1-58%2C1)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/2-dynamic-attributes-0-7-"
+"wddqfp?file=%2Fsrc%2Fmain.rs%3A1%2C1-58%2C1\" width=\"100%\" "
+"height=\"1000px\" style=\"max-height: 100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:220
+msgid ""
+"// a \"derived signal\" is a function that accesses other signals\n"
+"    // we can use this to create reactive values that depend on the\n"
+"    // values of one or more other signals\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:230
+msgid ""
+"// the class: syntax reactively updates a single class\n"
+"            // here, we'll set the `red` class when `count` is odd\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:237
+msgid "// NOTE: self-closing tags like <br> need an explicit /\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:240
+msgid "// We'll update this progress bar every time `count` changes\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:242
+msgid "// static attributes work as in HTML\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:245
+msgid ""
+"// passing a function to an attribute\n"
+"            // reactively sets that attribute\n"
+"            // signals are functions, so `value=count` and `value=move || "
+"count.get()`\n"
+"            // are interchangeable.\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:254
+msgid ""
+"// This progress bar will use `double_count`\n"
+"        // so it should move twice as fast!\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:258
+msgid ""
+"// derived signals are functions, so they can also\n"
+"            // reactively update the DOM\n"
+msgstr ""
+
+#: src/view/02_dynamic_attributes.md:263
+msgid "\"Count: \""
+msgstr ""
