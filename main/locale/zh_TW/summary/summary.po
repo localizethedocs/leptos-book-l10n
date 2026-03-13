@@ -61,7 +61,7 @@ msgstr ""
 
 #: src/SUMMARY.md:14
 msgid "Control Flow"
-msgstr ""
+msgstr "控制流程"
 
 #: src/SUMMARY.md:15
 msgid "Error Handling"
@@ -97,11 +97,11 @@ msgstr ""
 
 #: src/SUMMARY.md:23
 msgid "Testing"
-msgstr ""
+msgstr "測試"
 
 #: src/SUMMARY.md:24
 msgid "Async"
-msgstr ""
+msgstr "異步"
 
 #: src/SUMMARY.md:25
 msgid "Loading Data with Resources"
@@ -222,11 +222,11 @@ msgstr "部署"
 
 #: src/SUMMARY.md:54
 msgid "Deploying CSR Apps"
-msgstr ""
+msgstr "部署 CSR 應用"
 
 #: src/SUMMARY.md:55
 msgid "Deploying SSR Apps"
-msgstr ""
+msgstr "部署 SSR 應用"
 
 #: src/SUMMARY.md:56
 msgid "Deploying at Non-Root Paths"
@@ -234,7 +234,7 @@ msgstr ""
 
 #: src/SUMMARY.md:57
 msgid "Optimizing WASM Binary Size"
-msgstr ""
+msgstr "最佳化 WASM 二進位檔大小"
 
 #: src/SUMMARY.md:58
 msgid "Guide: Islands"
@@ -246,4 +246,4 @@ msgstr ""
 
 #: src/SUMMARY.md:61
 msgid "Appendix: The Life Cycle of a Signal"
-msgstr ""
+msgstr "附錄：訊號的生命週期"
