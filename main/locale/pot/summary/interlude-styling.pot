@@ -1,0 +1,255 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/interlude_styling.md:1
+msgid "Interlude: Styling"
+msgstr ""
+
+#: src/interlude_styling.md:3
+msgid ""
+"Anyone creating a website or application soon runs into the question of "
+"styling. For a small app, a single CSS file is probably plenty to style your "
+"user interface. But as an application grows, many developers find that plain "
+"CSS becomes increasingly hard to manage."
+msgstr ""
+
+#: src/interlude_styling.md:5
+msgid ""
+"Some frontend frameworks (like Angular, Vue, and Svelte) provide built-in "
+"ways to scope your CSS to particular components, making it easier to manage "
+"styles across a whole application without styles meant to modify one small "
+"component having a global effect. Other frameworks (like React or Solid) "
+"don’t provide built-in CSS scoping, but rely on libraries in the ecosystem "
+"to do it for them. Leptos is in this latter camp: the framework itself has "
+"no opinions about CSS at all, but provides a few tools and primitives that "
+"allow others to build styling libraries."
+msgstr ""
+
+#: src/interlude_styling.md:7
+msgid ""
+"Here are a few different approaches to styling your Leptos app, starting "
+"with plain CSS."
+msgstr ""
+
+#: src/interlude_styling.md:9
+msgid "Plain CSS"
+msgstr ""
+
+#: src/interlude_styling.md:11
+msgid "Client-Side Rendering with Trunk"
+msgstr ""
+
+#: src/interlude_styling.md:13
+msgid ""
+"`trunk` can be used to bundle CSS files and images with your site. To do "
+"this, you can add them as Trunk assets by defining them in your `index.html` "
+"in the `<head>`. For example, to add a CSS file located at `style.css` you "
+"can add the tag `<link data-trunk rel=\"css\" href=\"./style.css\"/>`."
+msgstr ""
+
+#: src/interlude_styling.md:15
+msgid ""
+"You can find more information in the Trunk documentation for [assets]"
+"(https://trunkrs.dev/assets/)."
+msgstr ""
+
+#: src/interlude_styling.md:17
+msgid "Server-Side Rendering with `cargo-leptos`"
+msgstr ""
+
+#: src/interlude_styling.md:19
+msgid ""
+"The `cargo-leptos` templates are configured by default to use SASS to bundle "
+"CSS files and output them at `/pkg/{project_name}.css`. If you want to load "
+"additional CSS files, you can do so either by importing them into that "
+"`style.scss` file, or by adding them to the `public` directory. (A file at "
+"`public/foo.css`, for example, is served at `/foo.css`.)"
+msgstr ""
+
+#: src/interlude_styling.md:21
+msgid ""
+"To load stylesheets in a component, you can use the [`Stylesheet`](https://"
+"docs.rs/leptos_meta/latest/leptos_meta/fn.Stylesheet.html) component."
+msgstr ""
+
+#: src/interlude_styling.md:23
+msgid "TailwindCSS: Utility-first CSS"
+msgstr ""
+
+#: src/interlude_styling.md:25
+msgid ""
+"[TailwindCSS](https://tailwindcss.com/) is a popular utility-first CSS "
+"library. It allows you to style your application by using inline utility "
+"classes, with a custom CLI tool that scans your files for Tailwind class "
+"names and bundles the necessary CSS."
+msgstr ""
+
+#: src/interlude_styling.md:27 src/interlude_styling.md:59
+msgid "This allows you to write components like this:"
+msgstr ""
+
+#: src/interlude_styling.md:35
+msgid "\"my-0 mx-auto max-w-3xl text-center\""
+msgstr ""
+
+#: src/interlude_styling.md:36
+msgid "\"p-6 text-4xl\""
+msgstr ""
+
+#: src/interlude_styling.md:36
+msgid "\"Welcome to Leptos with Tailwind\""
+msgstr ""
+
+#: src/interlude_styling.md:37
+msgid "\"px-10 pb-10 text-left\""
+msgstr ""
+
+#: src/interlude_styling.md:37
+msgid ""
+"\"Tailwind will scan your Rust files for Tailwind class names and compile "
+"them into a CSS file.\""
+msgstr ""
+
+#: src/interlude_styling.md:39
+msgid "\"bg-sky-600 hover:bg-sky-700 px-5 py-3 text-white rounded-lg\""
+msgstr ""
+
+#: src/interlude_styling.md:43
+msgid "\"Click me!\""
+msgstr ""
+
+#: src/interlude_styling.md:53
+msgid ""
+"It can be a little complicated to set up the Tailwind integration at first, "
+"but you can check out our two examples of how to use Tailwind with a [client-"
+"side-rendered `trunk` application](https://github.com/leptos-rs/leptos/tree/"
+"main/examples/tailwind_csr) or with a [server-rendered `cargo-leptos` "
+"application](https://github.com/leptos-rs/leptos/tree/main/examples/"
+"tailwind_actix). `cargo-leptos` also has some [built-in Tailwind support]"
+"(https://github.com/leptos-rs/cargo-leptos#site-parameters) that you can use "
+"as an alternative to Tailwind’s CLI."
+msgstr ""
+
+#: src/interlude_styling.md:55
+msgid "Stylers: Compile-time CSS Extraction"
+msgstr ""
+
+#: src/interlude_styling.md:57
+msgid ""
+"[Stylers](https://github.com/abishekatp/stylers) is a compile-time scoped "
+"CSS library that lets you declare scoped CSS in the body of your component. "
+"Stylers will extract this CSS at compile time into CSS files that you can "
+"then import into your app, which means that it doesn’t add anything to the "
+"WASM binary size of your application."
+msgstr ""
+
+#: src/interlude_styling.md:66
+msgid "\"App\""
+msgstr ""
+
+#: src/interlude_styling.md:72
+msgid "r#\"\\hello\"#"
+msgstr ""
+
+#: src/interlude_styling.md:73
+msgid "\"1.3em/1.2\""
+msgstr ""
+
+#: src/interlude_styling.md:92
+msgid ""
+"\">\n"
+"            <h1 id=\""
+msgstr ""
+
+#: src/interlude_styling.md:93
+msgid "\">\""
+msgstr ""
+
+#: src/interlude_styling.md:93
+msgid ""
+"\"</h1>\n"
+"            <h2>\""
+msgstr ""
+
+#: src/interlude_styling.md:94
+msgid ""
+"\"</h2>\n"
+"            <h2>\""
+msgstr ""
+
+#: src/interlude_styling.md:95
+msgid ""
+"\"</h2>\n"
+"            <h3>\""
+msgstr ""
+
+#: src/interlude_styling.md:96
+msgid ""
+"\"</h3>\n"
+"        </div>\n"
+"    }\n"
+"}\n"
+msgstr ""
+
+#: src/interlude_styling.md:102
+msgid "Stylance: Scoped CSS Written in CSS Files"
+msgstr ""
+
+#: src/interlude_styling.md:104
+msgid ""
+"Stylers lets you write CSS inline in your Rust code, extracts it at compile "
+"time, and scopes it. [Stylance](https://github.com/basro/stylance-rs) allows "
+"you to write your CSS in CSS files alongside your components, import those "
+"files into your components, and scope the CSS classes to your components."
+msgstr ""
+
+#: src/interlude_styling.md:106
+msgid ""
+"This works well with the live-reloading features of `trunk` and `cargo-"
+"leptos` because edited CSS files can be updated immediately in the browser."
+msgstr ""
+
+#: src/interlude_styling.md:109
+msgid "\"app.module.scss\""
+msgstr ""
+
+#: src/interlude_styling.md:119
+msgid "You can edit the CSS directly without causing a Rust recompile."
+msgstr ""
+
+#: src/interlude_styling.md:128
+msgid "Styled: Runtime CSS Scoping"
+msgstr ""
+
+#: src/interlude_styling.md:132
+msgid ""
+"[Styled](https://github.com/eboody/styled) is a runtime scoped CSS library "
+"that integrates well with Leptos. It lets you declare scoped CSS in the body "
+"of your component function, and then applies those styles at runtime."
+msgstr ""
+
+#: src/interlude_styling.md:162
+msgid "\"This text should be red with white text.\""
+msgstr ""
+
+#: src/interlude_styling.md:170
+msgid "Contributions Welcome"
+msgstr ""
+
+#: src/interlude_styling.md:172
+msgid ""
+"Leptos has no opinions on how you style your website or app, but we’re very "
+"happy to provide support to any tools you’re trying to create to make it "
+"easier. If you’re working on a CSS or styling approach that you’d like to "
+"add to this list, please let us know!"
+msgstr ""

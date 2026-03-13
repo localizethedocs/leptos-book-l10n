@@ -1,0 +1,371 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/view/09_component_children.md:1
+msgid "Component Children"
+msgstr ""
+
+#: src/view/09_component_children.md:3
+msgid ""
+"It’s pretty common to want to pass children into a component, just as you "
+"can pass children into an HTML element. For example, imagine I have a "
+"`<FancyForm/>` component that enhances an HTML `<form>`. I need some way to "
+"pass all its inputs."
+msgstr ""
+
+#: src/view/09_component_children.md:12
+msgid "\"Some Input\""
+msgstr ""
+
+#: src/view/09_component_children.md:13
+msgid "\"text\""
+msgstr ""
+
+#: src/view/09_component_children.md:13
+msgid "\"something\""
+msgstr ""
+
+#: src/view/09_component_children.md:16
+msgid "\"Submit\""
+msgstr ""
+
+#: src/view/09_component_children.md:21
+msgid ""
+"How can you do this in Leptos? There are basically two ways to pass "
+"components to other components:"
+msgstr ""
+
+#: src/view/09_component_children.md:24
+msgid "**render props**: properties that are functions that return a view"
+msgstr ""
+
+#: src/view/09_component_children.md:25
+msgid ""
+"the **`children`** prop: a special component property that includes anything "
+"you pass as a child to the component."
+msgstr ""
+
+#: src/view/09_component_children.md:28
+msgid ""
+"In fact, you’ve already seen these both in action in the [`<Show/>`](/"
+"view/06_control_flow.html#show) component:"
+msgstr ""
+
+#: src/view/09_component_children.md:33
+msgid "// `when` is a normal prop\n"
+msgstr ""
+
+#: src/view/09_component_children.md:35
+msgid "// `fallback` is a \"render prop\": a function that returns a view\n"
+msgstr ""
+
+#: src/view/09_component_children.md:38
+msgid ""
+"// `<Big/>` (and anything else here)\n"
+"    // will be given to the `children` prop\n"
+msgstr ""
+
+#: src/view/09_component_children.md:45
+msgid "Let’s define a component that takes some children and a render prop."
+msgstr ""
+
+#: src/view/09_component_children.md:48 src/view/09_component_children.md:277
+msgid "/// Displays a `render_prop` and some children within markup.\n"
+msgstr ""
+
+#: src/view/09_component_children.md:51 src/view/09_component_children.md:281
+msgid ""
+"/// Takes a function (type F) that returns anything that can be\n"
+"    /// converted into a View (type IV)\n"
+msgstr ""
+
+#: src/view/09_component_children.md:54
+msgid ""
+"/// `children` can take one of several different types, each of which\n"
+"    /// is a function that returns some view type\n"
+msgstr ""
+
+#: src/view/09_component_children.md:63 src/view/09_component_children.md:294
+msgid "\"<TakesChildren/>\""
+msgstr ""
+
+#: src/view/09_component_children.md:64 src/view/09_component_children.md:295
+msgid "\"Render Prop\""
+msgstr ""
+
+#: src/view/09_component_children.md:67 src/view/09_component_children.md:298
+msgid "\"Children\""
+msgstr ""
+
+#: src/view/09_component_children.md:73
+msgid ""
+"`render_prop` and `children` are both functions, so we can call them to "
+"generate the appropriate views. `children`, in particular, is an alias for "
+"`Box<dyn FnOnce() -> AnyView>`. (Aren't you glad we named it `Children` "
+"instead?) The `AnyView` returned here is an opaque, type-erased view: you "
+"can’t do anything to inspect it. There are a variety of other child types: "
+"for example, `ChildrenFragment` will return a `Fragment`, which is a "
+"collection whose children can be iterated over."
+msgstr ""
+
+#: src/view/09_component_children.md:80
+msgid ""
+"If you need a `Fn` or `FnMut` here because you need to call `children` more "
+"than once, we also provide `ChildrenFn` and `ChildrenMut` aliases."
+msgstr ""
+
+#: src/view/09_component_children.md:83
+msgid "We can use the component like this:"
+msgstr ""
+
+#: src/view/09_component_children.md:87
+msgid "\"Hi, there!\""
+msgstr ""
+
+#: src/view/09_component_children.md:88
+msgid ""
+"// these get passed to `children`\n"
+"        \"Some text\""
+msgstr ""
+
+#: src/view/09_component_children.md:90
+msgid "\"A span\""
+msgstr ""
+
+#: src/view/09_component_children.md:95
+msgid "Typed Children: Slots"
+msgstr ""
+
+#: src/view/09_component_children.md:97
+msgid ""
+"So far, we have discussed components with a single `children` prop, but "
+"sometimes it is helpful to create a component with multiple children of "
+"different types. For example:"
+msgstr ""
+
+#: src/view/09_component_children.md:101 src/view/09_component_children.md:143
+msgid "\"Show content when a is true\""
+msgstr ""
+
+#: src/view/09_component_children.md:102
+msgid "\"b is true\""
+msgstr ""
+
+#: src/view/09_component_children.md:103
+msgid "\"c is true\""
+msgstr ""
+
+#: src/view/09_component_children.md:104
+msgid "\"None of the above are true\""
+msgstr ""
+
+#: src/view/09_component_children.md:108
+msgid ""
+"The `If` component always expects a `Then` child, optionally multiple "
+"`ElseIf` children and an optional `Else` child. To handle this, Leptos "
+"provides [slot](https://docs.rs/leptos/latest/leptos/attr.slot.html)s."
+msgstr ""
+
+#: src/view/09_component_children.md:110
+msgid "The `#[slot]` macro annotates a plain Rust struct as component slot:"
+msgstr ""
+
+#: src/view/09_component_children.md:112
+msgid ""
+"// A simple struct annotated with `#[slot]`,\n"
+"// which expects children\n"
+msgstr ""
+
+#: src/view/09_component_children.md:120
+msgid "This slot can be used as a prop in a component:"
+msgstr ""
+
+#: src/view/09_component_children.md:125
+msgid "// Component slot, should be passed through the <Then slot> syntax\n"
+msgstr ""
+
+#: src/view/09_component_children.md:138
+msgid ""
+"Now, the `If` component expects a child of type `Then`. You would need to "
+"annotate the used slot with `slot:<prop_name>`:"
+msgstr ""
+
+#: src/view/09_component_children.md:142
+msgid "// The `If` component always expects a `Then` child for `then_slot`\n"
+msgstr ""
+
+#: src/view/09_component_children.md:148
+msgid ""
+"Specifying `slot` without a name will default the chosen slot as the snake "
+"case version of the struct name. So in this case `<Then slot>` would be "
+"equivalent to `<Then slot:then>`."
+msgstr ""
+
+#: src/view/09_component_children.md:150
+msgid ""
+"For the complete example, see [slots examples](https://github.com/leptos-rs/"
+"leptos/tree/main/examples/slots)."
+msgstr ""
+
+#: src/view/09_component_children.md:152
+msgid "Event handlers on slots"
+msgstr ""
+
+#: src/view/09_component_children.md:154
+msgid "Event handlers cannot be specified directly on slots like this:"
+msgstr ""
+
+#: src/view/09_component_children.md:157
+msgid "// ⚠️ Event handler `on:click` directly on slot is not allowed\n"
+msgstr ""
+
+#: src/view/09_component_children.md:159 src/view/09_component_children.md:170
+msgid "\"Hello, World!\""
+msgstr ""
+
+#: src/view/09_component_children.md:164
+msgid ""
+"Instead, wrap the slot content in a regular element and attach event "
+"handlers there:"
+msgstr ""
+
+#: src/view/09_component_children.md:168
+msgid "// ✅ Event handler is not defined directly on slot\n"
+msgstr ""
+
+#: src/view/09_component_children.md:176
+msgid "Manipulating Children"
+msgstr ""
+
+#: src/view/09_component_children.md:178
+msgid ""
+"The [`Fragment`](https://docs.rs/leptos/latest/leptos/tachys/view/fragment/"
+"struct.Fragment.html) type is basically a way of wrapping a `Vec<AnyView>`. "
+"You can insert it anywhere into your view."
+msgstr ""
+
+#: src/view/09_component_children.md:181
+msgid ""
+"But you can also access those inner views directly to manipulate them. For "
+"example, here’s a component that takes its children and turns them into an "
+"unordered list."
+msgstr ""
+
+#: src/view/09_component_children.md:185 src/view/09_component_children.md:302
+msgid "/// Wraps each child in an `<li>` and embeds them in a `<ul>`.\n"
+msgstr ""
+
+#: src/view/09_component_children.md:188 src/view/09_component_children.md:306
+msgid ""
+"// children() returns a `Fragment`, which has a\n"
+"    // `nodes` field that contains a Vec<View>\n"
+"    // this means we can iterate over the children\n"
+"    // to create something new!\n"
+msgstr ""
+
+#: src/view/09_component_children.md:199 src/view/09_component_children.md:317
+msgid "\"<WrapsChildren/>\""
+msgstr ""
+
+#: src/view/09_component_children.md:200 src/view/09_component_children.md:318
+msgid "// wrap our wrapped children in a UL\n"
+msgstr ""
+
+#: src/view/09_component_children.md:206
+msgid "Calling it like this will create a list:"
+msgstr ""
+
+#: src/view/09_component_children.md:211
+msgid "\"A\""
+msgstr ""
+
+#: src/view/09_component_children.md:212
+msgid "\"B\""
+msgstr ""
+
+#: src/view/09_component_children.md:213
+msgid "\"C\""
+msgstr ""
+
+#: src/view/09_component_children.md:218
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/9-component-"
+"children-0-7-736s9r?file=%2Fsrc%2Fmain."
+"rs%3A1%2C1-90%2C2&workspaceId=478437f3-1f86-4b1e-b665-5c27a31451fb)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/9-component-"
+"children-0-7-736s9r?file=%2Fsrc%2Fmain."
+"rs%3A1%2C1-90%2C2&workspaceId=478437f3-1f86-4b1e-b665-5c27a31451fb\" "
+"width=\"100%\" height=\"1000px\" style=\"max-height: 100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/view/09_component_children.md:237
+msgid ""
+"// Often, you want to pass some kind of child view to another\n"
+"// component. There are two basic patterns for doing this:\n"
+"// - \"render props\": creating a component prop that takes a function\n"
+"//   that creates a view\n"
+"// - the `children` prop: a special property that contains content\n"
+"//   passed as the children of a component in your view, not as a\n"
+"//   property\n"
+msgstr ""
+
+#: src/view/09_component_children.md:252
+msgid "\"Length: \""
+msgstr ""
+
+#: src/view/09_component_children.md:257
+msgid ""
+"// This component just displays the two kinds of children,\n"
+"        // embedding them in some other markup\n"
+msgstr ""
+
+#: src/view/09_component_children.md:260
+msgid ""
+"// for component props, you can shorthand\n"
+"            // `render_prop=render_prop` => `render_prop`\n"
+"            // (this doesn't work for HTML element attributes)\n"
+msgstr ""
+
+#: src/view/09_component_children.md:265
+msgid "// these look just like the children of an HTML element\n"
+msgstr ""
+
+#: src/view/09_component_children.md:266 src/view/09_component_children.md:272
+msgid "\"Here's a child.\""
+msgstr ""
+
+#: src/view/09_component_children.md:267 src/view/09_component_children.md:273
+msgid "\"Here's another child.\""
+msgstr ""
+
+#: src/view/09_component_children.md:270
+msgid "// This component actually iterates over and wraps the children\n"
+msgstr ""
+
+#: src/view/09_component_children.md:284
+msgid ""
+"/// `children` takes the `Children` type\n"
+"    /// this is an alias for `Box<dyn FnOnce() -> Fragment>`\n"
+"    /// ... aren't you glad we named it `Children` instead?\n"
+msgstr ""

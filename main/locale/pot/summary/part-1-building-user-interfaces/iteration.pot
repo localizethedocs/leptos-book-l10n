@@ -1,0 +1,386 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/view/04_iteration.md:1
+msgid "Iteration"
+msgstr ""
+
+#: src/view/04_iteration.md:3
+msgid ""
+"Whether you’re listing todos, displaying a table, or showing product images, "
+"iterating over a list of items is a common task in web applications. "
+"Reconciling the differences between changing sets of items can also be one "
+"of the trickiest tasks for a framework to handle well."
+msgstr ""
+
+#: src/view/04_iteration.md:8
+msgid "Leptos supports two different patterns for iterating over items:"
+msgstr ""
+
+#: src/view/04_iteration.md:10
+msgid "For static views: `Vec<_>`"
+msgstr ""
+
+#: src/view/04_iteration.md:11
+msgid "For dynamic lists: `<For/>`"
+msgstr ""
+
+#: src/view/04_iteration.md:13
+msgid "Static Views with `Vec<_>`"
+msgstr ""
+
+#: src/view/04_iteration.md:15
+msgid ""
+"Sometimes you need to show an item repeatedly, but the list you’re drawing "
+"from does not often change. In this case, it’s important to know that you "
+"can insert any `Vec<IV> where IV: IntoView` into your view. In other words, "
+"if you can render `T`, you can render `Vec<T>`."
+msgstr ""
+
+#: src/view/04_iteration.md:23 src/view/04_iteration.md:39
+msgid "// this will just render \"012\"\n"
+msgstr ""
+
+#: src/view/04_iteration.md:25 src/view/04_iteration.md:41
+msgid "// or we can wrap them in <li>\n"
+msgstr ""
+
+#: src/view/04_iteration.md:34
+msgid ""
+"Leptos also provides a `.collect_view()` helper function that allows you to "
+"collect any iterator of `T: IntoView` into `Vec<View>`."
+msgstr ""
+
+#: src/view/04_iteration.md:50
+msgid ""
+"The fact that the _list_ is static doesn’t mean the interface needs to be "
+"static. You can render dynamic items as part of a static list."
+msgstr ""
+
+#: src/view/04_iteration.md:54
+msgid "// create a list of 5 signals\n"
+msgstr ""
+
+#: src/view/04_iteration.md:59
+msgid ""
+"Note here that instead of calling `signal()` to get a tuple with a reader "
+"and a writer, here we use `RwSignal::new()` to get a single, read-write "
+"signal. This is just more convenient for a situation where we’d otherwise be "
+"passing the tuples around."
+msgstr ""
+
+#: src/view/04_iteration.md:64
+msgid ""
+"// each item manages a reactive view\n"
+"// but the list itself will never change\n"
+msgstr ""
+
+#: src/view/04_iteration.md:85
+msgid ""
+"You _can_ render a `Fn() -> Vec<_>` reactively as well. But note that this "
+"is an unkeyed list update: it will reuse the existing DOM elements, and "
+"update them with the new values, according to their order in the new "
+"`Vec<_>`. If you’re just adding and removing items at the end of the list, "
+"this works well, but if you are moving items around or inserting items into "
+"the middle of the list, this will cause the browser to do more work than it "
+"needs to, and may have surprising effects on things like input state and CSS "
+"animations. (For more on the “keyed” vs. “unkeyed” distinction, and some "
+"practical examples, you can read [this article](https://www.stefankrause.net/"
+"wp/?p=342).)"
+msgstr ""
+
+#: src/view/04_iteration.md:94
+msgid "Luckily, there’s an efficient way to do keyed list iteration, as well."
+msgstr ""
+
+#: src/view/04_iteration.md:96
+msgid "Dynamic Rendering with the `<For/>` Component"
+msgstr ""
+
+#: src/view/04_iteration.md:98
+msgid ""
+"The [`<For/>`](https://docs.rs/leptos/latest/leptos/control_flow/fn.For."
+"html) component is a keyed dynamic list. It takes three props:"
+msgstr ""
+
+#: src/view/04_iteration.md:101
+msgid ""
+"`each`: a reactive function that returns the items `T` to be iterated over"
+msgstr ""
+
+#: src/view/04_iteration.md:102
+msgid ""
+"`key`: a key function that takes `&T` and returns a stable, unique key or ID"
+msgstr ""
+
+#: src/view/04_iteration.md:103
+msgid "`children`: renders each `T` into a view"
+msgstr ""
+
+#: src/view/04_iteration.md:105
+msgid ""
+"`key` is, well, the key. You can add, remove, and move items within the "
+"list. As long as each item’s key is stable over time, the framework does not "
+"need to rerender any of the items, unless they are new additions, and it can "
+"very efficiently add, remove, and move items as they change. This allows for "
+"extremely efficient updates to the list as it changes, with minimal "
+"additional work."
+msgstr ""
+
+#: src/view/04_iteration.md:111
+msgid ""
+"Creating a good `key` can be a little tricky. You generally do _not_ want to "
+"use an index for this purpose, as it is not stable—if you remove or move "
+"items, their indices change."
+msgstr ""
+
+#: src/view/04_iteration.md:115
+msgid ""
+"But it’s a great idea to do something like generating a unique ID for each "
+"row as it is generated, and using that as an ID for the key function."
+msgstr ""
+
+#: src/view/04_iteration.md:118
+msgid "Check out the `<DynamicList/>` component below for an example."
+msgstr ""
+
+#: src/view/04_iteration.md:120
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/4-iteration-0-7-"
+"dw4dfl?file=%2Fsrc%2Fmain.rs%3A1%2C1-159%2C1&workspaceId=478437f3-1f86-4b1e-"
+"b665-5c27a31451fb)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/4-iteration-0-7-dw4dfl?"
+"file=%2Fsrc%2Fmain.rs%3A1%2C1-159%2C1&workspaceId=478437f3-1f86-4b1e-"
+"b665-5c27a31451fb\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/view/04_iteration.md:139
+msgid ""
+"// Iteration is a very common task in most applications.\n"
+"// So how do you take a list of data and render it in the DOM?\n"
+"// This example will show you the two ways:\n"
+"// 1) for mostly-static lists, using Rust iterators\n"
+"// 2) for lists that grow, shrink, or move items, using <For/>\n"
+msgstr ""
+
+#: src/view/04_iteration.md:149
+msgid "\"Iteration\""
+msgstr ""
+
+#: src/view/04_iteration.md:150
+msgid "\"Static List\""
+msgstr ""
+
+#: src/view/04_iteration.md:151
+msgid "\"Use this pattern if the list itself is static.\""
+msgstr ""
+
+#: src/view/04_iteration.md:153
+msgid "\"Dynamic List\""
+msgstr ""
+
+#: src/view/04_iteration.md:154
+msgid "\"Use this pattern if the rows in your list will change.\""
+msgstr ""
+
+#: src/view/04_iteration.md:158
+msgid ""
+"/// A list of counters, without the ability\n"
+"/// to add or remove any.\n"
+msgstr ""
+
+#: src/view/04_iteration.md:163
+msgid "/// How many counters to include in this list.\n"
+msgstr ""
+
+#: src/view/04_iteration.md:166
+msgid "// create counter signals that start at incrementing numbers\n"
+msgstr ""
+
+#: src/view/04_iteration.md:169
+msgid ""
+"// when you have a list that doesn't change, you can\n"
+"    // manipulate it using ordinary Rust iterators\n"
+"    // and collect it into a Vec<_> to insert it into the DOM\n"
+msgstr ""
+
+#: src/view/04_iteration.md:186
+msgid ""
+"// Note that if `counter_buttons` were a reactive list\n"
+"    // and its value changed, this would be very inefficient:\n"
+"    // it would rerender every row every time the list changed.\n"
+msgstr ""
+
+#: src/view/04_iteration.md:193
+msgid ""
+"/// A list of counters that allows you to add or\n"
+"/// remove counters.\n"
+msgstr ""
+
+#: src/view/04_iteration.md:198
+msgid "/// The number of counters to begin with.\n"
+msgstr ""
+
+#: src/view/04_iteration.md:201
+msgid ""
+"// This dynamic list will use the <For/> component.\n"
+"    // <For/> is a keyed list. This means that each row\n"
+"    // has a defined key. If the key does not change, the row\n"
+"    // will not be re-rendered. When the list changes, only\n"
+"    // the minimum number of changes will be made to the DOM.\n"
+msgstr ""
+
+#: src/view/04_iteration.md:207
+msgid ""
+"// `next_counter_id` will let us generate unique IDs\n"
+"    // we do this by simply incrementing the ID by one\n"
+"    // each time we create a counter\n"
+msgstr ""
+
+#: src/view/04_iteration.md:212
+msgid ""
+"// we generate an initial list as in <StaticList/>\n"
+"    // but this time we include the ID along with the signal\n"
+"    // see NOTE in add_counter below re: ArcRwSignal\n"
+msgstr ""
+
+#: src/view/04_iteration.md:219
+msgid ""
+"// now we store that initial list in a signal\n"
+"    // this way, we'll be able to modify the list over time,\n"
+"    // adding and removing counters, and it will change reactively\n"
+msgstr ""
+
+#: src/view/04_iteration.md:225
+msgid ""
+"// create a signal for the new counter\n"
+"        // we use ArcRwSignal here, instead of RwSignal\n"
+"        // ArcRwSignal is a reference-counted type, rather than the arena-"
+"allocated\n"
+"        // signal types we've been using so far.\n"
+"        // When we're creating a collection of signals like this, using "
+"ArcRwSignal\n"
+"        // allows each signal to be deallocated when its row is removed.\n"
+msgstr ""
+
+#: src/view/04_iteration.md:232
+msgid "// add this counter to the list of counters\n"
+msgstr ""
+
+#: src/view/04_iteration.md:234
+msgid ""
+"// since `.update()` gives us `&mut T`\n"
+"            // we can just use normal Vec methods like `push`\n"
+msgstr ""
+
+#: src/view/04_iteration.md:238
+msgid "// increment the ID so it's always unique\n"
+msgstr ""
+
+#: src/view/04_iteration.md:245
+msgid "\"Add Counter\""
+msgstr ""
+
+#: src/view/04_iteration.md:248
+msgid ""
+"// The <For/> component is central here\n"
+"                // This allows for efficient, key list rendering\n"
+msgstr ""
+
+#: src/view/04_iteration.md:251
+msgid ""
+"// `each` takes any function that returns an iterator\n"
+"                    // this should usually be a signal or derived signal\n"
+"                    // if it's not reactive, just render a Vec<_> instead of "
+"<For/>\n"
+msgstr ""
+
+#: src/view/04_iteration.md:255
+msgid ""
+"// the key should be unique and stable for each row\n"
+"                    // using an index is usually a bad idea, unless your "
+"list\n"
+"                    // can only grow, because moving items around inside the "
+"list\n"
+"                    // means their indices will change and they will all "
+"rerender\n"
+msgstr ""
+
+#: src/view/04_iteration.md:260
+msgid ""
+"// `children` receives each item from your `each` iterator\n"
+"                    // and returns a view\n"
+msgstr ""
+
+#: src/view/04_iteration.md:263
+msgid ""
+"// we can convert our ArcRwSignal to a Copy-able RwSignal\n"
+"                        // for nicer DX when moving it into the view\n"
+msgstr ""
+
+#: src/view/04_iteration.md:282
+msgid "\"Remove\""
+msgstr ""
+
+#: src/view/04_iteration.md:301
+msgid "Accessing an index while iterating with `<ForEnumerate/>`"
+msgstr ""
+
+#: src/view/04_iteration.md:303
+msgid ""
+"For the cases where you need to access the real-time index while iterating, "
+"Leptos provides a [`<ForEnumerate/>`](https://docs.rs/leptos/latest/leptos/"
+"control_flow/fn.ForEnumerate.html) component."
+msgstr ""
+
+#: src/view/04_iteration.md:306
+msgid ""
+"The props are identical to the [`<For/>`](https://docs.rs/leptos/latest/"
+"leptos/control_flow/fn.For.html) component, but when rendering `children` it "
+"additionally provides a `ReadSignal<usize>` parameter as the index:"
+msgstr ""
+
+#: src/view/04_iteration.md:317 src/view/04_iteration.md:331
+#: src/view/04_iteration.md:332
+msgid "// Same as <For/>\n"
+msgstr ""
+
+#: src/view/04_iteration.md:318
+msgid ""
+"// Same as <For/>\n"
+"    // Provides the index as a signal and the child T\n"
+msgstr ""
+
+#: src/view/04_iteration.md:322 src/view/04_iteration.md:335
+msgid "\". Value: \""
+msgstr ""
+
+#: src/view/04_iteration.md:328
+msgid "or it could also be used with the more convenient `let` syntax:"
+msgstr ""
+
+#: src/view/04_iteration.md:333
+msgid "// let syntax\n"
+msgstr ""

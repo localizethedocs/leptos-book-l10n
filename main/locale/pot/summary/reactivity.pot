@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/reactivity/index.md:1
+msgid "Reactivity"
+msgstr ""
+
+#: src/reactivity/index.md:3
+msgid ""
+"Leptos is built on top of a fine-grained reactive system, designed to run "
+"expensive side effects (like rendering something in a browser, or making a "
+"network request) as infrequently as possible in response to change, reactive "
+"values."
+msgstr ""
+
+#: src/reactivity/index.md:5
+msgid ""
+"So far we’ve seen signals in action. These chapters will go into a bit more "
+"depth, and look at effects, which are the other half of the story."
+msgstr ""

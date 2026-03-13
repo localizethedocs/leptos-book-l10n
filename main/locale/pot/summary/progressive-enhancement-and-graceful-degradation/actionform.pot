@@ -1,0 +1,198 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/progressive_enhancement/action_form.md:1
+msgid "`<ActionForm/>`"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:3
+msgid ""
+"[`<ActionForm/>`](https://docs.rs/leptos/latest/leptos/form/fn.ActionForm."
+"html) is a specialized `<Form/>` that takes a server action, and "
+"automatically dispatches it on form submission. This allows you to call a "
+"server function directly from a `<form>`, even without JS/WASM."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:5
+msgid "The process is simple:"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:7
+msgid ""
+"Define a server function using the [`#[server]` macro](https://docs.rs/"
+"leptos/latest/leptos/attr.server.html) (see [Server Functions](../"
+"server/25_server_functions.md).)"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:8
+msgid ""
+"Create an action using [`ServerAction::new()`](https://docs.rs/leptos/latest/"
+"leptos/server/struct.ServerAction.html), specifying the type of the server "
+"function you’ve defined."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:9
+msgid ""
+"Create an `<ActionForm/>`, providing the server action in the `action` prop."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:10
+msgid ""
+"Pass the named arguments to the server function as form fields with the same "
+"names."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:12
+msgid ""
+"**Note:** `<ActionForm/>` only works with the default URL-encoded `POST` "
+"encoding for server functions, to ensure graceful degradation/correct "
+"behavior as an HTML form."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:23
+msgid "// holds the latest *returned* value from the server\n"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:25
+msgid "// check if the server has returned an error\n"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:31
+msgid "\"Add a Todo\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:32
+msgid "// `title` matches the `title` argument to `add_todo`\n"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:33
+#: src/progressive_enhancement/action_form.md:91
+#: src/progressive_enhancement/action_form.md:93
+#: src/progressive_enhancement/action_form.md:98
+msgid "\"text\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:33
+msgid "\"title\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:35
+#: src/progressive_enhancement/action_form.md:102
+msgid "\"submit\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:35
+msgid "\"Add\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:41
+msgid ""
+"It’s really that easy. With JS/WASM, your form will submit without a page "
+"reload, storing its most recent submission in the `.input()` signal of the "
+"action, its pending status in `.pending()`, and so on. (See the [`Action`]"
+"(https://docs.rs/leptos/latest/leptos/reactive/actions/struct.Action.html) "
+"docs for a refresher, if you need.) Without JS/WASM, your form will submit "
+"with a page reload. If you call a `redirect` function (from `leptos_axum` or "
+"`leptos_actix`) it will redirect to the correct page. By default, it will "
+"redirect back to the page you’re currently on. The power of HTML, HTTP, and "
+"isomorphic rendering mean that your `<ActionForm/>` simply works, even with "
+"no JS/WASM."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:43
+msgid "Client-Side Validation"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:45
+msgid ""
+"Because the `<ActionForm/>` is just a `<form>`, it fires a `submit` event. "
+"You can use either HTML validation, or your own client-side validation logic "
+"in an `on:submit:capture` handler. Just call `ev.prevent_default()` to "
+"prevent submission."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:47
+msgid ""
+"The [`FromFormData`](https://docs.rs/leptos/latest/leptos/form/trait."
+"FromFormData.html) trait can be helpful here, for attempting to parse your "
+"server function’s data type from the submitted form."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:52
+msgid "// silly example of validation: if the todo is \"nope!\", nope it\n"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:53
+msgid "\"nope!\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:54
+msgid "// ev.prevent_default() will prevent form submission\n"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:58
+msgid "// ... add the `submit` handler to an `ActionForm`\n"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:61
+msgid "/* ... */"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:64
+msgid ""
+"```admonish note\n"
+"Note the use of `on:submit:capture` rather than `on:submit`. This adds an "
+"event listener that will fire during the browser’s “capture” phase of event "
+"handling, rather than during the “bubble” phase, which means that your event "
+"handler will run before the built-in `submit` handler of the `ActionForm`. "
+"For more information, check out [this issue](https://github.com/leptos-rs/"
+"leptos/issues/3872).\n"
+"```"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:68
+msgid "Complex Inputs"
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:70
+msgid ""
+"Server function arguments that are structs with nested serializable fields "
+"should make use of indexing notation of `serde_qs`."
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:91
+msgid "\"hefty_arg[first_name]\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:91
+#: src/progressive_enhancement/action_form.md:109
+msgid "\"leptos\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:94
+msgid "\"hefty_arg[last_name]\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:95
+#: src/progressive_enhancement/action_form.md:110
+msgid "\"closures-everywhere\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:99
+msgid "\"hefty_arg[settings][display_name]\""
+msgstr ""
+
+#: src/progressive_enhancement/action_form.md:100
+#: src/progressive_enhancement/action_form.md:111
+msgid "\"my alias\""
+msgstr ""
