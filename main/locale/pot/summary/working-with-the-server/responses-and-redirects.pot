@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/server/27_response.md:1
+msgid "Responses and Redirects"
+msgstr ""
+
+#: src/server/27_response.md:3
+msgid ""
+"Extractors provide an easy way to access request data inside server "
+"functions. Leptos also provides a way to modify the HTTP response, using the "
+"`ResponseOptions` type (see docs for [Actix](https://docs.rs/leptos_actix/"
+"latest/leptos_actix/struct.ResponseOptions.html) or [Axum](https://docs.rs/"
+"leptos_axum/latest/leptos_axum/struct.ResponseOptions.html) types) and the "
+"`redirect` helper function (see docs for [Actix](https://docs.rs/"
+"leptos_actix/latest/leptos_actix/fn.redirect.html) or [Axum](https://docs.rs/"
+"leptos_axum/latest/leptos_axum/fn.redirect.html))."
+msgstr ""
+
+#: src/server/27_response.md:5
+msgid "`ResponseOptions`"
+msgstr ""
+
+#: src/server/27_response.md:7
+msgid ""
+"`ResponseOptions` is provided via context during the initial server "
+"rendering response and during any subsequent server function call. It allows "
+"you to easily set the status code for the HTTP response, or to add headers "
+"to the HTTP response, e.g., to set cookies."
+msgstr ""
+
+#: src/server/27_response.md:19
+msgid "// pull ResponseOptions from context\n"
+msgstr ""
+
+#: src/server/27_response.md:22
+msgid "// set the HTTP status code\n"
+msgstr ""
+
+#: src/server/27_response.md:25
+msgid "// set a cookie in the HTTP response\n"
+msgstr ""
+
+#: src/server/27_response.md:26
+msgid "\"biscuits\""
+msgstr ""
+
+#: src/server/27_response.md:26
+msgid "\"yes\""
+msgstr ""
+
+#: src/server/27_response.md:34
+msgid "`redirect`"
+msgstr ""
+
+#: src/server/27_response.md:36
+msgid ""
+"One common modification to an HTTP response is to redirect to another page. "
+"The Actix and Axum integrations provide a `redirect` function to make this "
+"easy to do."
+msgstr ""
+
+#: src/server/27_response.md:46
+msgid "\"Invalid credentials\""
+msgstr ""
+
+#: src/server/27_response.md:49
+msgid "// pull the DB pool and auth provider from context\n"
+msgstr ""
+
+#: src/server/27_response.md:53
+msgid "// check whether the user exists\n"
+msgstr ""
+
+#: src/server/27_response.md:58
+msgid "// check whether the user has provided the correct password\n"
+msgstr ""
+
+#: src/server/27_response.md:60
+msgid "// if the password is correct...\n"
+msgstr ""
+
+#: src/server/27_response.md:62
+msgid "// log the user in\n"
+msgstr ""
+
+#: src/server/27_response.md:66
+msgid "// and redirect to the home page\n"
+msgstr ""
+
+#: src/server/27_response.md:67
+msgid "\"/\""
+msgstr ""
+
+#: src/server/27_response.md:70
+msgid "// if not, return an error\n"
+msgstr ""
+
+#: src/server/27_response.md:76
+msgid ""
+"This server function can then be used from your application. This `redirect` "
+"works well with the progressively-enhanced `<ActionForm/>` component: "
+"without JS/WASM, the server response will redirect because of the status "
+"code and header. With JS/WASM, the `<ActionForm/>` will detect the redirect "
+"in the server function response, and use client-side navigation to redirect "
+"to the new page."
+msgstr ""

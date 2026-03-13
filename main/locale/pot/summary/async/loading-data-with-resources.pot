@@ -1,0 +1,252 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/async/10_resources.md:1
+msgid "Loading Data with Resources"
+msgstr ""
+
+#: src/async/10_resources.md:3
+msgid ""
+"Resources are reactive wrappers for asynchronous tasks, which allow you to "
+"integrate an asynchronous `Future` into the synchronous reactive system."
+msgstr ""
+
+#: src/async/10_resources.md:5
+msgid ""
+"They effectively allow you to load some async data, and then reactively "
+"access it either synchronously or asynchronously. You can `.await` a "
+"resource like an ordinary `Future`, and this will track it. But you can also "
+"access a resource with `.get()` and other signal access methods, as if a "
+"resource were a signal that returns `Some(T)` if it has resolved, and `None` "
+"if it’s still pending."
+msgstr ""
+
+#: src/async/10_resources.md:7
+msgid ""
+"Resources come in two primary flavors: `Resource` and `LocalResource`. If "
+"you’re using server-side rendering (which this book will discuss later), you "
+"should default to using `Resource`. If you’re using client-side rendering "
+"with a `!Send` API (like many of the browser APIs), or if you are using SSR "
+"but have some async task that can only be done on the browser (for example, "
+"accessing an async browser API) then you should use `LocalResource`."
+msgstr ""
+
+#: src/async/10_resources.md:9
+msgid "Local Resources"
+msgstr ""
+
+#: src/async/10_resources.md:11
+msgid ""
+"`LocalResource::new()` takes a single argument: a “fetcher” function that "
+"returns a `Future`."
+msgstr ""
+
+#: src/async/10_resources.md:13
+msgid ""
+"The `Future` can be an `async` block, the result of an `async fn` call, or "
+"any other Rust `Future`. The function will work like a derived signal or the "
+"other reactive closures that we’ve seen so far: you can read signals inside "
+"it, and whenever the signal changes, the function will run again, creating a "
+"new `Future` to run."
+msgstr ""
+
+#: src/async/10_resources.md:16 src/async/10_resources.md:44
+#: src/async/10_resources.md:99
+msgid "// this count is our synchronous, local state\n"
+msgstr ""
+
+#: src/async/10_resources.md:18
+msgid ""
+"// tracks `count`, and reloads by calling `load_data`\n"
+"// whenever it changes\n"
+msgstr ""
+
+#: src/async/10_resources.md:24
+msgid ""
+"Creating a resource immediately calls its fetcher and begins polling the "
+"`Future`. Reading from a resource will return `None` until the async task "
+"completes, at which point it will notify its subscribers, and now have "
+"`Some(value)`."
+msgstr ""
+
+#: src/async/10_resources.md:26
+msgid ""
+"You can also `.await` a resource. This might seem pointless—Why would you "
+"create a wrapper around a `Future`, only to then `.await` it? We’ll see why "
+"in the next chapter."
+msgstr ""
+
+#: src/async/10_resources.md:28
+msgid "Resources"
+msgstr ""
+
+#: src/async/10_resources.md:30
+msgid ""
+"If you’re using SSR, you should be using `Resource` instead of "
+"`LocalResource` in most cases."
+msgstr ""
+
+#: src/async/10_resources.md:32
+msgid ""
+"This API is slightly different. `Resource::new()` takes two functions as its "
+"arguments:"
+msgstr ""
+
+#: src/async/10_resources.md:34
+msgid ""
+"a source function, which contains the “input.” This input is memoized, and "
+"whenever its value changes, the fetcher will be called."
+msgstr ""
+
+#: src/async/10_resources.md:35
+msgid ""
+"a fetcher function, which takes the data from the source function and "
+"returns a `Future`"
+msgstr ""
+
+#: src/async/10_resources.md:37
+msgid ""
+"Unlike a `LocalResource`, a `Resource` serializes its value from the server "
+"to the client. Then, on the client, when first loading the page, the initial "
+"value will be deserialized rather than the async task running again. This is "
+"extremely important and very useful: It means that rather than waiting for "
+"the client WASM bundle to load and begin running the application, data "
+"loading begins on the server. (There will be more to say about this in later "
+"chapters.)"
+msgstr ""
+
+#: src/async/10_resources.md:39
+msgid ""
+"This is also why the API is split into two parts: signals in the _source_ "
+"function are tracked, but signals in the _fetcher_ are untracked, because "
+"this allows the resource to maintain reactivity without needing to run the "
+"fetcher again during initial hydration on the client."
+msgstr ""
+
+#: src/async/10_resources.md:41
+msgid "Here’s the same example, using `Resource` instead of `LocalResource`"
+msgstr ""
+
+#: src/async/10_resources.md:46
+msgid "// our resource\n"
+msgstr ""
+
+#: src/async/10_resources.md:50
+msgid "// every time `count` changes, this will run\n"
+msgstr ""
+
+#: src/async/10_resources.md:55
+msgid ""
+"Resources also provide a `refetch()` method that allows you to manually "
+"reload the data (for example, in response to a button click)."
+msgstr ""
+
+#: src/async/10_resources.md:57
+msgid ""
+"To create a resource that simply runs once, you can use `OnceResource`, "
+"which simply takes a `Future`, and adds some optimizations that come from "
+"knowing it will only load once."
+msgstr ""
+
+#: src/async/10_resources.md:63
+msgid "Accessing Resources"
+msgstr ""
+
+#: src/async/10_resources.md:65
+msgid ""
+"Both `LocalResource` and `Resource` implement the various signal access "
+"methods (`.read()`, `.with()`, `.get()`), but return `Option<T>` instead of "
+"`T`; they will be `None` until the async data has loaded."
+msgstr ""
+
+#: src/async/10_resources.md:67
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/10-resource-0-7-"
+"q5xr9m?file=%2Fsrc%2Fmain.rs%3A7%2C30)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/10-resource-0-7-q5xr9m?"
+"file=%2Fsrc%2Fmain.rs%3A7%2C30\" width=\"100%\" height=\"1000px\" "
+"style=\"max-height: 100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/async/10_resources.md:87
+msgid ""
+"// Here we define an async function\n"
+"// This could be anything: a network request, database read, etc.\n"
+"// Here, we just multiply a number by 10\n"
+msgstr ""
+
+#: src/async/10_resources.md:92
+msgid "// fake a one-second delay\n"
+msgstr ""
+
+#: src/async/10_resources.md:102
+msgid ""
+"// tracks `count`, and reloads by calling `load_data`\n"
+"    // whenever it changes\n"
+msgstr ""
+
+#: src/async/10_resources.md:106
+msgid ""
+"// a resource will only load once if it doesn't read any reactive data\n"
+msgstr ""
+
+#: src/async/10_resources.md:109
+msgid ""
+"// we can access the resource values with .get()\n"
+"    // this will reactively return None before the Future has resolved\n"
+"    // and update to Some(T) when it has resolved\n"
+msgstr ""
+
+#: src/async/10_resources.md:115
+msgid "\"Server returned {value:?}\""
+msgstr ""
+
+#: src/async/10_resources.md:116
+msgid "// This loading state will only show before the first load\n"
+msgstr ""
+
+#: src/async/10_resources.md:117
+msgid "\"Loading...\""
+msgstr ""
+
+#: src/async/10_resources.md:124
+msgid "\"Click me\""
+msgstr ""
+
+#: src/async/10_resources.md:127
+msgid "\"stable\""
+msgstr ""
+
+#: src/async/10_resources.md:127 src/async/10_resources.md:130
+#: src/async/10_resources.md:133
+msgid "\": \""
+msgstr ""
+
+#: src/async/10_resources.md:130
+msgid "\"count\""
+msgstr ""
+
+#: src/async/10_resources.md:133
+msgid "\"async_value\""
+msgstr ""

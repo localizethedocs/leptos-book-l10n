@@ -1,0 +1,505 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/router/17_nested_routing.md:1
+msgid "Nested Routing"
+msgstr ""
+
+#: src/router/17_nested_routing.md:3
+msgid "We just defined the following set of routes:"
+msgstr ""
+
+#: src/router/17_nested_routing.md:6 src/router/17_nested_routing.md:19
+#: src/router/17_nested_routing.md:43 src/router/17_nested_routing.md:57
+#: src/router/17_nested_routing.md:98 src/router/17_nested_routing.md:111
+#: src/router/17_nested_routing.md:169 src/router/17_nested_routing.md:248
+msgid "\"Not found.\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:7 src/router/17_nested_routing.md:20
+#: src/router/17_nested_routing.md:244 src/router/17_nested_routing.md:250
+msgid "\"/\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:8 src/router/17_nested_routing.md:21
+#: src/router/17_nested_routing.md:44 src/router/17_nested_routing.md:58
+#: src/router/17_nested_routing.md:73
+msgid "\"/users\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:9 src/router/17_nested_routing.md:45
+msgid "\"/users/:id\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:10 src/router/17_nested_routing.md:24
+msgid "\"/*any\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:10 src/router/17_nested_routing.md:24
+msgid "\"Not Found\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:14
+msgid ""
+"There’s a certain amount of duplication here: `/users` and `/users/:id`. "
+"This is fine for a small app, but you can probably already tell it won’t "
+"scale well. Wouldn’t it be nice if we could nest these routes?"
+msgstr ""
+
+#: src/router/17_nested_routing.md:16
+msgid "Well... you can!"
+msgstr ""
+
+#: src/router/17_nested_routing.md:22 src/router/17_nested_routing.md:59
+#: src/router/17_nested_routing.md:74 src/router/17_nested_routing.md:100
+#: src/router/17_nested_routing.md:113 src/router/17_nested_routing.md:184
+#: src/router/17_nested_routing.md:259
+msgid "\":id\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:28
+msgid ""
+"You can nest a `<Route/>` inside a `<ParentRoute/>`. Seems straightforward."
+msgstr ""
+
+#: src/router/17_nested_routing.md:30
+msgid "But wait. We’ve just subtly changed what our application does."
+msgstr ""
+
+#: src/router/17_nested_routing.md:32
+msgid ""
+"The next section is one of the most important in this entire routing section "
+"of the guide. Read it carefully, and feel free to ask questions if there’s "
+"anything you don’t understand."
+msgstr ""
+
+#: src/router/17_nested_routing.md:34
+msgid "Nested Routes as Layout"
+msgstr ""
+
+#: src/router/17_nested_routing.md:36
+msgid "Nested routes are a form of layout, not a method of route definition."
+msgstr ""
+
+#: src/router/17_nested_routing.md:38
+msgid ""
+"Let me put that another way: The goal of defining nested routes is not "
+"primarily to avoid repeating yourself when typing out the paths in your "
+"route definitions. It is actually to tell the router to display multiple "
+"`<Route/>`s on the page at the same time, side by side."
+msgstr ""
+
+#: src/router/17_nested_routing.md:40
+msgid "Let’s look back at our practical example."
+msgstr ""
+
+#: src/router/17_nested_routing.md:49 src/router/17_nested_routing.md:64
+msgid "This means:"
+msgstr ""
+
+#: src/router/17_nested_routing.md:51
+msgid "If I go to `/users`, I get the `<Users/>` component."
+msgstr ""
+
+#: src/router/17_nested_routing.md:52
+msgid ""
+"If I go to `/users/3`, I get the `<UserProfile/>` component (with the "
+"parameter `id` set to `3`; more on that later)"
+msgstr ""
+
+#: src/router/17_nested_routing.md:54
+msgid "Let’s say I use nested routes instead:"
+msgstr ""
+
+#: src/router/17_nested_routing.md:66
+msgid ""
+"If I go to `/users/3`, the path matches two `<Route/>`s: `<Users/>` and "
+"`<UserProfile/>`."
+msgstr ""
+
+#: src/router/17_nested_routing.md:67
+msgid "If I go to `/users`, the path is not matched."
+msgstr ""
+
+#: src/router/17_nested_routing.md:69
+msgid "I actually need to add a fallback route"
+msgstr ""
+
+#: src/router/17_nested_routing.md:75 src/router/17_nested_routing.md:101
+#: src/router/17_nested_routing.md:114 src/router/17_nested_routing.md:118
+#: src/router/17_nested_routing.md:172 src/router/17_nested_routing.md:185
+#: src/router/17_nested_routing.md:260 src/router/17_nested_routing.md:272
+#: src/router/17_nested_routing.md:322
+msgid "\"\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:80
+msgid "Now:"
+msgstr ""
+
+#: src/router/17_nested_routing.md:82
+msgid ""
+"If I go to `/users/3`, the path matches `<Users/>` and `<UserProfile/>`."
+msgstr ""
+
+#: src/router/17_nested_routing.md:83
+msgid "If I go to `/users`, the path matches `<Users/>` and `<NoUser/>`."
+msgstr ""
+
+#: src/router/17_nested_routing.md:85
+msgid ""
+"When I use nested routes, in other words, each **path** can match multiple "
+"**routes**: each URL can render the views provided by multiple `<Route/>` "
+"components, at the same time, on the same page."
+msgstr ""
+
+#: src/router/17_nested_routing.md:87
+msgid ""
+"This may be counter-intuitive, but it’s very powerful, for reasons you’ll "
+"hopefully see in a few minutes."
+msgstr ""
+
+#: src/router/17_nested_routing.md:89
+msgid "Why Nested Routing?"
+msgstr ""
+
+#: src/router/17_nested_routing.md:91
+msgid "Why bother with this?"
+msgstr ""
+
+#: src/router/17_nested_routing.md:93
+msgid ""
+"Most web applications contain levels of navigation that correspond to "
+"different parts of the layout. For example, in an email app you might have a "
+"URL like `/contacts/greg`, which shows a list of contacts on the left of the "
+"screen, and contact details for Greg on the right of the screen. The contact "
+"list and the contact details should always appear on the screen at the same "
+"time. If there’s no contact selected, maybe you want to show a little "
+"instructional text."
+msgstr ""
+
+#: src/router/17_nested_routing.md:95
+msgid "You can easily define this with nested routes"
+msgstr ""
+
+#: src/router/17_nested_routing.md:99 src/router/17_nested_routing.md:112
+#: src/router/17_nested_routing.md:170 src/router/17_nested_routing.md:245
+#: src/router/17_nested_routing.md:255
+msgid "\"/contacts\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:102 src/router/17_nested_routing.md:119
+#: src/router/17_nested_routing.md:173
+msgid "\"Select a contact to view more info.\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:108
+msgid ""
+"You can go even deeper. Say you want to have tabs for each contact’s "
+"address, email/phone, and your conversations with them. You can add "
+"_another_ set of nested routes inside `:id`:"
+msgstr ""
+
+#: src/router/17_nested_routing.md:115 src/router/17_nested_routing.md:186
+msgid "\"address\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:116 src/router/17_nested_routing.md:187
+msgid "\"messages\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:125
+msgid ""
+"The main page of the [Remix website](https://remix.run/), a React framework "
+"from the creators of React Router, has a great visual example if you scroll "
+"down, with three levels of nested routing: Sales > Invoices > an invoice."
+msgstr ""
+
+#: src/router/17_nested_routing.md:127
+msgid "`<Outlet/>`"
+msgstr ""
+
+#: src/router/17_nested_routing.md:129
+msgid ""
+"Parent routes do not automatically render their nested routes. After all, "
+"they are just components; they don’t know exactly where they should render "
+"their children, and “just stick it at the end of the parent component” is "
+"not a great answer."
+msgstr ""
+
+#: src/router/17_nested_routing.md:131
+msgid ""
+"Instead, you tell a parent component where to render any nested components "
+"with an `<Outlet/>` component. The `<Outlet/>` simply renders one of two "
+"things:"
+msgstr ""
+
+#: src/router/17_nested_routing.md:133
+msgid "if there is no nested route that has been matched, it shows nothing"
+msgstr ""
+
+#: src/router/17_nested_routing.md:134
+msgid "if there is a nested route that has been matched, it shows its `view`"
+msgstr ""
+
+#: src/router/17_nested_routing.md:136
+msgid ""
+"That’s all! But it’s important to know and to remember, because it’s a "
+"common source of “Why isn’t this working?” frustration. If you don’t provide "
+"an `<Outlet/>`, the nested route won’t be displayed."
+msgstr ""
+
+#: src/router/17_nested_routing.md:144
+msgid "\"display: flex\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:145
+msgid "// the contact list\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:150
+msgid ""
+"// the nested child, if any\n"
+"      // don’t forget this!\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:158
+msgid "Refactoring Route Definitions"
+msgstr ""
+
+#: src/router/17_nested_routing.md:160
+msgid ""
+"You don’t need to define all your routes in one place if you don’t want to. "
+"You can refactor any `<Route/>` and its children out into a separate "
+"component."
+msgstr ""
+
+#: src/router/17_nested_routing.md:162
+msgid ""
+"For example, you can refactor the example above to use two separate "
+"components:"
+msgstr ""
+
+#: src/router/17_nested_routing.md:195
+msgid ""
+"This second component is a `#[component(transparent)]`, meaning it just "
+"returns its data, not a view; likewise, it uses `.into_inner()` to remove "
+"some debug info added by the `view` macro and just return the route "
+"definitions created by `<ParentRoute/>`."
+msgstr ""
+
+#: src/router/17_nested_routing.md:197
+msgid "Nested Routing and Performance"
+msgstr ""
+
+#: src/router/17_nested_routing.md:199
+msgid "All of this is nice, conceptually, but again—what’s the big deal?"
+msgstr ""
+
+#: src/router/17_nested_routing.md:201
+msgid "Performance."
+msgstr ""
+
+#: src/router/17_nested_routing.md:203
+msgid ""
+"In a fine-grained reactive library like Leptos, it’s always important to do "
+"the least amount of rendering work you can. Because we’re working with real "
+"DOM nodes and not diffing a virtual DOM, we want to “rerender” components as "
+"infrequently as possible. Nested routing makes this extremely easy."
+msgstr ""
+
+#: src/router/17_nested_routing.md:205
+msgid ""
+"Imagine my contact list example. If I navigate from Greg to Alice to Bob and "
+"back to Greg, the contact information needs to change on each navigation. "
+"But the `<ContactList/>` should never be rerendered. Not only does this save "
+"on rendering performance, it also maintains state in the UI. For example, if "
+"I have a search bar at the top of `<ContactList/>`, navigating from Greg to "
+"Alice to Bob won’t clear the search."
+msgstr ""
+
+#: src/router/17_nested_routing.md:207
+msgid ""
+"In fact, in this case, we don’t even need to rerender the `<Contact/>` "
+"component when moving between contacts. The router will just reactively "
+"update the `:id` parameter as we navigate, allowing us to make fine-grained "
+"updates. As we navigate between contacts, we’ll update single text nodes to "
+"change the contact’s name, address, and so on, without doing _any_ "
+"additional rerendering."
+msgstr ""
+
+#: src/router/17_nested_routing.md:209
+msgid ""
+"This sandbox includes a couple features (like nested routing) discussed in "
+"this section and the previous one, and a couple we’ll cover in the rest of "
+"this chapter. The router is such an integrated system that it makes sense to "
+"provide a single example, so don’t be surprised if there’s anything you "
+"don’t understand."
+msgstr ""
+
+#: src/router/17_nested_routing.md:211
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/16-router-0-7-"
+"csm8t5?file=%2Fsrc%2Fmain.rs)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/16-router-0-7-csm8t5?"
+"file=%2Fsrc%2Fmain.rs\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/router/17_nested_routing.md:238
+msgid "\"Contact App\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:239
+msgid ""
+"// this <nav> will show on every routes,\n"
+"            // because it's outside the <Routes/>\n"
+"            // note: we can just use normal <a> tags\n"
+"            // and the router will use client-side navigation\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:244 src/router/17_nested_routing.md:251
+msgid "\"Home\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:245 src/router/17_nested_routing.md:289
+msgid "\"Contacts\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:249
+msgid "// / just has an un-nested \"Home\"\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:253
+msgid "// /contacts has nested routes\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:258 src/router/17_nested_routing.md:271
+msgid "// if no id specified, fall back\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:261 src/router/17_nested_routing.md:266
+msgid "\"tab\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:262
+msgid "\"(Contact Info)\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:265 src/router/17_nested_routing.md:323
+msgid "\"conversations\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:267
+msgid "\"(Conversations)\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:273
+msgid "\"select-user\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:274
+msgid "\"Select a user to view contact info.\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:287
+msgid "\"contact-list\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:288
+msgid "// here's our contact list component itself\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:290
+msgid "\"contact-list-contacts\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:291 src/router/17_nested_routing.md:312
+msgid "\"alice\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:291 src/router/17_nested_routing.md:312
+msgid "\"Alice\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:292 src/router/17_nested_routing.md:313
+msgid "\"bob\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:292 src/router/17_nested_routing.md:313
+msgid "\"Bob\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:293 src/router/17_nested_routing.md:314
+msgid "\"steve\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:293 src/router/17_nested_routing.md:314
+msgid "\"Steve\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:296
+msgid ""
+"// <Outlet/> will show the nested child route\n"
+"            // we can position this outlet wherever we want\n"
+"            // within the layout\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:306
+msgid "// we can access the :id param reactively with `use_params_map`\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:308
+msgid "\"id\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:310
+msgid "// imagine we're loading data from an API here\n"
+msgstr ""
+
+#: src/router/17_nested_routing.md:315
+msgid "\"User not found.\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:320
+msgid "\"contact-info\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:321
+msgid "\"tabs\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:322
+msgid "\"Contact Info\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:323
+msgid "\"Conversations\""
+msgstr ""
+
+#: src/router/17_nested_routing.md:326
+msgid ""
+"// <Outlet/> here is the tabs that are nested\n"
+"            // underneath the /contacts/:id route\n"
+msgstr ""

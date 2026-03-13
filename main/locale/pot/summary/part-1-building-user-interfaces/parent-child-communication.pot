@@ -1,0 +1,376 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/view/08_parent_child.md:1
+msgid "Parent-Child Communication"
+msgstr ""
+
+#: src/view/08_parent_child.md:3
+msgid ""
+"You can think of your application as a nested tree of components. Each "
+"component handles its own local state and manages a section of the user "
+"interface, so components tend to be relatively self-contained."
+msgstr ""
+
+#: src/view/08_parent_child.md:7
+msgid ""
+"Sometimes, though, you’ll want to communicate between a parent component and "
+"its child. For example, imagine you’ve defined a `<FancyButton/>` component "
+"that adds some styling, logging, or something else to a `<button/>`. You "
+"want to use a `<FancyButton/>` in your `<App/>` component. But how can you "
+"communicate between the two?"
+msgstr ""
+
+#: src/view/08_parent_child.md:13
+msgid ""
+"It’s easy to communicate state from a parent component to a child component. "
+"We covered some of this in the material on [components and props]"
+"(./03_components.md). Basically if you want the parent to communicate to the "
+"child, you can pass either a [`ReadSignal`](https://docs.rs/leptos/latest/"
+"leptos/reactive/signal/struct.ReadSignal.html) or [`Signal`](https://docs.rs/"
+"leptos/latest/leptos/reactive/wrappers/read/struct.Signal.html) as a prop."
+msgstr ""
+
+#: src/view/08_parent_child.md:19
+msgid ""
+"But what about the other direction? How can a child send notifications about "
+"events or state changes back up to the parent?"
+msgstr ""
+
+#: src/view/08_parent_child.md:22
+msgid "There are four basic patterns of parent-child communication in Leptos."
+msgstr ""
+
+#: src/view/08_parent_child.md:24
+msgid ""
+"1. Pass a [`WriteSignal`](https://docs.rs/leptos/latest/leptos/reactive/"
+"signal/struct.WriteSignal.html)"
+msgstr ""
+
+#: src/view/08_parent_child.md:26
+msgid ""
+"One approach is simply to pass a `WriteSignal` from the parent down to the "
+"child, and update it in the child. This lets you manipulate the state of the "
+"parent from the child."
+msgstr ""
+
+#: src/view/08_parent_child.md:34 src/view/08_parent_child.md:67
+#: src/view/08_parent_child.md:99 src/view/08_parent_child.md:134
+#: src/view/08_parent_child.md:176 src/view/08_parent_child.md:235
+msgid "\"Toggled? \""
+msgstr ""
+
+#: src/view/08_parent_child.md:45 src/view/08_parent_child.md:76
+#: src/view/08_parent_child.md:109 src/view/08_parent_child.md:254
+msgid "\"Toggle\""
+msgstr ""
+
+#: src/view/08_parent_child.md:51
+msgid ""
+"This pattern is simple, but you should be careful with it: passing around a "
+"`WriteSignal` can make it hard to reason about your code. In this example, "
+"it’s pretty clear when you read `<App/>` that you are handing off the "
+"ability to mutate `toggled`, but it’s not at all clear when or how it will "
+"change. In this small, local example it’s easy to understand, but if you "
+"find yourself passing around `WriteSignal`s like this throughout your code, "
+"you should really consider whether this is making it too easy to write "
+"spaghetti code."
+msgstr ""
+
+#: src/view/08_parent_child.md:58
+msgid "2. Use a Callback"
+msgstr ""
+
+#: src/view/08_parent_child.md:60
+msgid ""
+"Another approach would be to pass a callback to the child: say, `on_click`."
+msgstr ""
+
+#: src/view/08_parent_child.md:82
+msgid ""
+"You’ll notice that whereas `<ButtonA/>` was given a `WriteSignal` and "
+"decided how to mutate it, `<ButtonB/>` simply fires an event: the mutation "
+"happens back in `<App/>`. This has the advantage of keeping local state "
+"local, preventing the problem of spaghetti mutation. But it also means the "
+"logic to mutate that signal needs to exist up in `<App/>`, not down in "
+"`<ButtonB/>`. These are real trade-offs, not a simple right-or-wrong choice."
+msgstr ""
+
+#: src/view/08_parent_child.md:88
+msgid "3. Use an Event Listener"
+msgstr ""
+
+#: src/view/08_parent_child.md:90
+msgid ""
+"You can actually write Option 2 in a slightly different way. If the callback "
+"maps directly onto a native DOM event, you can add an `on:` listener "
+"directly to the place you use the component in your `view` macro in `<App/>`."
+msgstr ""
+
+#: src/view/08_parent_child.md:100
+msgid ""
+"// note the on:click instead of on_click\n"
+"        // this is the same syntax as an HTML element event listener\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:114
+msgid ""
+"This lets you write way less code in `<ButtonC/>` than you did for `<ButtonB/"
+">`, and still gives a correctly-typed event to the listener. This works by "
+"adding an `on:` event listener to each element that `<ButtonC/>` returns: in "
+"this case, just the one `<button>`."
+msgstr ""
+
+#: src/view/08_parent_child.md:119
+msgid ""
+"Of course, this only works for actual DOM events that you’re passing "
+"directly through to the elements you’re rendering in the component. For more "
+"complex logic that doesn’t map directly onto an element (say you create "
+"`<ValidatedForm/>` and want an `on_valid_form_submit` callback) you should "
+"use Option 2."
+msgstr ""
+
+#: src/view/08_parent_child.md:124
+msgid "4. Providing a Context"
+msgstr ""
+
+#: src/view/08_parent_child.md:126
+msgid ""
+"This version is actually a variant on Option 1. Say you have a deeply-nested "
+"component tree:"
+msgstr ""
+
+#: src/view/08_parent_child.md:143 src/view/08_parent_child.md:185
+msgid "\"My Page\""
+msgstr ""
+
+#: src/view/08_parent_child.md:154 src/view/08_parent_child.md:196
+msgid "\"content\""
+msgstr ""
+
+#: src/view/08_parent_child.md:167
+msgid ""
+"Now `<ButtonD/>` is no longer a direct child of `<App/>`, so you can’t "
+"simply pass your `WriteSignal` to its props. You could do what’s sometimes "
+"called “prop drilling,” adding a prop to each layer between the two:"
+msgstr ""
+
+#: src/view/08_parent_child.md:208
+msgid ""
+"This is a mess. `<Layout/>` and `<Content/>` don’t need `set_toggled`; they "
+"just pass it through to `<ButtonD/>`. But I need to declare the prop in "
+"triplicate. This is not only annoying but hard to maintain: imagine we add a "
+"“half-toggled” option and the type of `set_toggled` needs to change to an "
+"`enum`. We have to change it in three places!"
+msgstr ""
+
+#: src/view/08_parent_child.md:214
+msgid "Isn’t there some way to skip levels?"
+msgstr ""
+
+#: src/view/08_parent_child.md:216
+msgid "There is!"
+msgstr ""
+
+#: src/view/08_parent_child.md:218
+msgid "4.1 The Context API"
+msgstr ""
+
+#: src/view/08_parent_child.md:220
+msgid ""
+"You can provide data that skips levels by using [`provide_context`](https://"
+"docs.rs/leptos/latest/leptos/context/fn.provide_context.html) and "
+"[`use_context`](https://docs.rs/leptos/latest/leptos/context/fn.use_context."
+"html). Contexts are identified by the type of the data you provide (in this "
+"example, `WriteSignal<bool>`), and they exist in a top-down tree that "
+"follows the contours of your UI tree. In this example, we can use context to "
+"skip the unnecessary prop drilling."
+msgstr ""
+
+#: src/view/08_parent_child.md:231
+msgid "// share `set_toggled` with all children of this component\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:239
+msgid ""
+"// <Layout/> and <Content/> omitted\n"
+"// To work in this version, drop the `set_toggled` parameter on each\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:245
+msgid ""
+"// use_context searches up the context tree, hoping to\n"
+"    // find a `WriteSignal<bool>`\n"
+"    // in this case, I .expect() because I know I provided it\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:248
+msgid "\"to have found the setter provided\""
+msgstr ""
+
+#: src/view/08_parent_child.md:261
+msgid ""
+"The same caveats apply to this as to `<ButtonA/>`: passing a `WriteSignal` "
+"around should be done with caution, as it allows you to mutate state from "
+"arbitrary parts of your code. But when done carefully, this can be one of "
+"the most effective techniques for global state management in Leptos: simply "
+"provide the state at the highest level you’ll need it, and use it wherever "
+"you need it lower down."
+msgstr ""
+
+#: src/view/08_parent_child.md:268
+msgid ""
+"Note that there are no performance downsides to this approach. Because you "
+"are passing a fine-grained reactive signal, _nothing happens_ in the "
+"intervening components (`<Layout/>` and `<Content/>`) when you update it. "
+"You are communicating directly between `<ButtonD/>` and `<App/>`. In fact—"
+"and this is the power of fine-grained reactivity—you are communicating "
+"directly between a button click in `<ButtonD/>` and a single text node in "
+"`<App/>`. It’s as if the components themselves don’t exist at all. And, "
+"well... at runtime, they don’t. It’s just signals and effects, all the way "
+"down."
+msgstr ""
+
+#: src/view/08_parent_child.md:277
+msgid ""
+"Note that this approach makes an important tradeoff: You don't have type-"
+"safety anymore between `provide_context` and `use_context`. Receiving the "
+"right context in the child component is a runtime check (see `use_context."
+"expect(...)`). The compiler won't guide you during a refactoring, as it does "
+"with the earlier approaches."
+msgstr ""
+
+#: src/view/08_parent_child.md:282
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/8-parent-"
+"child-0-7-cgcgk9?file=%2Fsrc%2Fmain."
+"rs%3A1%2C1-116%2C2&workspaceId=478437f3-1f86-4b1e-b665-5c27a31451fb)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/8-parent-child-0-7-cgcgk9?"
+"file=%2Fsrc%2Fmain.rs%3A1%2C1-116%2C2&workspaceId=478437f3-1f86-4b1e-"
+"b665-5c27a31451fb\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/view/08_parent_child.md:301
+msgid ""
+"// This highlights four different ways that child components can "
+"communicate\n"
+"// with their parent:\n"
+"// 1) <ButtonA/>: passing a WriteSignal as one of the child component "
+"props,\n"
+"//    for the child component to write into and the parent to read\n"
+"// 2) <ButtonB/>: passing a closure as one of the child component props, "
+"for\n"
+"//    the child component to call\n"
+"// 3) <ButtonC/>: adding an `on:` event listener to a component\n"
+"// 4) <ButtonD/>: providing a context that is used in the component (rather "
+"than prop drilling)\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:316
+msgid "// just some signals to toggle four classes on our <p>\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:322
+msgid ""
+"// the newtype pattern isn't *necessary* here but is a good practice\n"
+"    // it avoids confusion with other possible future `WriteSignal<bool>` "
+"contexts\n"
+"    // and makes it easier to refer to it in ButtonD\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:330
+msgid ""
+"// class: attributes take F: Fn() => bool, and these signals all implement "
+"Fn()\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:336
+msgid "\"Lorem ipsum sit dolor amet.\""
+msgstr ""
+
+#: src/view/08_parent_child.md:339
+msgid "// Button A: pass the signal setter\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:342
+msgid "// Button B: pass a closure\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:345
+msgid ""
+"// Button C: use a regular event listener\n"
+"            // setting an event listener on a component like this applies "
+"it\n"
+"            // to each of the top-level elements the component returns\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:350
+msgid "// Button D gets its setter from context rather than props\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:355
+msgid "/// Button A receives a signal setter and updates the signal itself\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:359
+msgid "/// Signal that will be toggled when the button is clicked.\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:366
+msgid "\"Toggle Red\""
+msgstr ""
+
+#: src/view/08_parent_child.md:370
+msgid "/// Button B receives a closure\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:374
+msgid "/// Callback that will be invoked when the button is clicked.\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:382
+msgid "\"Toggle Right\""
+msgstr ""
+
+#: src/view/08_parent_child.md:386
+msgid ""
+"/// Button C is a dummy: it renders a button but doesn't handle\n"
+"/// its click. Instead, the parent component adds an event listener.\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:393
+msgid "\"Toggle Italics\""
+msgstr ""
+
+#: src/view/08_parent_child.md:397
+msgid ""
+"/// Button D is very similar to Button A, but instead of passing the setter "
+"as a prop\n"
+"/// we get it from the context\n"
+msgstr ""
+
+#: src/view/08_parent_child.md:408
+msgid "\"Toggle Small Caps\""
+msgstr ""

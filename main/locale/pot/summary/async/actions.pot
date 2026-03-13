@@ -1,0 +1,259 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/async/13_actions.md:1
+msgid "Mutating Data with Actions"
+msgstr ""
+
+#: src/async/13_actions.md:3
+msgid ""
+"We’ve talked about how to load `async` data with resources. Resources "
+"immediately load data and work closely with `<Suspense/>` and `<Transition/"
+">` components to show whether data is loading in your app. But what if you "
+"just want to call some arbitrary `async` function and keep track of what "
+"it’s doing?"
+msgstr ""
+
+#: src/async/13_actions.md:5
+msgid ""
+"Well, you could always use [`spawn_local`](https://docs.rs/leptos/latest/"
+"leptos/task/fn.spawn_local.html). This allows you to just spawn an `async` "
+"task in a synchronous environment by handing the `Future` off to the browser "
+"(or, on the server, Tokio or whatever other runtime you’re using). But how "
+"do you know if it’s still pending? Well, you could just set a signal to show "
+"whether it’s loading, and another one to show the result..."
+msgstr ""
+
+#: src/async/13_actions.md:7
+msgid ""
+"All of this is true. Or you could use the final `async` primitive: [`Action`]"
+"(https://docs.rs/leptos/latest/leptos/reactive/actions/struct.Action.html)."
+msgstr ""
+
+#: src/async/13_actions.md:9
+msgid ""
+"Actions and resources seem similar, but they represent fundamentally "
+"different things. If you’re trying to load data by running an `async` "
+"function, either once or when some other value changes, you probably want to "
+"use a resource. If you’re trying to occasionally run an `async` function in "
+"response to something like a user clicking a button, you probably want to "
+"use an `Action`."
+msgstr ""
+
+#: src/async/13_actions.md:11
+msgid "Say we have some `async` function we want to run."
+msgstr ""
+
+#: src/async/13_actions.md:15
+msgid "/* do some stuff on the server to add a new todo */"
+msgstr ""
+
+#: src/async/13_actions.md:19
+msgid ""
+"`Action::new()` takes an `async` function that takes a reference to a single "
+"argument, which you could think of as its “input type.”"
+msgstr ""
+
+#: src/async/13_actions.md:21
+msgid ""
+"The input is always a single type. If you want to pass in multiple "
+"arguments, you can do it with a struct or tuple."
+msgstr ""
+
+#: src/async/13_actions.md:24
+msgid "// if there's a single argument, just use that\n"
+msgstr ""
+
+#: src/async/13_actions.md:30
+msgid "// if there are no arguments, use the unit type `()`\n"
+msgstr ""
+
+#: src/async/13_actions.md:33
+msgid "// if there are multiple arguments, use a tuple\n"
+msgstr ""
+
+#: src/async/13_actions.md:39
+msgid ""
+"Because the action function takes a reference but the `Future` needs to have "
+"a `'static` lifetime, you’ll usually need to clone the value to pass it into "
+"the `Future`. This is admittedly awkward but it unlocks some powerful "
+"features like optimistic UI. We’ll see a little more about that in future "
+"chapters."
+msgstr ""
+
+#: src/async/13_actions.md:41
+msgid "So in this case, all we need to do to create an action is"
+msgstr ""
+
+#: src/async/13_actions.md:50
+msgid ""
+"Rather than calling `add_todo_action` directly, we’ll call it with `."
+"dispatch()`, as in"
+msgstr ""
+
+#: src/async/13_actions.md:53
+msgid "\"Some value\""
+msgstr ""
+
+#: src/async/13_actions.md:56
+msgid ""
+"You can do this from an event listener, a timeout, or anywhere; because `."
+"dispatch()` isn’t an `async` function, it can be called from a synchronous "
+"context."
+msgstr ""
+
+#: src/async/13_actions.md:58
+msgid ""
+"Actions provide access to a few signals that synchronize between the "
+"asynchronous action you’re calling and the synchronous reactive system:"
+msgstr ""
+
+#: src/async/13_actions.md:61
+msgid "// RwSignal<Option<String>>\n"
+msgstr ""
+
+#: src/async/13_actions.md:62
+msgid "// ReadSignal<bool>\n"
+msgstr ""
+
+#: src/async/13_actions.md:63
+msgid "// RwSignal<Option<Uuid>>\n"
+msgstr ""
+
+#: src/async/13_actions.md:66
+msgid ""
+"This makes it easy to track the current state of your request, show a "
+"loading indicator, or do “optimistic UI” based on the assumption that the "
+"submission will succeed."
+msgstr ""
+
+#: src/async/13_actions.md:74 src/async/13_actions.md:152
+msgid "// don't reload the page...\n"
+msgstr ""
+
+#: src/async/13_actions.md:75 src/async/13_actions.md:153
+msgid "\"input to exist\""
+msgstr ""
+
+#: src/async/13_actions.md:80 src/async/13_actions.md:158
+msgid "\"What do you need to do?\""
+msgstr ""
+
+#: src/async/13_actions.md:81 src/async/13_actions.md:159
+msgid "\"text\""
+msgstr ""
+
+#: src/async/13_actions.md:85 src/async/13_actions.md:163
+msgid "\"submit\""
+msgstr ""
+
+#: src/async/13_actions.md:85 src/async/13_actions.md:163
+msgid "\"Add Todo\""
+msgstr ""
+
+#: src/async/13_actions.md:87
+msgid "// use our loading state\n"
+msgstr ""
+
+#: src/async/13_actions.md:88 src/async/13_actions.md:165
+msgid "\"Loading...\""
+msgstr ""
+
+#: src/async/13_actions.md:92
+msgid ""
+"Now, there’s a chance this all seems a little over-complicated, or maybe too "
+"restricted. I wanted to include actions here, alongside resources, as the "
+"missing piece of the puzzle. In a real Leptos app, you’ll actually most "
+"often use actions alongside server functions, [`ServerAction`](https://docs."
+"rs/leptos/latest/leptos/server/struct.ServerAction.html), and the "
+"[`<ActionForm/>`](https://docs.rs/leptos/latest/leptos/form/fn.ActionForm."
+"html) component to create really powerful progressively-enhanced forms. So "
+"if this primitive seems useless to you... Don’t worry! Maybe it will make "
+"sense later. (Or check out our [`todo_app_sqlite`](https://github.com/leptos-"
+"rs/leptos/blob/main/examples/todo_app_sqlite/src/todo.rs) example now.)"
+msgstr ""
+
+#: src/async/13_actions.md:94
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/13-action-0-7-"
+"g73rl9?file=%2Fsrc%2Fmain.rs)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/13-action-0-7-g73rl9?"
+"file=%2Fsrc%2Fmain.rs\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/async/13_actions.md:115
+msgid ""
+"// Here we define an async function\n"
+"// This could be anything: a network request, database read, etc.\n"
+"// Think of it as a mutation: some imperative async action you run,\n"
+"// whereas a resource would be some async data you load\n"
+msgstr ""
+
+#: src/async/13_actions.md:122
+msgid ""
+"// fake a one-second delay\n"
+"    // SendWrapper allows us to use this !Send browser API; don't worry "
+"about it\n"
+msgstr ""
+
+#: src/async/13_actions.md:125
+msgid "// pretend this is a post ID or something\n"
+msgstr ""
+
+#: src/async/13_actions.md:131
+msgid ""
+"// an action takes an async function with single argument\n"
+"    // it can be a simple type, a struct, or ()\n"
+msgstr ""
+
+#: src/async/13_actions.md:134
+msgid ""
+"// the input is a reference, but we need the Future to own it\n"
+"        // this is important: we need to clone and move into the Future\n"
+"        // so it has a 'static lifetime\n"
+msgstr ""
+
+#: src/async/13_actions.md:141
+msgid ""
+"// actions provide a bunch of synchronous, reactive variables\n"
+"    // that tell us different things about the state of the action\n"
+msgstr ""
+
+#: src/async/13_actions.md:167
+msgid "\"Submitted: \""
+msgstr ""
+
+#: src/async/13_actions.md:168 src/async/13_actions.md:172
+#: src/async/13_actions.md:176
+msgid "\"{:#?}\""
+msgstr ""
+
+#: src/async/13_actions.md:171
+msgid "\"Pending: \""
+msgstr ""
+
+#: src/async/13_actions.md:175
+msgid "\"Todo ID: \""
+msgstr ""
