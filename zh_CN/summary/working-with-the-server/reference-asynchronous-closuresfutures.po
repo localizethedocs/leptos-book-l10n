@@ -1,0 +1,209 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/server/28_async_quick_reference.md:1
+msgid "Reference: Asynchronous Closures/Futures"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:3
+msgid ""
+"With all the different types of asynchronous closures and futures having "
+"been introduced, it may become difficult to keep track of where and when "
+"they execute in different contexts. The following table briefly describes "
+"when and where the code is executed for each of the introduced asynchronous "
+"closure types. Note how each asynchronous closure type behaves differently "
+"when executed on the server and on the client in conjunction with the "
+"relevant stage of execution (SSR/hydration/CSR)."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:5
+msgid "Server-side rendering"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:5
+msgid "During hydration (preparing for CSR)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:5
+msgid "Client-side rendering"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:7
+msgid "Server Functions (Server)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:7
+msgid ""
+"Invoked as a normal asynchronous function, with the code defined in the body "
+"directly executed and the results returned to the caller. When executed "
+"inside a component, the full reactive context is accessible."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:7
+#: src/server/28_async_quick_reference.md:8
+#: src/server/28_async_quick_reference.md:9
+#: src/server/28_async_quick_reference.md:10
+#: src/server/28_async_quick_reference.md:11
+#: src/server/28_async_quick_reference.md:12
+#: src/server/28_async_quick_reference.md:13
+msgid "\\-"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:7
+msgid ""
+"(Invoked by responding to the HTTP request made to the server function's "
+"standalone endpoint, where the response will be the serialized result. Since "
+"this endpoint is fully standalone, reactive context is typically not "
+"available.)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:8
+msgid "Server Functions (Client)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:8
+msgid "Not executed. (When defined inside resource typed async closures.)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:8
+msgid ""
+"Makes an HTTP request to the server function's endpoint, the response body "
+"will be deserialized into the result. Take note that the code in the "
+"function body is never compiled into the client."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:9
+msgid "Resources (Server)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:9
+msgid ""
+"Their async closures are executed in _parallel_ when possible by the async "
+"executor; results are encoded into the response body inside `<script>` tags."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:10
+msgid "Resources (Client)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:10
+msgid ""
+"Not executed; the `<script>` tags within the response body provides the "
+"results."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:10
+#: src/server/28_async_quick_reference.md:11
+msgid ""
+"Their async closures are executed whenever required by the reactive system "
+"to return any new results."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:11
+msgid "Local Resources (Client Only)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:11
+msgid ""
+"Not executed. (Will be executed once after hydration to provide the initial "
+"value.)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:12
+msgid "Suspend (Server)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:12
+msgid ""
+"These futures are executed in _parallel_ when possible by the async "
+"executor.  The selected `SsrMode` can modify how and when: 1) these futures "
+"are polled, 2) the ordering of the stream of outputs."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:13
+msgid "Suspend (Client)"
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:13
+msgid ""
+"These futures are fully executed once more in the client as part of "
+"hydration; returned `view! {}` will be used to hydrate the HTML."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:13
+msgid ""
+"These futures are executed whenever required by the reactive system; "
+"returned `view! {}`  will be rendered wherever they are defined."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:15
+msgid ""
+"A useful note to keep in mind is that there are up to three different stages "
+"of execution, split between both the server and the client.  One consequence "
+"of this are the potential for hydration bugs or unexpected program behavior "
+"if there are side effects inside a Resource or Suspend.  These side effects "
+"may not be executed in the expected time or in the identical order across "
+"the different stages of execution, and this mismatch may lead to hydration "
+"errors."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:17
+msgid ""
+"For example, a side effect might arise from a resource that sets a signal.  "
+"The resource might pass a value that's sourced asynchronously through a "
+"reactive signal in its asychronous closure - this behaves perfectly fine "
+"under SSR and CSR, but will not behave in the expected manner if hydration "
+"is involved.   During hydration, the body of the asynchronous closure _will "
+"not_ be executed, thus resulting in the signal not being set during "
+"hydration; and since that closure under SSR would be executed and thus the "
+"signal would be set there, this mismatch between the signal being set under "
+"SSR and not set during hydration may lead to a hydration error.  To correct "
+"for this, have the resource return the value, so that a Suspend may `.await` "
+"for it before passing it through the reactive signal, ensuring the signal is "
+"set under all three execution stages."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:19
+msgid ""
+"Another way this mismatch may arise is when a single signal is used by "
+"multiple Suspends.  The Suspends may be polled in a different order on the "
+"server versus how they may be polled on the client; this is simply due to "
+"the different async executors being used in these two contexts.  This "
+"effectively results in an unstable order of execution, leading to the "
+"changing of the order of which the values are passed through the signal.  "
+"Ultimately the result is yet another potential for values being mismatched "
+"under SSR versus hydration, and in this particular instance the hydration "
+"error may become non-deterministic and thus difficult to narrow down."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:21
+msgid ""
+"As another example, during SSR, server functions will have access to the "
+"full set of contexts set up by the application, as they will be invoked as "
+"standard async functions during rendering of the application.  On the "
+"otherhand, their API endpoint counterparts exist as much more simple "
+"standalone endpoint handlers, thus they will run without any of the contexts "
+"that the application have set up.  Hence the use of `expect_context` and "
+"`use_context` on types that are set up by the application will not work, "
+"unless the values were provided to context by `."
+"leptos_routes_with_context()`."
+msgstr ""
+
+#: src/server/28_async_quick_reference.md:23
+msgid ""
+"The above are just some examples to serve as a quick reference of the "
+"behavior of the different types under the typical documented configuration "
+"(i.e. server functions are only invoked/awaited inside Resources, and "
+"Resources are only awaited inside Suspends), as combining or nesting of "
+"these asynchronous closures in some other manner can cause other behaviors."
+msgstr ""

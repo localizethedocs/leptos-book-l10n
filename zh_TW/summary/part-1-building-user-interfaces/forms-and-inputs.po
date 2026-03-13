@@ -1,0 +1,540 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/view/05_forms.md:1
+msgid "Forms and Inputs"
+msgstr ""
+
+#: src/view/05_forms.md:3
+msgid ""
+"Forms and form inputs are an important part of interactive apps. There are "
+"two basic patterns for interacting with inputs in Leptos, which you may "
+"recognize if you’re familiar with React, SolidJS, or a similar framework: "
+"using **controlled** or **uncontrolled** inputs."
+msgstr ""
+
+#: src/view/05_forms.md:8
+msgid "Controlled Inputs"
+msgstr ""
+
+#: src/view/05_forms.md:10
+msgid ""
+"In a \"controlled input,\" the framework controls the state of the input "
+"element. On every `input` event, it updates a local signal that holds the "
+"current state, which in turn updates the `value` prop of the input."
+msgstr ""
+
+#: src/view/05_forms.md:14
+msgid "There are two important things to remember:"
+msgstr ""
+
+#: src/view/05_forms.md:16
+msgid ""
+"The `input` event fires on (almost) every change to the element, while the "
+"`change` event fires (more or less) when you unfocus the input. You probably "
+"want `on:input`, but we give you the freedom to choose."
+msgstr ""
+
+#: src/view/05_forms.md:19
+msgid ""
+"The `value` _attribute_ only sets the initial value of the input, i.e., it "
+"only updates the input up to the point that you begin typing. The `value` "
+"_property_ continues updating the input after that. You usually want to set "
+"`prop:value` for this reason. (The same is true for `checked` and `prop:"
+"checked` on an `<input type=\"checkbox\">`.)"
+msgstr ""
+
+#: src/view/05_forms.md:26 src/view/05_forms.md:80 src/view/05_forms.md:296
+msgid "\"Controlled\""
+msgstr ""
+
+#: src/view/05_forms.md:29 src/view/05_forms.md:86 src/view/05_forms.md:154
+#: src/view/05_forms.md:299 src/view/05_forms.md:356
+msgid "\"text\""
+msgstr ""
+
+#: src/view/05_forms.md:30
+msgid ""
+"// adding :target gives us typed access to the element\n"
+"        // that is the target of the event that fires\n"
+msgstr ""
+
+#: src/view/05_forms.md:33
+msgid "// .value() returns the current value of an HTML input element\n"
+msgstr ""
+
+#: src/view/05_forms.md:37
+msgid ""
+"// the `prop:` syntax lets you update a DOM property,\n"
+"        // rather than an attribute.\n"
+msgstr ""
+
+#: src/view/05_forms.md:41 src/view/05_forms.md:129 src/view/05_forms.md:160
+#: src/view/05_forms.md:321 src/view/05_forms.md:367
+msgid "\"Name is: \""
+msgstr ""
+
+#: src/view/05_forms.md:45
+msgid "Why do you need `prop:value`?"
+msgstr ""
+
+#: src/view/05_forms.md:47
+msgid ""
+"Web browsers are the most ubiquitous and stable platform for rendering "
+"graphical user interfaces in existence. They have also maintained an "
+"incredible backwards compatibility over their three decades of existence. "
+"Inevitably, this means there are some quirks."
+msgstr ""
+
+#: src/view/05_forms.md:49
+msgid ""
+"One odd quirk is that there is a distinction between HTML attributes and DOM "
+"element properties, i.e., between something called an “attribute” which is "
+"parsed from HTML and can be set on a DOM element with `.setAttribute()`, and "
+"something called a “property” which is a field of the JavaScript class "
+"representation of that parsed HTML element."
+msgstr ""
+
+#: src/view/05_forms.md:51
+msgid ""
+"In the case of an `<input value=...>`, setting the `value` _attribute_ is "
+"defined as setting the initial value for the input, and setting `value` "
+"_property_ sets its current value. It may be easier to understand this by "
+"opening `about:blank` and running the following JavaScript in the browser "
+"console, line by line:"
+msgstr ""
+
+#: src/view/05_forms.md:54
+msgid "// create an input and append it to the DOM\n"
+msgstr ""
+
+#: src/view/05_forms.md:55
+msgid "\"input\""
+msgstr ""
+
+#: src/view/05_forms.md:58 src/view/05_forms.md:59 src/view/05_forms.md:63
+msgid "\"value\""
+msgstr ""
+
+#: src/view/05_forms.md:58
+msgid "\"test\""
+msgstr ""
+
+#: src/view/05_forms.md:58
+msgid "// updates the input\n"
+msgstr ""
+
+#: src/view/05_forms.md:59
+msgid "\"another test\""
+msgstr ""
+
+#: src/view/05_forms.md:59
+msgid "// updates the input again\n"
+msgstr ""
+
+#: src/view/05_forms.md:61
+msgid "// now go and type into the input: delete some characters, etc.\n"
+msgstr ""
+
+#: src/view/05_forms.md:63
+msgid "\"one more time?\""
+msgstr ""
+
+#: src/view/05_forms.md:64
+msgid ""
+"// nothing should have changed. Setting the \"initial value\" does nothing "
+"now\n"
+msgstr ""
+
+#: src/view/05_forms.md:66
+msgid "// however...\n"
+msgstr ""
+
+#: src/view/05_forms.md:67
+msgid "\"But this works\""
+msgstr ""
+
+#: src/view/05_forms.md:70
+msgid ""
+"Many other frontend frameworks conflate attributes and properties, or create "
+"a special case for inputs that sets the value correctly. Maybe Leptos should "
+"do this too, but for now, I prefer giving users the maximum amount of "
+"control over whether they’re setting an attribute or a property, and doing "
+"my best to educate people about the actual underlying browser behavior "
+"rather than obscuring it."
+msgstr ""
+
+#: src/view/05_forms.md:72
+msgid "Simplifying Controlled Inputs with `bind:`"
+msgstr ""
+
+#: src/view/05_forms.md:74
+msgid ""
+"Adherence to Web standards and a clear division between “reading from a "
+"signal” and “writing to a signal” are good, but creating controlled inputs "
+"in this way can sometimes seem like more boilerplate than is really "
+"necessary."
+msgstr ""
+
+#: src/view/05_forms.md:77
+msgid ""
+"Leptos also includes a special `bind:` syntax for inputs that allows you to "
+"automatically bind signals to inputs. They do exactly the same thing as the "
+"“controlled input” pattern above: create an event listener that updates the "
+"signal, and a dynamic property that reads from the signal. You can use `bind:"
+"value` for text inputs, `bind:checked` for checkboxes, and `bind:group` for "
+"radio button groups."
+msgstr ""
+
+#: src/view/05_forms.md:81
+msgid "\"\""
+msgstr ""
+
+#: src/view/05_forms.md:82 src/view/05_forms.md:105
+msgid "\"red\""
+msgstr ""
+
+#: src/view/05_forms.md:89
+msgid "\"email\""
+msgstr ""
+
+#: src/view/05_forms.md:93
+msgid "\"Please send me lots of spam email.\""
+msgstr ""
+
+#: src/view/05_forms.md:94
+msgid "\"checkbox\""
+msgstr ""
+
+#: src/view/05_forms.md:99
+msgid "\"Favorite color\""
+msgstr ""
+
+#: src/view/05_forms.md:101
+msgid "\"Red\""
+msgstr ""
+
+#: src/view/05_forms.md:103 src/view/05_forms.md:112 src/view/05_forms.md:121
+msgid "\"radio\""
+msgstr ""
+
+#: src/view/05_forms.md:104 src/view/05_forms.md:113 src/view/05_forms.md:122
+msgid "\"color\""
+msgstr ""
+
+#: src/view/05_forms.md:110
+msgid "\"Green\""
+msgstr ""
+
+#: src/view/05_forms.md:114
+msgid "\"green\""
+msgstr ""
+
+#: src/view/05_forms.md:119
+msgid "\"Blue\""
+msgstr ""
+
+#: src/view/05_forms.md:123
+msgid "\"blue\""
+msgstr ""
+
+#: src/view/05_forms.md:128
+msgid "\"Your favorite color is \""
+msgstr ""
+
+#: src/view/05_forms.md:128
+msgid "\".\""
+msgstr ""
+
+#: src/view/05_forms.md:130
+msgid "\"Email is: \""
+msgstr ""
+
+#: src/view/05_forms.md:132
+msgid "\"You’ll receive cool bonus content!\""
+msgstr ""
+
+#: src/view/05_forms.md:137
+msgid "Uncontrolled Inputs"
+msgstr ""
+
+#: src/view/05_forms.md:139
+msgid ""
+"In an \"uncontrolled input,\" the browser controls the state of the input "
+"element. Rather than continuously updating a signal to hold its value, we "
+"use a [`NodeRef`](https://docs.rs/leptos/latest/leptos/tachys/reactive_graph/"
+"node_ref/struct.NodeRef.html) to access the input when we want to get its "
+"value."
+msgstr ""
+
+#: src/view/05_forms.md:144
+msgid ""
+"In this example, we only notify the framework when the `<form>` fires a "
+"`submit` event. Note the use of the [`leptos::html`](https://docs.rs/leptos/"
+"latest/leptos/html/index.html) module, which provides a bunch of types for "
+"every HTML element."
+msgstr ""
+
+#: src/view/05_forms.md:148 src/view/05_forms.md:330
+msgid "\"Uncontrolled\""
+msgstr ""
+
+#: src/view/05_forms.md:153
+msgid "// on_submit defined below\n"
+msgstr ""
+
+#: src/view/05_forms.md:158 src/view/05_forms.md:365
+msgid "\"submit\""
+msgstr ""
+
+#: src/view/05_forms.md:158 src/view/05_forms.md:365
+msgid "\"Submit\""
+msgstr ""
+
+#: src/view/05_forms.md:164
+msgid "The view should be pretty self-explanatory by now. Note two things:"
+msgstr ""
+
+#: src/view/05_forms.md:166
+msgid ""
+"Unlike in the controlled input example, we use `value` (not `prop:value`). "
+"This is because we’re just setting the initial value of the input, and "
+"letting the browser control its state. (We could use `prop:value` instead.)"
+msgstr ""
+
+#: src/view/05_forms.md:169
+msgid ""
+"We use `node_ref=...` to fill the `NodeRef`. (Older examples sometimes use "
+"`_ref`. They are the same thing, but `node_ref` has better rust-analyzer "
+"support.)"
+msgstr ""
+
+#: src/view/05_forms.md:172
+msgid ""
+"`NodeRef` is a kind of reactive smart pointer: we can use it to access the "
+"underlying DOM node. Its value will be set when the element is rendered."
+msgstr ""
+
+#: src/view/05_forms.md:177 src/view/05_forms.md:339
+msgid "// stop the page from reloading!\n"
+msgstr ""
+
+#: src/view/05_forms.md:180 src/view/05_forms.md:342
+msgid "// here, we'll extract the value from the input\n"
+msgstr ""
+
+#: src/view/05_forms.md:183
+msgid ""
+"// event handlers can only fire after the view\n"
+"        // is mounted to the DOM, so the `NodeRef` will be `Some`\n"
+msgstr ""
+
+#: src/view/05_forms.md:185
+msgid "\"<input> should be mounted\""
+msgstr ""
+
+#: src/view/05_forms.md:186
+msgid ""
+"// `leptos::HtmlElement<html::Input>` implements `Deref`\n"
+"        // to a `web_sys::HtmlInputElement`.\n"
+"        // this means we can call`HtmlInputElement::value()`\n"
+"        // to get the current value of the input\n"
+msgstr ""
+
+#: src/view/05_forms.md:195
+msgid ""
+"Our `on_submit` handler will access the input’s value and use it to call "
+"`set_name.set()`. To access the DOM node stored in the `NodeRef`, we can "
+"simply call it as a function (or using `.get()`). This will return "
+"`Option<leptos::HtmlElement<html::Input>>`, but we know that the element has "
+"already been mounted (how else did you fire this event!), so it's safe to "
+"unwrap here."
+msgstr ""
+
+#: src/view/05_forms.md:201
+msgid ""
+"We can then call `.value()` to get the value out of the input, because "
+"`NodeRef` gives us access to a correctly-typed HTML element."
+msgstr ""
+
+#: src/view/05_forms.md:204
+msgid ""
+"Take a look at [`web_sys` and `HtmlElement`](../web_sys.md) to learn more "
+"about using a `leptos::HtmlElement`. Also, see the full CodeSandbox example "
+"at the end of this page."
+msgstr ""
+
+#: src/view/05_forms.md:207
+msgid "Special Cases: `<textarea>` and `<select>`"
+msgstr ""
+
+#: src/view/05_forms.md:209
+msgid "Two form elements tend to cause some confusion in different ways."
+msgstr ""
+
+#: src/view/05_forms.md:211
+msgid "`<textarea>`"
+msgstr ""
+
+#: src/view/05_forms.md:213
+msgid ""
+"Unlike `<input>`, the `<textarea>` element does not support a `value` "
+"attribute in HTML. Instead, it receives its initial value as a plain text "
+"node in its HTML children."
+msgstr ""
+
+#: src/view/05_forms.md:216
+msgid ""
+"So if you’d like to server render an initial value, and have the value also "
+"react in the browser, you can both pass it an initial text node as a child "
+"and use `prop:value` to set its current value."
+msgstr ""
+
+#: src/view/05_forms.md:231
+msgid "`<select>`"
+msgstr ""
+
+#: src/view/05_forms.md:233
+msgid ""
+"The `<select>` element can likewise be controlled via a `value` property on "
+"the `<select>` itself, which will select whichever `<option>` has that value."
+msgstr ""
+
+#: src/view/05_forms.md:245
+msgid "\"0\""
+msgstr ""
+
+#: src/view/05_forms.md:246
+msgid "\"1\""
+msgstr ""
+
+#: src/view/05_forms.md:247
+msgid "\"2\""
+msgstr ""
+
+#: src/view/05_forms.md:249
+msgid "// a button that will cycle through the options\n"
+msgstr ""
+
+#: src/view/05_forms.md:257
+msgid "\"Next Option\""
+msgstr ""
+
+#: src/view/05_forms.md:262
+msgid ""
+"```admonish sandbox title=\"Controlled vs uncontrolled forms CodeSandbox\" "
+"collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/5-forms-0-7-"
+"l5hktg?file=%2Fsrc%2Fmain.rs&workspaceId=478437f3-1f86-4b1e-"
+"b665-5c27a31451fb)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/5-forms-0-7-l5hktg?"
+"file=%2Fsrc%2Fmain.rs&workspaceId=478437f3-1f86-4b1e-b665-5c27a31451fb\" "
+"width=\"100%\" height=\"1000px\" style=\"max-height: 100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/view/05_forms.md:286
+msgid "\"Controlled Component\""
+msgstr ""
+
+#: src/view/05_forms.md:288
+msgid "\"Uncontrolled Component\""
+msgstr ""
+
+#: src/view/05_forms.md:295
+msgid "// create a signal to hold the value\n"
+msgstr ""
+
+#: src/view/05_forms.md:300
+msgid ""
+"// fire an event whenever the input changes\n"
+"            // adding :target after the event gives us access to\n"
+"            // a correctly-typed element at ev.target()\n"
+msgstr ""
+
+#: src/view/05_forms.md:307
+msgid ""
+"// the `prop:` syntax lets you update a DOM property,\n"
+"            // rather than an attribute.\n"
+"            //\n"
+"            // IMPORTANT: the `value` *attribute* only sets the\n"
+"            // initial value, until you have made a change.\n"
+"            // The `value` *property* sets the current value.\n"
+"            // This is a quirk of the DOM; I didn't invent it.\n"
+"            // Other frameworks gloss this over; I think it's\n"
+"            // more important to give you access to the browser\n"
+"            // as it really works.\n"
+"            //\n"
+"            // tl;dr: use prop:value for form inputs\n"
+msgstr ""
+
+#: src/view/05_forms.md:327
+msgid "// import the type for <input>\n"
+msgstr ""
+
+#: src/view/05_forms.md:332
+msgid ""
+"// we'll use a NodeRef to store a reference to the input element\n"
+"    // this will be filled when the element is created\n"
+msgstr ""
+
+#: src/view/05_forms.md:336
+msgid ""
+"// fires when the form `submit` event happens\n"
+"    // this will store the value of the <input> in our signal\n"
+msgstr ""
+
+#: src/view/05_forms.md:344
+msgid ""
+"// event handlers can only fire after the view\n"
+"            // is mounted to the DOM, so the `NodeRef` will be `Some`\n"
+msgstr ""
+
+#: src/view/05_forms.md:346
+msgid "\"<input> to exist\""
+msgstr ""
+
+#: src/view/05_forms.md:347
+msgid ""
+"// `NodeRef` implements `Deref` for the DOM element type\n"
+"            // this means we can call`HtmlInputElement::value()`\n"
+"            // to get the current value of the input\n"
+msgstr ""
+
+#: src/view/05_forms.md:357
+msgid ""
+"// here, we use the `value` *attribute* to set only\n"
+"                // the initial value, letting the browser maintain\n"
+"                // the state after that\n"
+msgstr ""
+
+#: src/view/05_forms.md:362
+msgid "// store a reference to this input in `input_element`\n"
+msgstr ""
+
+#: src/view/05_forms.md:370
+msgid ""
+"// This `main` function is the entry point into the app\n"
+"// It just mounts our component to the <body>\n"
+"// Because we defined it as `fn App`, we can now use it in a\n"
+"// template as <App/>\n"
+msgstr ""

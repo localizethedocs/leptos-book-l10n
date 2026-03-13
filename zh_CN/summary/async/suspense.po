@@ -1,0 +1,199 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/async/11_suspense.md:1
+msgid "`<Suspense/>`"
+msgstr ""
+
+#: src/async/11_suspense.md:3
+msgid ""
+"In the previous chapter, we showed how you can create a simple loading "
+"screen to show some fallback while a resource is loading."
+msgstr ""
+
+#: src/async/11_suspense.md:10 src/async/11_suspense.md:27
+#: src/async/11_suspense.md:49 src/async/11_suspense.md:53
+#: src/async/11_suspense.md:76 src/async/11_suspense.md:80
+msgid "\"My Data\""
+msgstr ""
+
+#: src/async/11_suspense.md:12 src/async/11_suspense.md:33
+#: src/async/11_suspense.md:51 src/async/11_suspense.md:78
+#: src/async/11_suspense.md:169 src/async/11_suspense.md:182
+msgid "\"Loading...\""
+msgstr ""
+
+#: src/async/11_suspense.md:18
+msgid "But what if we have two resources, and want to wait for both of them?"
+msgstr ""
+
+#: src/async/11_suspense.md:38
+msgid ""
+"That’s not _so_ bad, but it’s kind of annoying. What if we could invert the "
+"flow of control?"
+msgstr ""
+
+#: src/async/11_suspense.md:40
+msgid ""
+"The [`<Suspense/>`](https://docs.rs/leptos/latest/leptos/suspense/fn."
+"Suspense.html) component lets us do exactly that. You give it a `fallback` "
+"prop and children, one or more of which usually involves reading from a "
+"resource. Reading from a resource “under” a `<Suspense/>` (i.e., in one of "
+"its children) registers that resource with the `<Suspense/>`. If it’s still "
+"waiting for resources to load, it shows the `fallback`. When they’ve all "
+"loaded, it shows the children."
+msgstr ""
+
+#: src/async/11_suspense.md:54 src/async/11_suspense.md:85
+msgid "\"A\""
+msgstr ""
+
+#: src/async/11_suspense.md:59 src/async/11_suspense.md:87
+msgid "\"B\""
+msgstr ""
+
+#: src/async/11_suspense.md:68
+msgid ""
+"Every time one of the resources is reloading, the `\"Loading...\"` fallback "
+"will show again."
+msgstr ""
+
+#: src/async/11_suspense.md:70
+msgid ""
+"This inversion of the flow of control makes it easier to add or remove "
+"individual resources, as you don’t need to handle the matching yourself. It "
+"also unlocks some massive performance improvements during server-side "
+"rendering, which we’ll talk about during a later chapter."
+msgstr ""
+
+#: src/async/11_suspense.md:72
+msgid ""
+"Using `<Suspense/>` also gives us access to a useful way to directly `."
+"await` resources, allowing us to remove a level of nesting, above. The "
+"`Suspend` type lets us create a renderable `Future` which can be used in the "
+"view:"
+msgstr ""
+
+#: src/async/11_suspense.md:95
+msgid ""
+"`Suspend` allows us to avoid null-checking each resource, and removes some "
+"additional complexity from the code."
+msgstr ""
+
+#: src/async/11_suspense.md:97
+msgid "`<Await/>`"
+msgstr ""
+
+#: src/async/11_suspense.md:99
+msgid ""
+"If you’re simply trying to wait for some `Future` to resolve before "
+"rendering, you may find the `<Await/>` component helpful in reducing "
+"boilerplate. `<Await/>` essentially combines a `OnceResource` with a "
+"`<Suspense/>` with no fallback."
+msgstr ""
+
+#: src/async/11_suspense.md:101
+msgid "In other words:"
+msgstr ""
+
+#: src/async/11_suspense.md:103
+msgid ""
+"It only polls the `Future` once, and does not respond to any reactive "
+"changes."
+msgstr ""
+
+#: src/async/11_suspense.md:104
+msgid "It does not render anything until the `Future` resolves."
+msgstr ""
+
+#: src/async/11_suspense.md:105
+msgid ""
+"After the `Future` resolves, it binds its data to whatever variable name you "
+"choose and then renders its children with that variable in scope."
+msgstr ""
+
+#: src/async/11_suspense.md:109
+msgid "// maybe this didn't need to be async\n"
+msgstr ""
+
+#: src/async/11_suspense.md:114
+msgid "// `future` provides the `Future` to be resolved\n"
+msgstr ""
+
+#: src/async/11_suspense.md:116
+msgid "// the data is bound to whatever variable name you provide\n"
+msgstr ""
+
+#: src/async/11_suspense.md:119
+msgid "// you receive the data by reference and can use it in your view here\n"
+msgstr ""
+
+#: src/async/11_suspense.md:120
+msgid "\" little monkeys, jumping on the bed.\""
+msgstr ""
+
+#: src/async/11_suspense.md:125
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/11-suspense-0-7-"
+"sr2srk?file=%2Fsrc%2Fmain.rs%3A1%2C1-55%2C1)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/11-suspense-0-7-sr2srk?"
+"file=%2Fsrc%2Fmain.rs%3A1%2C1-55%2C1\" width=\"100%\" height=\"1000px\" "
+"style=\"max-height: 100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/async/11_suspense.md:153
+msgid "\"Bill\""
+msgstr ""
+
+#: src/async/11_suspense.md:155
+msgid "// this will reload every time `name` changes\n"
+msgstr ""
+
+#: src/async/11_suspense.md:165
+msgid "\"name:\""
+msgstr ""
+
+#: src/async/11_suspense.md:167 src/async/11_suspense.md:180
+msgid ""
+"// the fallback will show whenever a resource\n"
+"            // read \"under\" the suspense is loading\n"
+msgstr ""
+
+#: src/async/11_suspense.md:171
+msgid "// Suspend allows you use to an async block in the view\n"
+msgstr ""
+
+#: src/async/11_suspense.md:173
+msgid "\"Your shouting name is \""
+msgstr ""
+
+#: src/async/11_suspense.md:184
+msgid ""
+"// the children will be rendered once initially,\n"
+"            // and then whenever any resources has been resolved\n"
+msgstr ""
+
+#: src/async/11_suspense.md:187
+msgid "\"Which should be the same as... \""
+msgstr ""

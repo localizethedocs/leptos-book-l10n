@@ -1,0 +1,230 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/view/builder.md:1
+msgid "No Macros: The View Builder Syntax"
+msgstr ""
+
+#: src/view/builder.md:3
+msgid ""
+"If you’re perfectly happy with the `view!` macro syntax described so far, "
+"you’re welcome to skip this chapter. The builder syntax described in this "
+"section is always available, but never required."
+msgstr ""
+
+#: src/view/builder.md:5
+msgid ""
+"For one reason or another, many developers would prefer to avoid macros. "
+"Perhaps you don’t like the limited `rustfmt` support. (Although, you should "
+"check out [`leptosfmt`](https://github.com/bram209/leptosfmt), which is an "
+"excellent tool!) Perhaps you worry about the effect of macros on compile "
+"time. Perhaps you prefer the aesthetics of pure Rust syntax, or you have "
+"trouble context-switching between an HTML-like syntax and your Rust code. Or "
+"perhaps you want more flexibility in how you create and manipulate HTML "
+"elements than the `view` macro provides."
+msgstr ""
+
+#: src/view/builder.md:7
+msgid "If you fall into any of those camps, the builder syntax may be for you."
+msgstr ""
+
+#: src/view/builder.md:9
+msgid ""
+"The `view` macro expands an HTML-like syntax to a series of Rust functions "
+"and method calls. If you’d rather not use the `view` macro, you can simply "
+"use that expanded syntax yourself. And it’s actually pretty nice!"
+msgstr ""
+
+#: src/view/builder.md:11
+msgid ""
+"First off, if you want you can even drop the `#[component]` macro: a "
+"component is just a setup function that creates your view, so you can define "
+"a component as a simple function call:"
+msgstr ""
+
+#: src/view/builder.md:17
+msgid ""
+"Elements are created by calling a function with the same name as the HTML "
+"element:"
+msgstr ""
+
+#: src/view/builder.md:23
+msgid ""
+"Custom elements/web components can be created by using the [`custom()`]"
+"(https://docs.rs/leptos/latest/leptos/html/fn.custom.html) function with "
+"their name:"
+msgstr ""
+
+#: src/view/builder.md:25
+msgid "\"my-custom-element\""
+msgstr ""
+
+#: src/view/builder.md:28
+msgid ""
+"You can add children to the element with [`.child()`](https://docs.rs/leptos/"
+"latest/leptos/html/trait.ElementChild.html#tymethod.child), which takes a "
+"single child or a tuple or array of types that implement [`IntoView`]"
+"(https://docs.rs/leptos/latest/leptos/trait.IntoView.html)."
+msgstr ""
+
+#: src/view/builder.md:31
+msgid "\"Big, \""
+msgstr ""
+
+#: src/view/builder.md:31
+msgid "\"bold \""
+msgstr ""
+
+#: src/view/builder.md:31
+msgid "\"text\""
+msgstr ""
+
+#: src/view/builder.md:34
+msgid ""
+"Attributes are added with [`.attr()`](https://docs.rs/leptos/latest/leptos/"
+"attr/custom/trait.CustomAttribute.html#method.attr). This can take any of "
+"the same types that you could pass as an attribute into the view macro "
+"(types that implement [`Attribute`](https://docs.rs/leptos/latest/leptos/"
+"attr/trait.Attribute.html))."
+msgstr ""
+
+#: src/view/builder.md:37
+msgid "\"id\""
+msgstr ""
+
+#: src/view/builder.md:37 src/view/builder.md:44
+msgid "\"foo\""
+msgstr ""
+
+#: src/view/builder.md:38 src/view/builder.md:45
+msgid "\"data-count\""
+msgstr ""
+
+#: src/view/builder.md:41
+msgid ""
+"They can also be added with attribute methods, which are available for any "
+"built-in HTML attribute name:"
+msgstr ""
+
+#: src/view/builder.md:48
+msgid ""
+"Similarly, the `class:`, `prop:`, and `style:` syntaxes map directly onto [`."
+"class()`](https://docs.rs/leptos/latest/leptos/attr/global/trait."
+"ClassAttribute.html#tymethod.class), [`.prop()`](https://docs.rs/leptos/"
+"latest/leptos/attr/global/trait.PropAttribute.html#tymethod.prop), and [`."
+"style()`](https://docs.rs/leptos/latest/leptos/attr/global/trait."
+"StyleAttribute.html#tymethod.style) methods."
+msgstr ""
+
+#: src/view/builder.md:50
+msgid ""
+"Event listeners can be added with [`.on()`](https://docs.rs/leptos/latest/"
+"leptos/attr/global/trait.OnAttribute.html#tymethod.on). Typed events found "
+"in [`leptos::ev`](https://docs.rs/leptos/latest/leptos/tachys/html/event/"
+"index.html) prevent typos in event names and allow for correct type "
+"inference in the callback function."
+msgstr ""
+
+#: src/view/builder.md:55 src/view/builder.md:71
+msgid "\"Clear\""
+msgstr ""
+
+#: src/view/builder.md:58
+msgid ""
+"All of this adds up to a very Rusty syntax to build full-featured views, if "
+"you prefer this style."
+msgstr ""
+
+#: src/view/builder.md:61
+msgid ""
+"/// A simple counter view.\n"
+"// A component is really just a function call: it runs once to create the "
+"DOM and reactive system\n"
+msgstr ""
+
+#: src/view/builder.md:67
+msgid ""
+"// typed events found in leptos::ev\n"
+"            // 1) prevent typos in event names\n"
+"            // 2) allow for correct type inference in callbacks\n"
+msgstr ""
+
+#: src/view/builder.md:74
+msgid "\"-1\""
+msgstr ""
+
+#: src/view/builder.md:75
+msgid "\"Value: \""
+msgstr ""
+
+#: src/view/builder.md:75
+msgid "\"!\""
+msgstr ""
+
+#: src/view/builder.md:78
+msgid "\"+1\""
+msgstr ""
+
+#: src/view/builder.md:83
+msgid "Using Components with the Builder Syntax"
+msgstr ""
+
+#: src/view/builder.md:85
+msgid ""
+"To create your own components with the builder syntax, you can simply use "
+"plain functions (see above). To use other components (for example, the built-"
+"in `For` or `Show` control-flow components), you can take advantage of the "
+"fact that each component is a function of one component props argument, and "
+"component props have their own builder."
+msgstr ""
+
+#: src/view/builder.md:87
+msgid "You can either use the component props builder:"
+msgstr ""
+
+#: src/view/builder.md:96 src/view/builder.md:111
+msgid "\"I will appear if `value` is 5 or lower\""
+msgstr ""
+
+#: src/view/builder.md:98 src/view/builder.md:112
+msgid "\"I will appear if `value` is above 5\""
+msgstr ""
+
+#: src/view/builder.md:103
+msgid "or you can directly build the props struct:"
+msgstr ""
+
+#: src/view/builder.md:115
+msgid ""
+"Using the component builder correctly applies the various modifiers like "
+"`#[prop(into)]`; using the struct syntax, we’ve applied this manually by "
+"calling `.into()` ourselves."
+msgstr ""
+
+#: src/view/builder.md:117
+msgid "Expanding Macros"
+msgstr ""
+
+#: src/view/builder.md:119
+msgid ""
+"Not every feature of the `view` macro or `component` macro syntax has been "
+"described here in detail. However, Rust provides you the tools you need to "
+"understand what is going on with any macro. Specifically, rust-analyzer’s "
+"[\"expand macro recursively\" feature](https://rust-analyzer.github.io/book/"
+"features.html#expand-macro-recursively) allows you to expand any macro to "
+"show the code it generates, and [`cargo-expand`](https://crates.io/crates/"
+"cargo-expand) expands all the macros in a project into regular Rust code. "
+"The rest of this book will continue using the `view` macro syntax, but if "
+"you’re ever unsure how to translate this into the builder syntax, you can "
+"use these tools to explore the code that is generated."
+msgstr ""

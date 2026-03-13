@@ -1,0 +1,409 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/reactivity/14_create_effect.md:1
+msgid "Responding to Changes with Effects"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:3
+msgid ""
+"We’ve made it this far without having mentioned half of the reactive system: "
+"effects."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:5
+msgid ""
+"Reactivity works in two halves: updating individual reactive values "
+"(“signals”) notifies the pieces of code that depend on them (“effects”) that "
+"they need to run again. These two halves of the reactive system are inter-"
+"dependent. Without effects, signals can change within the reactive system "
+"but never be observed in a way that interacts with the outside world. "
+"Without signals, effects run once but never again, as there’s no observable "
+"value to subscribe to. Effects are quite literally “side effects” of the "
+"reactive system: they exist to synchronize the reactive system with the non-"
+"reactive world outside it."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:7
+msgid ""
+"The renderer uses effects to update parts of the DOM in response to changes "
+"in signals. You can create your own effects to synchronize the reactive "
+"system with the outside world in other ways."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:9
+msgid ""
+"[`Effect::new`](https://docs.rs/leptos/latest/leptos/reactive/effect/struct."
+"Effect.html) takes a function as its argument. It runs this function on the "
+"next “tick” of the reactive system. (So for example, if you use it in a "
+"component, it will run just _after_ that component has been rendered.) If "
+"you access any reactive signal inside that function, it registers the fact "
+"that the effect depends on that signal. Whenever one of the signals that the "
+"effect depends on changes, the effect runs again."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:16
+msgid "// immediately prints \"Value: 0\" and subscribes to `a`\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:17
+msgid "\"Value: {}\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:21
+msgid ""
+"The effect function is called with an argument containing whatever value it "
+"returned the last time it ran. On the initial run, this is `None`."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:23
+msgid ""
+"By default, effects **do not run on the server**. This means you can call "
+"browser-specific APIs within the effect function without causing issues. If "
+"you need an effect to run on the server, use [`Effect::new_isomorphic`]"
+"(https://docs.rs/leptos/latest/leptos/reactive/effect/struct.Effect."
+"html#method.new_isomorphic)."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:25
+msgid "Auto-tracking and Dynamic Dependencies"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:27
+msgid ""
+"If you’re familiar with a framework like React, you might notice one key "
+"difference. React and similar frameworks typically require you to pass a "
+"“dependency array,” an explicit set of variables that determine when the "
+"effect should rerun."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:29
+msgid ""
+"Because Leptos comes from the tradition of synchronous reactive programming, "
+"we don’t need this explicit dependency list. Instead, we automatically track "
+"dependencies depending on which signals are accessed within the effect."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:31
+msgid "This has two effects (no pun intended). Dependencies are:"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:33
+msgid ""
+"**Automatic**: You don’t need to maintain a dependency list, or worry about "
+"what should or shouldn’t be included. The framework simply tracks which "
+"signals might cause the effect to rerun, and handles it for you."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:34
+msgid ""
+"**Dynamic**: The dependency list is cleared and updated every time the "
+"effect runs. If your effect contains a conditional (for example), only "
+"signals that are used in the current branch are tracked. This means that "
+"effects rerun the absolute minimum number of times."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:36
+msgid ""
+"If this sounds like magic, and if you want a deep dive into how automatic "
+"dependency tracking works, [check out this video](https://www.youtube.com/"
+"watch?v=GWB3vTWeLd4). (Apologies for the low volume!)"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:38
+msgid "Effects as Zero-Cost-ish Abstraction"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:40
+msgid ""
+"While they’re not a “zero-cost abstraction” in the most technical sense—they "
+"require some additional memory use, exist at runtime, etc.—at a higher "
+"level, from the perspective of whatever expensive API calls or other work "
+"you’re doing within them, effects are a zero-cost abstraction. They rerun "
+"the absolute minimum number of times necessary, given how you’ve described "
+"them."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:42
+msgid ""
+"Imagine that I’m creating some kind of chat software, and I want people to "
+"be able to display their full name, or just their first name, and to notify "
+"the server whenever their name changes:"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:48
+msgid ""
+"// this will add the name to the log\n"
+"// any time one of the source signals changes\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:53
+msgid "\"{}\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:54 src/reactivity/14_create_effect.md:259
+msgid "\"{} {}\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:62
+msgid ""
+"If `use_last` is `true`, effect should rerun whenever `first`, `last`, or "
+"`use_last` changes. But if I toggle `use_last` to `false`, a change in "
+"`last` will never cause the full name to change. In fact, `last` will be "
+"removed from the dependency list until `use_last` toggles again. This saves "
+"us from sending multiple unnecessary requests to the API if I change `last` "
+"multiple times while `use_last` is still `false`."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:64
+msgid "To create an effect, or not to create an effect?"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:66
+msgid ""
+"Effects are intended to synchronize the reactive system with the non-"
+"reactive world outside, not to synchronize between different reactive "
+"values. In other words: using an effect to read a value from one signal and "
+"set it in another is always sub-optimal."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:68
+msgid ""
+"If you need to define a signal that depends on the value of other signals, "
+"use a derived signal or a [`Memo`](https://docs.rs/leptos/latest/leptos/"
+"reactive/computed/struct.Memo.html). Writing to a signal inside an effect "
+"isn’t the end of the world, and it won’t cause your computer to light on "
+"fire, but a derived signal or memo is always better—not only because the "
+"dataflow is clear, but because the performance is better."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:72
+msgid "// ⚠️ not great\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:78
+msgid "// ✅ woo-hoo!\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:83
+msgid ""
+"If you need to synchronize some reactive value with the non-reactive world "
+"outside—like a web API, the console, the filesystem, or the DOM—writing to a "
+"signal in an effect is a fine way to do that. In many cases, though, you’ll "
+"find that you’re really writing to a signal inside an event listener or "
+"something else, not inside an effect. In these cases, you should check out "
+"[`leptos-use`](https://leptos-use.rs/) to see if it already provides a "
+"reactive wrapping primitive to do that!"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:85
+msgid ""
+"If you’re curious for more information about when you should and shouldn’t "
+"use `create_effect`, [check out this video](https://www.youtube.com/watch?"
+"v=aQOFJQ2JkvQ) for a more in-depth consideration!"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:87
+msgid "Effects and Rendering"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:89
+msgid ""
+"We’ve managed to get this far without mentioning effects because they’re "
+"built into the Leptos DOM renderer. We’ve seen that you can create a signal "
+"and pass it into the `view` macro, and it will update the relevant DOM node "
+"whenever the signal changes:"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:99
+msgid ""
+"This works because the framework essentially creates an effect wrapping this "
+"update. You can imagine Leptos translating this view into something like "
+"this:"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:103
+msgid "// create a DOM element\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:106
+msgid "\"p\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:107
+msgid "// create an effect to reactively update the text\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:110
+msgid "// first, access the signal’s value and convert it to a string\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:113
+msgid "// if this is different from the previous value, update the node\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:118
+msgid "// return this value so we can memoize the next update\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:123
+msgid ""
+"Every time `count` is updated, this effect will rerun. This is what allows "
+"reactive, fine-grained updates to the DOM."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:125
+msgid "Explicit Tracking with `Effect::watch()`"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:127
+msgid ""
+"In addition to `Effect::new()`, Leptos provides an [`Effect::watch()`]"
+"(https://docs.rs/leptos/latest/leptos/reactive/effect/struct.Effect."
+"html#method.watch) function, which can be used to separate tracking and "
+"responding to changes by explicitly passing in a set of values to track."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:129
+msgid ""
+"`watch` takes three arguments. The `dependency_fn` argument is reactively "
+"tracked while `handler` and `immediate` are not. Whenever `dependency_fn` is "
+"changed, `handler` is run. If `immediate` is false, the `handler` will run "
+"only after the first change is detected of any signal that is accessed in "
+"`dependency_fn`. `watch` returns an `Effect`, which can be called with `."
+"stop()` to stop tracking the dependencies."
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:137
+msgid "\"Number: {}; Prev: {:?}\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:142
+msgid "// > \"Number: 1; Prev: Some(0)\"\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:144
+msgid "// stop watching\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:146
+msgid "// (nothing happens)\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:149
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/14-effect-0-7-"
+"fxpy2d?file=%2Fsrc%2Fmain.rs%3A21%2C28&workspaceId=478437f3-1f86-4b1e-"
+"b665-5c27a31451fb)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/14-effect-0-7-fxpy2d?"
+"file=%2Fsrc%2Fmain.rs%3A21%2C28&workspaceId=478437f3-1f86-4b1e-"
+"b665-5c27a31451fb\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:175
+msgid ""
+"// Just making a visible log here\n"
+"    // You can ignore this...\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:178
+msgid "\"\\n\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:180
+msgid ""
+"// the newtype pattern isn't *necessary* here but is a good practice\n"
+"    // it avoids confusion with other possible future "
+"`RwSignal<Vec<String>>` contexts\n"
+"    // and makes it easier to refer to it\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:197
+msgid ""
+"// this will add the name to the log\n"
+"    // any time one of the source signals changes\n"
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:203
+msgid "\"{first} {last}\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:211
+msgid "\"create_effect\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:212
+msgid "\" Version\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:216
+#: src/reactivity/14_create_effect.md:273
+msgid "\"First Name\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:218
+#: src/reactivity/14_create_effect.md:227
+#: src/reactivity/14_create_effect.md:273
+#: src/reactivity/14_create_effect.md:274
+msgid "\"text\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:219
+#: src/reactivity/14_create_effect.md:273
+msgid "\"first\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:225
+#: src/reactivity/14_create_effect.md:274
+msgid "\"Last Name\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:228
+#: src/reactivity/14_create_effect.md:274
+msgid "\"last\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:234
+#: src/reactivity/14_create_effect.md:276
+msgid "\"Show Last Name\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:236
+#: src/reactivity/14_create_effect.md:276
+msgid "\"checkbox\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:237
+#: src/reactivity/14_create_effect.md:276
+msgid "\"use_last\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:254
+msgid "\"      listener\""
+msgstr ""
+
+#: src/reactivity/14_create_effect.md:271
+msgid "\"Manual Version\""
+msgstr ""

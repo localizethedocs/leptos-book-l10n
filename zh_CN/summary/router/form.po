@@ -1,0 +1,282 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/router/20_form.md:1
+msgid "The `<Form/>` Component"
+msgstr ""
+
+#: src/router/20_form.md:3
+msgid ""
+"Links and forms sometimes seem completely unrelated. But, in fact, they work "
+"in very similar ways."
+msgstr ""
+
+#: src/router/20_form.md:5
+msgid "In plain HTML, there are three ways to navigate to another page:"
+msgstr ""
+
+#: src/router/20_form.md:7
+msgid ""
+"An `<a>` element that links to another page: Navigates to the URL in its "
+"`href` attribute with the `GET` HTTP method."
+msgstr ""
+
+#: src/router/20_form.md:8
+msgid ""
+"A `<form method=\"GET\">`: Navigates to the URL in its `action` attribute "
+"with the `GET` HTTP method and the form data from its inputs encoded in the "
+"URL query string."
+msgstr ""
+
+#: src/router/20_form.md:9
+msgid ""
+"A `<form method=\"POST\">`: Navigates to the URL in its `action` attribute "
+"with the `POST` HTTP method and the form data from its inputs encoded in the "
+"body of the request."
+msgstr ""
+
+#: src/router/20_form.md:11
+msgid ""
+"Since we have a client-side router, we can do client-side link navigations "
+"without reloading the page, i.e., without a full round-trip to the server "
+"and back. It makes sense that we can do client-side form navigations in the "
+"same way."
+msgstr ""
+
+#: src/router/20_form.md:13
+msgid ""
+"The router provides a [`<Form>`](https://docs.rs/leptos_router/latest/"
+"leptos_router/components/fn.Form.html) component, which works like the HTML "
+"`<form>` element, but uses client-side navigations instead of full page "
+"reloads. `<Form/>` works with both `GET` and `POST` requests. With "
+"`method=\"GET\"`, it will navigate to the URL encoded in the form data. With "
+"`method=\"POST\"` it will make a `POST` request and handle the server’s "
+"response."
+msgstr ""
+
+#: src/router/20_form.md:15
+msgid ""
+"`<Form/>` provides the basis for some components like `<ActionForm/>` and "
+"`<MultiActionForm/>` that we’ll see in later chapters. But it also enables "
+"some powerful patterns of its own."
+msgstr ""
+
+#: src/router/20_form.md:17
+msgid ""
+"For example, imagine that you want to create a search field that updates "
+"search results in real time as the user searches, without a page reload, but "
+"that also stores the search in the URL so a user can copy and paste it to "
+"share results with someone else."
+msgstr ""
+
+#: src/router/20_form.md:19
+msgid ""
+"It turns out that the patterns we’ve learned so far make this easy to "
+"implement."
+msgstr ""
+
+#: src/router/20_form.md:23
+msgid "// some async function to fetch our search results\n"
+msgstr ""
+
+#: src/router/20_form.md:28
+msgid "// reactive access to URL query strings\n"
+msgstr ""
+
+#: src/router/20_form.md:30
+msgid "// search stored as ?q=\n"
+msgstr ""
+
+#: src/router/20_form.md:31 src/router/20_form.md:37 src/router/20_form.md:57
+msgid "\"q\""
+msgstr ""
+
+#: src/router/20_form.md:32
+msgid "// a resource driven by the search string\n"
+msgstr ""
+
+#: src/router/20_form.md:36 src/router/20_form.md:56 src/router/20_form.md:129
+#: src/router/20_form.md:152
+msgid "\"GET\""
+msgstr ""
+
+#: src/router/20_form.md:36 src/router/20_form.md:56 src/router/20_form.md:96
+#: src/router/20_form.md:129 src/router/20_form.md:152
+msgid "\"\""
+msgstr ""
+
+#: src/router/20_form.md:37 src/router/20_form.md:57
+msgid "\"search\""
+msgstr ""
+
+#: src/router/20_form.md:38 src/router/20_form.md:147 src/router/20_form.md:182
+msgid "\"submit\""
+msgstr ""
+
+#: src/router/20_form.md:41
+msgid "/* render search results */"
+msgstr ""
+
+#: src/router/20_form.md:48
+msgid ""
+"Whenever you click `Submit`, the `<Form/>` will “navigate” to `?q={search}`. "
+"But because this navigation is done on the client side, there’s no page "
+"flicker or reload. The URL query string changes, which triggers `search` to "
+"update. Because `search` is the source signal for the `search_results` "
+"resource, this triggers `search_results` to reload its resource. The "
+"`<Transition/>` continues displaying the current search results until the "
+"new ones have loaded. When they are complete, it switches to displaying the "
+"new result."
+msgstr ""
+
+#: src/router/20_form.md:50
+msgid ""
+"This is a great pattern. The data flow is extremely clear: all data flows "
+"from the URL to the resource into the UI. The current state of the "
+"application is stored in the URL, which means you can refresh the page or "
+"text the link to a friend and it will show exactly what you’re expecting. "
+"And once we introduce server rendering, this pattern will prove to be really "
+"fault-tolerant, too: because it uses a `<form>` element and URLs under the "
+"hood, it actually works really well without even loading your WASM on the "
+"client."
+msgstr ""
+
+#: src/router/20_form.md:52
+msgid "We can actually take it a step further and do something kind of clever:"
+msgstr ""
+
+#: src/router/20_form.md:58 src/router/20_form.md:159 src/router/20_form.md:165
+#: src/router/20_form.md:168
+msgid "\"this.form.requestSubmit()\""
+msgstr ""
+
+#: src/router/20_form.md:64
+msgid ""
+"You’ll notice that this version drops the `Submit` button. Instead, we add "
+"an `oninput` attribute to the input. Note that this is _not_ `on:input`, "
+"which would listen for the `input` event and run some Rust code. Without the "
+"colon, `oninput` is the plain HTML attribute. So the string is actually a "
+"JavaScript string. `this.form` gives us the form the input is attached to. "
+"`requestSubmit()` fires the `submit` event on the `<form>`, which is caught "
+"by `<Form/>` just as if we had clicked a `Submit` button. Now the form will "
+"“navigate” on every keystroke or input to keep the URL (and therefore the "
+"search) perfectly in sync with the user’s input as they type."
+msgstr ""
+
+#: src/router/20_form.md:66
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/20-form-0-7-"
+"m73jsz)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/20-form-0-7-m73jsz\" "
+"width=\"100%\" height=\"1000px\" style=\"max-height: 100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/router/20_form.md:93
+msgid "\"<Form/>\""
+msgstr ""
+
+#: src/router/20_form.md:95
+msgid "\"Not found.\""
+msgstr ""
+
+#: src/router/20_form.md:105
+msgid "// reactive access to URL query\n"
+msgstr ""
+
+#: src/router/20_form.md:107 src/router/20_form.md:115
+#: src/router/20_form.md:131 src/router/20_form.md:155
+msgid "\"name\""
+msgstr ""
+
+#: src/router/20_form.md:108 src/router/20_form.md:119
+#: src/router/20_form.md:132 src/router/20_form.md:162
+#: src/router/20_form.md:163
+msgid "\"number\""
+msgstr ""
+
+#: src/router/20_form.md:109 src/router/20_form.md:123
+#: src/router/20_form.md:133 src/router/20_form.md:167
+msgid "\"select\""
+msgstr ""
+
+#: src/router/20_form.md:112
+msgid "// read out the URL query strings\n"
+msgstr ""
+
+#: src/router/20_form.md:127
+msgid "// <Form/> will navigate whenever submitted\n"
+msgstr ""
+
+#: src/router/20_form.md:128
+msgid "\"Manual Submission\""
+msgstr ""
+
+#: src/router/20_form.md:130
+msgid "// input names determine query string key\n"
+msgstr ""
+
+#: src/router/20_form.md:131 src/router/20_form.md:154
+msgid "\"text\""
+msgstr ""
+
+#: src/router/20_form.md:134
+msgid "// `selected` will set which starts as selected\n"
+msgstr ""
+
+#: src/router/20_form.md:135 src/router/20_form.md:136
+#: src/router/20_form.md:170 src/router/20_form.md:171
+msgid "\"A\""
+msgstr ""
+
+#: src/router/20_form.md:138 src/router/20_form.md:139
+#: src/router/20_form.md:173 src/router/20_form.md:174
+msgid "\"B\""
+msgstr ""
+
+#: src/router/20_form.md:141 src/router/20_form.md:142
+#: src/router/20_form.md:176 src/router/20_form.md:177
+msgid "\"C\""
+msgstr ""
+
+#: src/router/20_form.md:145 src/router/20_form.md:180
+msgid ""
+"// submitting should cause a client-side\n"
+"            // navigation, not a full reload\n"
+msgstr ""
+
+#: src/router/20_form.md:149
+msgid ""
+"// This <Form/> uses some JavaScript to submit\n"
+"        // on every input\n"
+msgstr ""
+
+#: src/router/20_form.md:151
+msgid "\"Automatic Submission\""
+msgstr ""
+
+#: src/router/20_form.md:157
+msgid ""
+"// this oninput attribute will cause the\n"
+"                // form to submit on every input to the field\n"
+msgstr ""

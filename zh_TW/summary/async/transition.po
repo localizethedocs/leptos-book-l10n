@@ -1,0 +1,122 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/async/12_transition.md:1
+msgid "`<Transition/>`"
+msgstr ""
+
+#: src/async/12_transition.md:3
+msgid ""
+"You’ll notice in the `<Suspense/>` example that if you keep reloading the "
+"data, it keeps flickering back to `\"Loading...\"`. Sometimes this is fine. "
+"For other times, there’s [`<Transition/>`](https://docs.rs/leptos/latest/"
+"leptos/suspense/fn.Transition.html)."
+msgstr ""
+
+#: src/async/12_transition.md:5
+msgid ""
+"`<Transition/>` behaves exactly the same as `<Suspense/>`, but instead of "
+"falling back every time, it only shows the fallback the first time. On all "
+"subsequent loads, it continues showing the old data until the new data are "
+"ready. This can be really handy to prevent the flickering effect, and to "
+"allow users to continue interacting with your application."
+msgstr ""
+
+#: src/async/12_transition.md:7
+msgid ""
+"This example shows how you can create a simple tabbed contact list with "
+"`<Transition/>`. When you select a new tab, it continues showing the current "
+"contact until the new data loads. This can be a much better user experience "
+"than constantly falling back to a loading message."
+msgstr ""
+
+#: src/async/12_transition.md:9
+msgid ""
+"```admonish sandbox title=\"Live example\" collapsible=true\n"
+"\n"
+"[Click to open CodeSandbox.](https://codesandbox.io/p/devbox/12-"
+"transition-0-7-ln2hgd?file=%2Fsrc%2Fmain."
+"rs%3A1%2C1-69%2C1&workspaceId=478437f3-1f86-4b1e-b665-5c27a31451fb)\n"
+"\n"
+"<noscript>\n"
+"  Please enable JavaScript to view examples.\n"
+"</noscript>\n"
+"\n"
+"<template>\n"
+"  <iframe src=\"https://codesandbox.io/p/devbox/12-transition-0-7-ln2hgd?"
+"file=%2Fsrc%2Fmain.rs%3A1%2C1-69%2C1&workspaceId=478437f3-1f86-4b1e-"
+"b665-5c27a31451fb\" width=\"100%\" height=\"1000px\" style=\"max-height: "
+"100vh\"></iframe>\n"
+"</template>\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/async/12_transition.md:33
+msgid "\"Alice\""
+msgstr ""
+
+#: src/async/12_transition.md:34
+msgid "\"Bob\""
+msgstr ""
+
+#: src/async/12_transition.md:35
+msgid "\"Carol\""
+msgstr ""
+
+#: src/async/12_transition.md:36
+msgid "\"User not found\""
+msgstr ""
+
+#: src/async/12_transition.md:46
+msgid "// this will reload every time `tab` changes\n"
+msgstr ""
+
+#: src/async/12_transition.md:50
+msgid "\"buttons\""
+msgstr ""
+
+#: src/async/12_transition.md:55
+msgid "\"Tab A\""
+msgstr ""
+
+#: src/async/12_transition.md:61
+msgid "\"Tab B\""
+msgstr ""
+
+#: src/async/12_transition.md:67
+msgid "\"Tab C\""
+msgstr ""
+
+#: src/async/12_transition.md:72
+msgid "\"Hang on...\""
+msgstr ""
+
+#: src/async/12_transition.md:74
+msgid "\"Ready.\""
+msgstr ""
+
+#: src/async/12_transition.md:78
+msgid ""
+"// the fallback will show initially\n"
+"            // on subsequent reloads, the current child will\n"
+"            // continue showing\n"
+msgstr ""
+
+#: src/async/12_transition.md:81
+msgid "\"Loading initial data...\""
+msgstr ""
+
+#: src/async/12_transition.md:82
+msgid "// this will be set to `true` whenever the transition is ongoing\n"
+msgstr ""

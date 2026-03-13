@@ -1,0 +1,465 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/appendix_life_cycle.md:1
+msgid "Appendix: The Life Cycle of a Signal"
+msgstr ""
+
+#: src/appendix_life_cycle.md:3
+msgid ""
+"Three questions commonly arise at the intermediate level when using Leptos:"
+msgstr ""
+
+#: src/appendix_life_cycle.md:4
+msgid ""
+"How can I connect to the component lifecycle, running some code when a "
+"component mounts or unmounts?"
+msgstr ""
+
+#: src/appendix_life_cycle.md:5
+msgid ""
+"How do I know when signals are disposed, and why do I get an occasional "
+"panic when trying to access a disposed signal?"
+msgstr ""
+
+#: src/appendix_life_cycle.md:6
+msgid ""
+"How is it possible that signals are `Copy` and can be moved into closures "
+"and other structures without being explicitly cloned?"
+msgstr ""
+
+#: src/appendix_life_cycle.md:8
+msgid ""
+"The answers to these three questions are closely inter-related, and are each "
+"somewhat complicated. This appendix will try to give you the context for "
+"understanding the answers, so that you can reason correctly about your "
+"application's code and how it runs."
+msgstr ""
+
+#: src/appendix_life_cycle.md:10
+msgid "The Component Tree vs. The Decision Tree"
+msgstr ""
+
+#: src/appendix_life_cycle.md:12
+msgid "Consider the following simple Leptos app:"
+msgstr ""
+
+#: src/appendix_life_cycle.md:23
+msgid "\"+1\""
+msgstr ""
+
+#: src/appendix_life_cycle.md:25
+msgid "\"Even numbers are fine.\""
+msgstr ""
+
+#: src/appendix_life_cycle.md:35 src/appendix_life_cycle.md:107
+msgid "\"count is odd and is {}\""
+msgstr ""
+
+#: src/appendix_life_cycle.md:47
+msgid "\"You're an odd duck.\""
+msgstr ""
+
+#: src/appendix_life_cycle.md:52
+msgid ""
+"All it does is show a counter button, and then one message if it's even, and "
+"a different message if it's odd. If it's odd, it also logs the values in the "
+"console."
+msgstr ""
+
+#: src/appendix_life_cycle.md:54
+msgid ""
+"One way to map out this simple application would be to draw a tree of nested "
+"components:"
+msgstr ""
+
+#: src/appendix_life_cycle.md:61
+msgid "Another way would be to draw the tree of decision points:"
+msgstr ""
+
+#: src/appendix_life_cycle.md:69
+msgid ""
+"If you combine the two together, you'll notice that they don't map onto one "
+"another perfectly. The decision tree slices the view we created in "
+"`InnerComponent` into three pieces, and combines part of `InnerComponent` "
+"with the `OddDuck` component:"
+msgstr ""
+
+#: src/appendix_life_cycle.md:80
+msgid "Looking at this table, I notice the following things:"
+msgstr ""
+
+#: src/appendix_life_cycle.md:81
+msgid ""
+"The component tree and the decision tree don't match one another: the \"is "
+"count even?\" decision splits `<InnerComponent/>` into three parts (one that "
+"never changes, one if even, one if odd), and merges one of these with the "
+"`<OddDuck/>` component."
+msgstr ""
+
+#: src/appendix_life_cycle.md:82
+msgid ""
+"The decision tree and the list of side effects correspond perfectly: each "
+"side effect is created at a specific decision point."
+msgstr ""
+
+#: src/appendix_life_cycle.md:83
+msgid ""
+"The decision tree and the tree of data also line up. It's hard to see with "
+"only one signal in the table, but unlike a component, which is a function "
+"that can include multiple decisions or none, a signal is always created at a "
+"specific line in the tree of decisions."
+msgstr ""
+
+#: src/appendix_life_cycle.md:85
+msgid ""
+"Here's the thing: The structure of your data and the structure of side "
+"effects affect the actual functionality of your application. The structure "
+"of your components is just a convenience of authoring. You don't care, and "
+"you shouldn't care, which component rendered which `<p>` tag, or which "
+"component created the effect to log the values. All that matters is that "
+"they happen at the right times."
+msgstr ""
+
+#: src/appendix_life_cycle.md:87
+msgid ""
+"In Leptos, _components do not exist._ That is to say: You can write your "
+"application as a tree of components, because that's convenient, and we "
+"provide some debugging tools and logging built around components, because "
+"that's convenient too. But your components do not exist at runtime: "
+"Components are not a unit of change detection or of rendering. They are "
+"simply function calls. You can write your whole application in one big "
+"component, or split it into a hundred components, and it does not affect the "
+"runtime behavior, because components don't really exist."
+msgstr ""
+
+#: src/appendix_life_cycle.md:89
+msgid ""
+"The decision tree, on the other hand, _does exist_. And it's really "
+"important!"
+msgstr ""
+
+#: src/appendix_life_cycle.md:91
+msgid "The Decision Tree, Rendering, and Ownership"
+msgstr ""
+
+#: src/appendix_life_cycle.md:93
+msgid ""
+"Every decision point is some kind of reactive statement: a signal or a "
+"function that can change over time. When you pass a signal or a function "
+"into the renderer, it automatically wraps it in an effect that subscribes to "
+"any signals it contains, and updates the view accordingly over time."
+msgstr ""
+
+#: src/appendix_life_cycle.md:95
+msgid ""
+"This means that when your application is rendered, it creates a tree of "
+"nested effects that perfectly mirrors the decision tree. In pseudo-code:"
+msgstr ""
+
+#: src/appendix_life_cycle.md:97
+msgid "// root\n"
+msgstr ""
+
+#: src/appendix_life_cycle.md:98
+msgid "/* render the <button> once */"
+msgstr ""
+
+#: src/appendix_life_cycle.md:99
+msgid "// the renderer wraps an effect around the `move || if count() ...`\n"
+msgstr ""
+
+#: src/appendix_life_cycle.md:103
+msgid "/* render the even <p> */"
+msgstr ""
+
+#: src/appendix_life_cycle.md:105
+msgid "// the user created an effect to log the count\n"
+msgstr ""
+
+#: src/appendix_life_cycle.md:110
+msgid "/* render the <p> from OddDuck */"
+msgstr ""
+
+#: src/appendix_life_cycle.md:111
+msgid "/* render the second <p> */"
+msgstr ""
+
+#: src/appendix_life_cycle.md:113
+msgid "// the renderer creates an effect to update the second <p>\n"
+msgstr ""
+
+#: src/appendix_life_cycle.md:115
+msgid "// update the content of the <p> with the signal\n"
+msgstr ""
+
+#: src/appendix_life_cycle.md:122
+msgid ""
+"Each reactive value is wrapped in its own effect to update the DOM, or run "
+"any other side effects of changes to signals. But you don't need these "
+"effects to keep running forever. For example, when `count` switches from an "
+"odd number back to an even number, the second `<p>` no longer exists, so the "
+"effect to keep updating it is no longer useful. Instead of running forever, "
+"effects are canceled when the decision that created them changes. In other "
+"words, and more precisely: effects are canceled whenever the effect that was "
+"running when they were created re-runs. If they were created in a "
+"conditional branch, and re-running the effect goes through the same branch, "
+"the effect will be created again: if not, it will not."
+msgstr ""
+
+#: src/appendix_life_cycle.md:124
+msgid ""
+"From the perspective of the reactive system itself, your application's "
+"\"decision tree\" is really a reactive \"ownership tree.\" Simply put, a "
+"reactive \"owner\" is the effect or memo that is currently running. It owns "
+"effects created within it, they own their own children, and so on. When an "
+"effect is going to re-run, it first \"cleans up\" its children, then runs "
+"again."
+msgstr ""
+
+#: src/appendix_life_cycle.md:126
+msgid ""
+"So far, this model is shared with the reactive system as it exists in "
+"JavaScript frameworks like S.js or Solid, in which the concept of ownership "
+"exists to automatically cancel effects."
+msgstr ""
+
+#: src/appendix_life_cycle.md:128
+msgid ""
+"What Leptos adds is that we add a second, similar meaning to ownership: a "
+"reactive owner not only owns its child effects, so that it can cancel them; "
+"it also owns its signals (memos, etc.) so that it can dispose of them."
+msgstr ""
+
+#: src/appendix_life_cycle.md:130
+msgid "Ownership and the `Copy` Arena"
+msgstr ""
+
+#: src/appendix_life_cycle.md:132
+msgid ""
+"This is the innovation that allows Leptos to be usable as a Rust UI "
+"framework. Traditionally, managing UI state in Rust has been hard, because "
+"UI is all about shared mutability. (A simple counter button is enough to see "
+"the problem: You need both immutable access to set the text node showing the "
+"counter's value, and mutable access in the click handler, and every Rust UI "
+"framework is designed around the fact that Rust is designed to prevent "
+"exactly that!) Using something like an event handler in Rust traditionally "
+"relies on primitives for communicating via shared memory with interior "
+"mutability (`Rc<RefCell<_>>`, `Arc<Mutex<_>>`) or for shared memory by "
+"communicating via channels, either of which often requires explicit `."
+"clone()`ing to be moved into an event listener. This is kind of fine, but "
+"also an enormous inconvenience."
+msgstr ""
+
+#: src/appendix_life_cycle.md:134
+msgid ""
+"Leptos has always used a form of arena allocation for signals instead. A "
+"signal itself is essentially an index into a data structure that's held "
+"elsewhere. It's a cheap-to-copy integer type that does not do reference "
+"counting on its own, so it can be copied around, moved into event listeners, "
+"etc. without explicit cloning."
+msgstr ""
+
+#: src/appendix_life_cycle.md:136
+msgid ""
+"Instead of Rust lifetimes or reference counting, the life cycles of these "
+"signals are determined by the ownership tree."
+msgstr ""
+
+#: src/appendix_life_cycle.md:138
+msgid ""
+"Just as all effects belong to an owning parent effect, and the children are "
+"canceled when the owner reruns, so too all signals belong to an owner, and "
+"are disposed of when the parent reruns."
+msgstr ""
+
+#: src/appendix_life_cycle.md:140
+msgid ""
+"In most cases, this is completely fine. Imagine that in our example above, "
+"`<OddDuck/>` created some other signal that it used to update part of its "
+"UI. In most cases, that signal will be used for local state in that "
+"component, or maybe passed down as a prop to another component. It's unusual "
+"for it to be hoisted up out of the decision tree and used somewhere else in "
+"the application. When the `count` switches back to an even number, it is no "
+"longer needed and can be disposed."
+msgstr ""
+
+#: src/appendix_life_cycle.md:142
+msgid "However, this means there are two possible issues that can arise."
+msgstr ""
+
+#: src/appendix_life_cycle.md:144
+msgid "Signals can be used after they are disposed"
+msgstr ""
+
+#: src/appendix_life_cycle.md:146
+msgid ""
+"The `ReadSignal` or `WriteSignal` that you hold is just an integer: say, 3 "
+"if it's the 3rd signal in the application. (As always, the reality is a bit "
+"more complicated, but not much.) You can copy that number all over the place "
+"and use it to say, \"Hey, get me signal 3.\" When the owner cleans up, the "
+"_value_ of signal 3 will be invalidated; but the number 3 that you've copied "
+"all over the place can't be invalidated. (Not without a whole garbage "
+"collector!) That means that if you push signals back \"up\" the decision "
+"tree, and store them somewhere conceptually \"higher\" in your application "
+"than they were created, they can be accessed after being disposed."
+msgstr ""
+
+#: src/appendix_life_cycle.md:148
+msgid ""
+"If you try to _update_ a signal after it was disposed, nothing bad really "
+"happens. The framework will just warn you that you tried to update a signal "
+"that no longer exists. But if you try to _access_ one, there's no coherent "
+"answer other than panicking: there is no value that could be returned. "
+"(There are `try_` equivalents to the `.get()` and `.with()` methods that "
+"will simply return `None` if a signal has been disposed)."
+msgstr ""
+
+#: src/appendix_life_cycle.md:150
+msgid ""
+"Signals can be leaked if you create them in a higher scope and never dispose "
+"of them"
+msgstr ""
+
+#: src/appendix_life_cycle.md:152
+msgid ""
+"The opposite is also true, and comes up particularly when working with "
+"collections of signals, like an `RwSignal<Vec<RwSignal<_>>>`. If you create "
+"a signal at a higher level, and pass it down to a component at a lower "
+"level, it is not disposed until the higher-up owner is cleaned up."
+msgstr ""
+
+#: src/appendix_life_cycle.md:154
+msgid ""
+"For example, if you have a todo app that creates a new `RwSignal<Todo>` for "
+"each todo, stores it in an `RwSignal<Vec<RwSignal<Todo>>>`, and then passes "
+"it down to a `<Todo/>`, that signal is not automatically disposed when you "
+"remove the todo from the list, but must be manually disposed, or it will "
+"\"leak\" for as long as its owner is still alive. (See the [TodoMVC example]"
+"(https://github.com/leptos-rs/leptos/blob/main/examples/todomvc/src/lib."
+"rs#L77-L85) for more discussion.)"
+msgstr ""
+
+#: src/appendix_life_cycle.md:156
+msgid ""
+"This is only an issue when you create signals, store them in a collection, "
+"and remove them from the collection without manually disposing of them as "
+"well."
+msgstr ""
+
+#: src/appendix_life_cycle.md:158
+msgid "Solving these Problems with Reference-Counted Signals"
+msgstr ""
+
+#: src/appendix_life_cycle.md:160
+msgid ""
+"0.7 introduces a reference-counted equivalent for each of our arena-"
+"allocated primitive: for every `RwSignal` there is an `ArcRwSignal` "
+"(`ArcReadSignal`, `ArcWriteSignal`, `ArcMemo`, and so on)."
+msgstr ""
+
+#: src/appendix_life_cycle.md:162
+msgid ""
+"These have their memory and disposal managed by reference counting, rather "
+"than the ownership tree."
+msgstr ""
+
+#: src/appendix_life_cycle.md:164
+msgid ""
+"This means that they can safely be used in situations in which the arena-"
+"allocated equivalents would either be leaked or used after being disposed."
+msgstr ""
+
+#: src/appendix_life_cycle.md:166
+msgid ""
+"This is especially useful when creating collections of signals: you might "
+"create `ArcRwSignal<_>` instead of `RwSignal<_>`, and then convert it into "
+"an `RwSignal<_>` in each row of a table, for example."
+msgstr ""
+
+#: src/appendix_life_cycle.md:168
+msgid ""
+"See the use of `ArcRwSignal<i32>` in the [`counters` example](https://github."
+"com/leptos-rs/leptos/blob/main/examples/counters/src/lib.rs) for a more "
+"concrete example."
+msgstr ""
+
+#: src/appendix_life_cycle.md:170
+msgid "Connecting the Dots"
+msgstr ""
+
+#: src/appendix_life_cycle.md:172
+msgid ""
+"The answers to the questions we started with should probably make some sense "
+"now."
+msgstr ""
+
+#: src/appendix_life_cycle.md:174
+msgid "Component Life-Cycle"
+msgstr ""
+
+#: src/appendix_life_cycle.md:176
+msgid ""
+"There is no component life-cycle, because components don't really exist. But "
+"there is an ownership lifecycle, and you can use it to accomplish the same "
+"things:"
+msgstr ""
+
+#: src/appendix_life_cycle.md:177
+msgid ""
+"_before mount_: simply running code in the body of a component will run it "
+"\"before the component mounts\""
+msgstr ""
+
+#: src/appendix_life_cycle.md:178
+msgid ""
+"_on mount_: `create_effect` runs a tick after the rest of the component, so "
+"it can be useful for effects that need to wait for the view to be mounted to "
+"the DOM."
+msgstr ""
+
+#: src/appendix_life_cycle.md:179
+msgid ""
+"_on unmount_: You can use `on_cleanup` to give the reactive system code that "
+"should run while the current owner is cleaning up, before running again. "
+"Because an owner is around a \"decision,\" this means that `on_cleanup` will "
+"run when your component unmounts: if something can unmount, the renderer "
+"must have created an effect that's unmounting it!"
+msgstr ""
+
+#: src/appendix_life_cycle.md:181
+msgid "Issues with Disposed Signals"
+msgstr ""
+
+#: src/appendix_life_cycle.md:183
+msgid ""
+"Generally speaking, problems can only arise here if you are creating a "
+"signal lower down in the ownership tree and storing it somewhere higher up. "
+"If you run into issues here, you should instead \"hoist\" the signal "
+"creation up into the parent, and then pass the created signals down—making "
+"sure to dispose of them on removal, if needed!"
+msgstr ""
+
+#: src/appendix_life_cycle.md:185
+msgid "`Copy` signals"
+msgstr ""
+
+#: src/appendix_life_cycle.md:187
+msgid ""
+"The whole system of `Copy`able wrapper types (signals, `StoredValue`, and so "
+"on) uses the ownership tree as a close approximation of the life-cycle of "
+"different parts of your UI. In effect, it parallels the Rust language's "
+"system of lifetimes based on blocks of code with a system of lifetimes based "
+"on sections of UI. This can't always be perfectly checked at compile time, "
+"but overall we think it's a net positive."
+msgstr ""

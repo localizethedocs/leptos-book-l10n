@@ -1,0 +1,84 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-03-13T12:31:32Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/router/index.md:1
+msgid "Routing"
+msgstr ""
+
+#: src/router/index.md:3
+msgid "The Basics"
+msgstr ""
+
+#: src/router/index.md:5
+msgid ""
+"Routing drives most websites. A router is the answer to the question, “Given "
+"this URL, what should appear on the page?”"
+msgstr ""
+
+#: src/router/index.md:7
+msgid ""
+"A URL consists of many parts. For example, the URL `https://my-cool-blog.com/"
+"blog/search?q=Search#results` consists of"
+msgstr ""
+
+#: src/router/index.md:9
+msgid "a _scheme_: `https`"
+msgstr ""
+
+#: src/router/index.md:10
+msgid "a _domain_: `my-cool-blog.com`"
+msgstr ""
+
+#: src/router/index.md:11
+msgid "a **path**: `/blog/search`"
+msgstr ""
+
+#: src/router/index.md:12
+msgid "a **query** (or **search**): `?q=Search`"
+msgstr ""
+
+#: src/router/index.md:13
+msgid "a _hash_: `#results`"
+msgstr ""
+
+#: src/router/index.md:15
+msgid ""
+"The Leptos Router works with the path and query (`/blog/search?q=Search`). "
+"Given this piece of the URL, what should the app render on the page?"
+msgstr ""
+
+#: src/router/index.md:17
+msgid "The Philosophy"
+msgstr ""
+
+#: src/router/index.md:19
+msgid ""
+"In most cases, the path should drive what is displayed on the page. From the "
+"user’s perspective, for most applications, most major changes in the state "
+"of the app should be reflected in the URL. If you copy and paste the URL and "
+"open it in another tab, you should find yourself more or less in the same "
+"place."
+msgstr ""
+
+#: src/router/index.md:21
+msgid ""
+"In this sense, the router is really at the heart of the global state "
+"management for your application. More than anything else, it drives what is "
+"displayed on the page."
+msgstr ""
+
+#: src/router/index.md:23
+msgid ""
+"The router handles most of this work for you by mapping the current location "
+"to particular components."
+msgstr ""
