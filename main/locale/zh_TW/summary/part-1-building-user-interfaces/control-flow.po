@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/view/06_control_flow.md:1
 msgid "Control Flow"
-msgstr ""
+msgstr "控制流程"
 
 #: src/view/06_control_flow.md:3
 msgid ""

@@ -39,6 +39,10 @@ msgid ""
 "(JavaScript), Yew (Rust), and Dioxus (Rust), so knowledge of one of those "
 "frameworks may also make it easier to understand Leptos."
 msgstr ""
+"Leptos 與 [Solid](https://www.solidjs.com)（JavaScript）和 [Sycamore]"
+"(https://sycamore-rs.netlify.app/)（Rust）這類框架最為相似。它與其他框架如 "
+"React（JavaScript）、Svelte（JavaScript）、Yew（Rust）和 Dioxus（Rust）也有一"
+"些共通點，因此若您熟悉其中任一框架，可能也會更容易理解 Leptos。"
 
 #: src/01_introduction.md:18
 msgid ""
