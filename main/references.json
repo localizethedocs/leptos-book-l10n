@@ -16,9 +16,9 @@
       "branch" : "main",
       "commit" : 
       {
-        "date" : "2026-03-06 14:03:38 -0500",
-        "hash" : "ff42f3cd45899934b308cbe1d3436448deb9eb70",
-        "title" : "chore: update GitHub actions (#258)"
+        "date" : "2026-03-20 11:25:14 -0400",
+        "hash" : "c5dc513b87585ddce2871621d3f3159e4ae1093f",
+        "title" : "fix: correct typo in explanation of synchronous rendering in 23_ssr_modes (#259)"
       }
     },
     "zh_TW" : 
@@ -26,9 +26,9 @@
       "branch" : "main",
       "commit" : 
       {
-        "date" : "2026-03-06 14:03:38 -0500",
-        "hash" : "ff42f3cd45899934b308cbe1d3436448deb9eb70",
-        "title" : "chore: update GitHub actions (#258)"
+        "date" : "2026-03-20 11:25:14 -0400",
+        "hash" : "c5dc513b87585ddce2871621d3f3159e4ae1093f",
+        "title" : "fix: correct typo in explanation of synchronous rendering in 23_ssr_modes (#259)"
       }
     }
   },
