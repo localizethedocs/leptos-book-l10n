@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-03-24T09:28:32Z\n"
+"POT-Creation-Date: 2026-05-19T11:12:29Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -86,12 +86,12 @@ msgid "VSCode `settings.json`:"
 msgstr ""
 
 #: src/getting_started/leptos_dx.md:34 src/getting_started/leptos_dx.md:45
-#: src/getting_started/leptos_dx.md:119
+#: src/getting_started/leptos_dx.md:123
 msgid "\"rust-analyzer.procMacro.ignored\""
 msgstr ""
 
 #: src/getting_started/leptos_dx.md:35 src/getting_started/leptos_dx.md:46
-#: src/getting_started/leptos_dx.md:120
+#: src/getting_started/leptos_dx.md:105 src/getting_started/leptos_dx.md:124
 msgid "\"leptos_macro\""
 msgstr ""
 
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Neovim:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:62 src/getting_started/leptos_dx.md:142
+#: src/getting_started/leptos_dx.md:62 src/getting_started/leptos_dx.md:146
 msgid "'rust_analyzer'"
 msgstr ""
 
@@ -134,8 +134,8 @@ msgid "-- Other Configs ...\n"
 msgstr ""
 
 #: src/getting_started/leptos_dx.md:65 src/getting_started/leptos_dx.md:101
-#: src/getting_started/leptos_dx.md:144 src/getting_started/leptos_dx.md:168
-#: src/getting_started/leptos_dx.md:184
+#: src/getting_started/leptos_dx.md:148 src/getting_started/leptos_dx.md:172
+#: src/getting_started/leptos_dx.md:188
 msgid "\"rust-analyzer\""
 msgstr ""
 
@@ -169,53 +169,57 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:95 src/getting_started/leptos_dx.md:162
+#: src/getting_started/leptos_dx.md:95 src/getting_started/leptos_dx.md:166
 msgid "Zed, in `settings.json`:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:100 src/getting_started/leptos_dx.md:167
+#: src/getting_started/leptos_dx.md:100 src/getting_started/leptos_dx.md:171
 msgid "\"lsp\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:102
-msgid "\"procMacro\""
+#: src/getting_started/leptos_dx.md:102 src/getting_started/leptos_dx.md:173
+msgid "\"initialization_options\""
 msgstr ""
 
 #: src/getting_started/leptos_dx.md:103
-msgid "\"ignored\""
+msgid "\"procMacro\""
 msgstr ""
 
 #: src/getting_started/leptos_dx.md:104
-msgid ""
-"// optional:\n"
-"          // \"component\",\n"
-"          \"server\""
+msgid "\"ignored\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:114
+#: src/getting_started/leptos_dx.md:106
+msgid ""
+"// Optional:\n"
+"\t\t\t\t// \"component\",\n"
+"\t\t\t\t\"server\""
+msgstr ""
+
+#: src/getting_started/leptos_dx.md:118
 msgid ""
 "SublimeText 3, under `LSP-rust-analyzer.sublime-settings` in `Goto "
 "Anything...` menu:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:117
+#: src/getting_started/leptos_dx.md:121
 msgid ""
 "// Settings in here override those in \"LSP-rust-analyzer/LSP-rust-analyzer."
 "sublime-settings\"\n"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:121
+#: src/getting_started/leptos_dx.md:125
 msgid ""
 "// optional:\n"
 "      // \"component\",\n"
 "      \"server\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:128
+#: src/getting_started/leptos_dx.md:132
 msgid "3) Enable features in Rust-Analyzer for your Editor (optional)"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:129
+#: src/getting_started/leptos_dx.md:133
 msgid ""
 "By default, rust-analyzer will only run against the default features in your "
 "Rust project. Leptos uses different features to control compilation. For "
@@ -224,7 +228,7 @@ msgid ""
 "code that we'll only run in the browser."
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:131
+#: src/getting_started/leptos_dx.md:135
 msgid ""
 "How to enable these features varies by your IDE, we've listed some common "
 "ones below. If your IDE is not listed, you can usually find the setting by "
@@ -232,37 +236,37 @@ msgid ""
 "allFeatures`."
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:133
+#: src/getting_started/leptos_dx.md:137
 msgid "VSCode, in `settings.json`:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:136
+#: src/getting_started/leptos_dx.md:140
 msgid "\"rust-analyzer.cargo.features\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:136 src/getting_started/leptos_dx.md:146
-#: src/getting_started/leptos_dx.md:187
+#: src/getting_started/leptos_dx.md:140 src/getting_started/leptos_dx.md:150
+#: src/getting_started/leptos_dx.md:191
 msgid "\"all\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:136 src/getting_started/leptos_dx.md:171
+#: src/getting_started/leptos_dx.md:140 src/getting_started/leptos_dx.md:175
 msgid "// Enable all features\n"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:140
+#: src/getting_started/leptos_dx.md:144
 msgid "Neovim, in `init.lua`:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:146
+#: src/getting_started/leptos_dx.md:150
 msgid "-- Enable all features\n"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:153
+#: src/getting_started/leptos_dx.md:157
 msgid ""
 "helix, in `.helix/languages.toml` or per project in `.helix/config.toml`:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:154
+#: src/getting_started/leptos_dx.md:158
 msgid ""
 "```toml\n"
 "[[language]]\n"
@@ -273,39 +277,35 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:169
-msgid "\"initialization_options\""
-msgstr ""
-
-#: src/getting_started/leptos_dx.md:170 src/getting_started/leptos_dx.md:186
+#: src/getting_started/leptos_dx.md:174 src/getting_started/leptos_dx.md:190
 msgid "\"cargo\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:171
+#: src/getting_started/leptos_dx.md:175
 msgid "\"allFeatures\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:179
+#: src/getting_started/leptos_dx.md:183
 msgid "SublimeText 3,in the user settings for LSP-rust-analyzer-settings.json"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:182 src/getting_started/leptos_dx.md:185
+#: src/getting_started/leptos_dx.md:186 src/getting_started/leptos_dx.md:189
 msgid "\"settings\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:183
+#: src/getting_started/leptos_dx.md:187
 msgid "\"LSP\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:187
+#: src/getting_started/leptos_dx.md:191
 msgid "\"features\""
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:197
+#: src/getting_started/leptos_dx.md:201
 msgid "4) Set up `leptosfmt` (optional)"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:199
+#: src/getting_started/leptos_dx.md:203
 msgid ""
 "`leptosfmt` is a formatter for the Leptos `view!` macro (inside of which "
 "you'll typically write your UI code). Because the `view!` macro enables an "
@@ -315,28 +315,28 @@ msgid ""
 "looking nice and tidy!"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:201
+#: src/getting_started/leptos_dx.md:205
 msgid ""
 "`leptosfmt` can be installed and used via the command line or from within "
 "your code editor:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:203
+#: src/getting_started/leptos_dx.md:207
 msgid "First, install the tool with `cargo install leptosfmt`."
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:205
+#: src/getting_started/leptos_dx.md:209
 msgid ""
 "If you just want to use the default options from the command line, just run "
 "`leptosfmt ./**/*.rs` from the root of your project to format all the rust "
 "files using `leptosfmt`."
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:207
+#: src/getting_started/leptos_dx.md:211
 msgid "Run automatically in Rust Analyzer IDEs"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:209
+#: src/getting_started/leptos_dx.md:213
 msgid ""
 "If you wish to set up your editor to work with `leptosfmt`, or if you wish "
 "to customize your `leptosfmt` experience, please see the instructions "
@@ -344,17 +344,17 @@ msgid ""
 "com/bram209/leptosfmt)."
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:211
+#: src/getting_started/leptos_dx.md:215
 msgid ""
 "Just note that it's recommended to set up your editor with `leptosfmt` on a "
 "per-workspace basis for best results."
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:213
+#: src/getting_started/leptos_dx.md:217
 msgid "Run automatically in RustRover"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:215
+#: src/getting_started/leptos_dx.md:219
 msgid ""
 "Unfortunately, RustRover does not support Rust Analyzer, so a different "
 "approach is required in order to automatically run `leptosfmt`. One way is "
@@ -362,33 +362,33 @@ msgid ""
 "watchers) plugin with the below configuration:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:219
+#: src/getting_started/leptos_dx.md:223
 msgid "Name: Leptosfmt"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:220
+#: src/getting_started/leptos_dx.md:224
 msgid "File type: Rust files"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:221
+#: src/getting_started/leptos_dx.md:225
 msgid ""
 "Program: `/path/to/leptosfmt` (can simply be `leptosfmt` if it's in your "
 "`$PATH` environment variable)"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:222
+#: src/getting_started/leptos_dx.md:226
 msgid "Arguments: `$FilePath$`"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:223
+#: src/getting_started/leptos_dx.md:227
 msgid "Output paths to refresh: `$FilePath$`"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:226
+#: src/getting_started/leptos_dx.md:230
 msgid "5) Use `--cfg=erase_components` during development"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:228
+#: src/getting_started/leptos_dx.md:232
 msgid ""
 "Leptos 0.7 made a number of changes to the renderer that relied more heavily "
 "on the type system. For larger projects, this can lead to slower compile "
@@ -399,7 +399,7 @@ msgid ""
 "and runtime cost, so it’s best not to use it in release mode.)"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:230
+#: src/getting_started/leptos_dx.md:234
 msgid ""
 "As of cargo-leptos v0.2.40, this is automatically enabled for you in "
 "development mode. If you are using trunk, not using cargo-leptos, or want to "
@@ -408,7 +408,7 @@ msgid ""
 "erase_components\" cargo leptos watch`), or in your `.cargo/config.toml`:"
 msgstr ""
 
-#: src/getting_started/leptos_dx.md:231
+#: src/getting_started/leptos_dx.md:235
 msgid ""
 "```toml\n"
 "# use your own native target\n"

@@ -37,9 +37,9 @@
     "branch" : "main",
     "commit" : 
     {
-      "date" : "2026-03-20 11:25:14 -0400",
-      "hash" : "c5dc513b87585ddce2871621d3f3159e4ae1093f",
-      "title" : "fix: correct typo in explanation of synchronous rendering in 23_ssr_modes (#259)"
+      "date" : "2026-04-19 17:05:01 -0400",
+      "hash" : "a0102d9fbd1a1bb00a77b78fbe1194d55f2db0a8",
+      "title" : "chore: update zed settings for ignoring leptos proc macro (#256)"
     }
   },
   "type" : "branch",
