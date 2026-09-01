@@ -37,9 +37,9 @@
     "branch" : "main",
     "commit" : 
     {
-      "date" : "2026-08-08 10:38:32 -0400",
-      "hash" : "3d65eecabfb0a4bc93d41bb803b67103828f051a",
-      "title" : "Fix: Add `--locked` flag when installing trunk in GettingStarted/Readme.md (#269)"
+      "date" : "2026-08-24 13:33:14 -0400",
+      "hash" : "066b3e4c7d899f30fd828ed57600f12465b20304",
+      "title" : "add some notes about client-side routing with islands"
     }
   },
   "type" : "branch",
