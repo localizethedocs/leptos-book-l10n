@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-03-24T09:28:32Z\n"
+"POT-Creation-Date: 2026-09-01T13:29:24Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -233,7 +233,7 @@ msgid "// Creates a reactive value to update the button\n"
 msgstr ""
 
 #: src/islands.md:100 src/islands.md:116 src/islands.md:148 src/islands.md:235
-#: src/islands.md:315 src/islands.md:455
+#: src/islands.md:315 src/islands.md:469
 msgid "\"Welcome to Leptos!\""
 msgstr ""
 
@@ -419,15 +419,15 @@ msgstr ""
 msgid "// these are the files we’re going to read\n"
 msgstr ""
 
-#: src/islands.md:231 src/islands.md:296 src/islands.md:434
+#: src/islands.md:231 src/islands.md:296 src/islands.md:448
 msgid "\"a.txt\""
 msgstr ""
 
-#: src/islands.md:231 src/islands.md:296 src/islands.md:434
+#: src/islands.md:231 src/islands.md:296 src/islands.md:448
 msgid "\"b.txt\""
 msgstr ""
 
-#: src/islands.md:231 src/islands.md:296 src/islands.md:434
+#: src/islands.md:231 src/islands.md:296 src/islands.md:448
 msgid "\"c.txt\""
 msgstr ""
 
@@ -435,7 +435,7 @@ msgstr ""
 msgid "// the tab labels will just be the file names\n"
 msgstr ""
 
-#: src/islands.md:236 src/islands.md:316 src/islands.md:456
+#: src/islands.md:236 src/islands.md:316 src/islands.md:470
 msgid "\"Click any of the tabs below to read a recipe.\""
 msgstr ""
 
@@ -577,19 +577,19 @@ msgid ""
 "And let’s modify the `Tab` island to use that context to show or hide itself:"
 msgstr ""
 
-#: src/islands.md:372 src/islands.md:495
+#: src/islands.md:372 src/islands.md:509
 msgid "\"lightgreen\""
 msgstr ""
 
-#: src/islands.md:373 src/islands.md:496
+#: src/islands.md:373 src/islands.md:510
 msgid "\"10px\""
 msgstr ""
 
-#: src/islands.md:375 src/islands.md:498
+#: src/islands.md:375 src/islands.md:512
 msgid "\"block\""
 msgstr ""
 
-#: src/islands.md:377 src/islands.md:500
+#: src/islands.md:377 src/islands.md:514
 msgid "\"none\""
 msgstr ""
 
@@ -620,22 +620,60 @@ msgid ""
 msgstr ""
 
 #: src/islands.md:392
-msgid "Overview"
+msgid "Replacing the Client-Side Router"
 msgstr ""
 
 #: src/islands.md:394
+msgid ""
+"One of the main purposes of using islands is to keep routing out of the "
+"client. Once you have a client-side router, you need to be able to render "
+"every page on the client. Using islands, you can minimize the amount of code "
+"shipped to the browser; but in exchange, you lose access to the conveniences "
+"of client-side routing."
+msgstr ""
+
+#: src/islands.md:396
+msgid ""
+"There is an \"islands router\" mode that combines client-side routing with "
+"islands, by using a small amount of JavaScript on the frontend to fetch new "
+"server-rendered pages and diff them in an efficient way. You can read more "
+"about it in [the `islands_router` example](https://github.com/leptos-rs/"
+"leptos/tree/main/examples/islands_router). It works pretty well, and "
+"supports both link and form navigations."
+msgstr ""
+
+#: src/islands.md:398
+msgid ""
+"Note that without a client-side router, you lose the ability to call "
+"`redirect()` directly from server functions and have them redirect on the "
+"client. This ability is provided by the router. However, you can create your "
+"own minimal version by calling [`set_redirect_hook`](https://docs.rs/leptos/"
+"latest/leptos/server_fn/redirect/fn.set_redirect_hook.html):"
+msgstr ""
+
+#: src/islands.md:404
+msgid ""
+"Now, any server function that calls `redirect()` will be handled on the "
+"client by ordinary page navigation."
+msgstr ""
+
+#: src/islands.md:406
+msgid "Overview"
+msgstr ""
+
+#: src/islands.md:408
 msgid ""
 "This demo may seem pretty basic. It is. But there are a number of immediate "
 "takeaways:"
 msgstr ""
 
-#: src/islands.md:396
+#: src/islands.md:410
 msgid ""
 "**50% WASM binary size reduction**, which means measurable improvements in "
 "time to interactivity and initial load times for clients."
 msgstr ""
 
-#: src/islands.md:397
+#: src/islands.md:411
 msgid ""
 "**Reduced data serialization costs.** Creating a resource and reading it on "
 "the client means you need to serialize the data, so it can be used for "
@@ -645,24 +683,24 @@ msgid ""
 "slowing them down."
 msgstr ""
 
-#: src/islands.md:398
+#: src/islands.md:412
 msgid ""
 "**Easily use server-only APIs** inside a `#[component]` as if it were a "
 "normal, native Rust function running on the server—which, in islands mode, "
 "it is!"
 msgstr ""
 
-#: src/islands.md:399
+#: src/islands.md:413
 msgid ""
 "**Reduced `#[server]`/`create_resource`/`Suspense` boilerplate** for loading "
 "server data."
 msgstr ""
 
-#: src/islands.md:401
+#: src/islands.md:415
 msgid "Future Exploration"
 msgstr ""
 
-#: src/islands.md:403
+#: src/islands.md:417
 msgid ""
 "The `islands` feature reflects work at the cutting edge of what frontend web "
 "frameworks are exploring right now. As it stands, our islands approach is "
@@ -671,25 +709,25 @@ msgid ""
 "seamlessly integrate islands of interactivity."
 msgstr ""
 
-#: src/islands.md:405
+#: src/islands.md:419
 msgid ""
 "There are some small improvements that will be easy to add. For example, we "
 "can do something very much like Astro's View Transitions approach:"
 msgstr ""
 
-#: src/islands.md:407
+#: src/islands.md:421
 msgid ""
 "add client-side routing for islands apps by fetching subsequent navigations "
 "from the server and replacing the HTML document with the new one"
 msgstr ""
 
-#: src/islands.md:408
+#: src/islands.md:422
 msgid ""
 "add animated transitions between the old and new document using the View "
 "Transitions API"
 msgstr ""
 
-#: src/islands.md:409
+#: src/islands.md:423
 msgid ""
 "support explicit persistent islands, i.e., islands that you can mark with "
 "unique IDs (something like `persist:searchbar` on the component in the "
@@ -697,17 +735,17 @@ msgid ""
 "losing their current state"
 msgstr ""
 
-#: src/islands.md:411
+#: src/islands.md:425
 msgid ""
 "There are other, larger architectural changes that I’m [not sold on yet]"
 "(https://github.com/leptos-rs/leptos/issues/1830)."
 msgstr ""
 
-#: src/islands.md:413
+#: src/islands.md:427
 msgid "Additional Information"
 msgstr ""
 
-#: src/islands.md:415
+#: src/islands.md:429
 msgid ""
 "Check out the [`islands` example](https://github.com/leptos-rs/leptos/blob/"
 "main/examples/islands/src/app.rs), [roadmap](https://github.com/leptos-rs/"
@@ -716,19 +754,19 @@ msgid ""
 "discussion."
 msgstr ""
 
-#: src/islands.md:417
+#: src/islands.md:431
 msgid "Demo Code"
 msgstr ""
 
-#: src/islands.md:425 src/islands.md:444
+#: src/islands.md:439 src/islands.md:458
 msgid "\"background-color: lightblue; padding: 10px\""
 msgstr ""
 
-#: src/islands.md:430
+#: src/islands.md:444
 msgid "/// Renders the home page of your application.\n"
 msgstr ""
 
-#: src/islands.md:481
+#: src/islands.md:495
 msgid ""
 "\"display: flex; width: 100%; justify-content: space-around;\\\n"
 "            background-color: lightgreen; padding: 10px;\""
