@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-03-24T09:28:32Z\n"
+"POT-Creation-Date: 2026-10-06T15:03:15Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -100,12 +100,12 @@ msgid ""
 msgstr ""
 
 #: src/view/06_control_flow.md:56 src/view/06_control_flow.md:107
-#: src/view/06_control_flow.md:329
+#: src/view/06_control_flow.md:331
 msgid "\"Odd\""
 msgstr ""
 
 #: src/view/06_control_flow.md:58 src/view/06_control_flow.md:108
-#: src/view/06_control_flow.md:331
+#: src/view/06_control_flow.md:333
 msgid "\"Even\""
 msgstr ""
 
@@ -155,8 +155,8 @@ msgstr ""
 msgid "\"Zero\""
 msgstr ""
 
-#: src/view/06_control_flow.md:106 src/view/06_control_flow.md:230
-#: src/view/06_control_flow.md:258 src/view/06_control_flow.md:365
+#: src/view/06_control_flow.md:106 src/view/06_control_flow.md:231
+#: src/view/06_control_flow.md:260 src/view/06_control_flow.md:367
 msgid "\"One\""
 msgstr ""
 
@@ -274,16 +274,24 @@ msgid ""
 "This won’t compile, because the different HTML elements are different types."
 msgstr ""
 
-#: src/view/06_control_flow.md:233 src/view/06_control_flow.md:262
-#: src/view/06_control_flow.md:370
-msgid "\"Two\""
+#: src/view/06_control_flow.md:230 src/view/06_control_flow.md:259
+msgid "// returns HtmlElement<Pre>\n"
+msgstr ""
+
+#: src/view/06_control_flow.md:234 src/view/06_control_flow.md:263
+msgid "// returns HtmlElement<P>\n"
 msgstr ""
 
 #: src/view/06_control_flow.md:235 src/view/06_control_flow.md:264
+#: src/view/06_control_flow.md:372
+msgid "\"Two\""
+msgstr ""
+
+#: src/view/06_control_flow.md:237 src/view/06_control_flow.md:266
 msgid "// returns HtmlElement<Textarea>\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:242
+#: src/view/06_control_flow.md:244
 msgid ""
 "This strong typing is very powerful, because it enables all sorts of compile-"
 "time optimizations. But it can be a little annoying in conditional logic "
@@ -292,30 +300,22 @@ msgid ""
 "situation:"
 msgstr ""
 
-#: src/view/06_control_flow.md:247
+#: src/view/06_control_flow.md:249
 msgid ""
 "Use the enum `Either` (and `EitherOf3`, `EitherOf4`, etc.) to convert the "
 "different types to the same type."
 msgstr ""
 
-#: src/view/06_control_flow.md:248
+#: src/view/06_control_flow.md:250
 msgid ""
 "Use `.into_any()` to convert multiple types into one typed-erased `AnyView`."
 msgstr ""
 
-#: src/view/06_control_flow.md:250
+#: src/view/06_control_flow.md:252
 msgid "Here’s the same example, with the conversion added:"
 msgstr ""
 
-#: src/view/06_control_flow.md:257
-msgid "// returns HtmlElement<Pre>\n"
-msgstr ""
-
-#: src/view/06_control_flow.md:261
-msgid "// returns HtmlElement<P>\n"
-msgstr ""
-
-#: src/view/06_control_flow.md:271
+#: src/view/06_control_flow.md:273
 msgid ""
 "```admonish sandbox title=\"Live example\" collapsible=true\n"
 "\n"
@@ -337,45 +337,45 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/view/06_control_flow.md:296
+#: src/view/06_control_flow.md:298
 msgid "\"How odd!\""
 msgstr ""
 
-#: src/view/06_control_flow.md:302
+#: src/view/06_control_flow.md:304
 msgid "\"Control Flow\""
 msgstr ""
 
-#: src/view/06_control_flow.md:304
+#: src/view/06_control_flow.md:306
 msgid "// Simple UI to update and show a value\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:306
+#: src/view/06_control_flow.md:308
 msgid "\"+1\""
 msgstr ""
 
-#: src/view/06_control_flow.md:308
+#: src/view/06_control_flow.md:310
 msgid "\"Value is: \""
 msgstr ""
 
-#: src/view/06_control_flow.md:312
+#: src/view/06_control_flow.md:314
 msgid "\"Option<T>\""
 msgstr ""
 
-#: src/view/06_control_flow.md:313
+#: src/view/06_control_flow.md:315
 msgid ""
 "// For any `T` that implements `IntoView`,\n"
 "        // so does `Option<T>`\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:317
+#: src/view/06_control_flow.md:319
 msgid "// This means you can use `Option` methods on it\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:320
+#: src/view/06_control_flow.md:322
 msgid "\"Conditional Logic\""
 msgstr ""
 
-#: src/view/06_control_flow.md:321
+#: src/view/06_control_flow.md:323
 msgid ""
 "// You can do dynamic conditional if-then-else\n"
 "        // logic in several ways\n"
@@ -385,7 +385,7 @@ msgid ""
 "        //    changes, which makes it good for lightweight UI\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:335
+#: src/view/06_control_flow.md:337
 msgid ""
 "// b. Toggling some kind of class\n"
 "        //    This is smart for an element that's going to\n"
@@ -394,11 +394,11 @@ msgid ""
 "        //    (you can find the `hidden` class in `index.html`)\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:340
+#: src/view/06_control_flow.md:342
 msgid "\"Appears if even.\""
 msgstr ""
 
-#: src/view/06_control_flow.md:342
+#: src/view/06_control_flow.md:344
 msgid ""
 "// c. The <Show/> component\n"
 "        //    This only renders the fallback and the child\n"
@@ -407,29 +407,29 @@ msgid ""
 "        //    than a {move || if ...} block\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:348
+#: src/view/06_control_flow.md:350
 msgid "\"Even steven\""
 msgstr ""
 
-#: src/view/06_control_flow.md:350
+#: src/view/06_control_flow.md:352
 msgid "\"Oddment\""
 msgstr ""
 
-#: src/view/06_control_flow.md:353
+#: src/view/06_control_flow.md:355
 msgid ""
 "// d. Because `bool::then()` converts a `bool` to\n"
 "        //    `Option`, you can use it to create a show/hide toggled\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:355
+#: src/view/06_control_flow.md:357
 msgid "\"Oddity!\""
 msgstr ""
 
-#: src/view/06_control_flow.md:357
+#: src/view/06_control_flow.md:359
 msgid "\"Converting between Types\""
 msgstr ""
 
-#: src/view/06_control_flow.md:358
+#: src/view/06_control_flow.md:360
 msgid ""
 "// e. Note: if branches return different types,\n"
 "        //    you can convert between them with\n"
@@ -437,11 +437,11 @@ msgid ""
 "        //    (`Either`, `EitherOf3`, `EitherOf4`, etc.)\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:364
+#: src/view/06_control_flow.md:366
 msgid "// <pre> returns HtmlElement<Pre>\n"
 msgstr ""
 
-#: src/view/06_control_flow.md:368
+#: src/view/06_control_flow.md:370
 msgid ""
 "// <p> returns HtmlElement<P>\n"
 "                // so we convert into a more generic type\n"
