@@ -37,9 +37,9 @@
     "branch" : "main",
     "commit" : 
     {
-      "date" : "2026-08-08 10:38:32 -0400",
-      "hash" : "3d65eecabfb0a4bc93d41bb803b67103828f051a",
-      "title" : "Fix: Add `--locked` flag when installing trunk in GettingStarted/Readme.md (#269)"
+      "date" : "2026-10-10 11:19:05 -0400",
+      "hash" : "98defa4e964102e0b43ba75ef8f3593e7860290f",
+      "title" : "3.10: Make header consistent with sidebar (#275)"
     }
   },
   "type" : "branch",
