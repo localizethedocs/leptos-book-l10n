@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-03-24T09:28:32Z\n"
+"POT-Creation-Date: 2026-10-20T13:39:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -93,7 +93,8 @@ msgstr ""
 #: src/testing.md:62
 msgid ""
 "This is a fairly simple manual testing setup that uses the [`wasm-pack test`]"
-"(https://rustwasm.github.io/wasm-pack/book/commands/test.html) command."
+"(https://wasm-bindgen.github.io/wasm-pack/book/commands/test.html#wasm-pack-"
+"test) command."
 msgstr ""
 
 #: src/testing.md:64 src/testing.md:142
