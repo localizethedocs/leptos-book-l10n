@@ -37,9 +37,9 @@
     "branch" : "main",
     "commit" : 
     {
-      "date" : "2026-08-08 10:38:32 -0400",
-      "hash" : "3d65eecabfb0a4bc93d41bb803b67103828f051a",
-      "title" : "Fix: Add `--locked` flag when installing trunk in GettingStarted/Readme.md (#269)"
+      "date" : "2026-10-16 17:03:58 -0400",
+      "hash" : "c573962ab3a3a936b02e1811e8dd0d57d3127b0f",
+      "title" : "chore: type (close #277)"
     }
   },
   "type" : "branch",
