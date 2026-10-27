@@ -109,8 +109,8 @@ msgstr ""
 
 #: src/view/04_iteration.md:98
 msgid ""
-"The [`<For/>`](https://docs.rs/leptos/latest/leptos/control_flow/fn.For."
-"html) component is a keyed dynamic list. It takes three props:"
+"The [`<For/>`](https://docs.rs/leptos/latest/leptos/control_flow/"
+"fn.For.html) component is a keyed dynamic list. It takes three props:"
 msgstr ""
 
 #: src/view/04_iteration.md:101

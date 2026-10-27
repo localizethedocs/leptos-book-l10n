@@ -118,12 +118,12 @@ msgstr ""
 
 #: src/view/builder.md:48
 msgid ""
-"Similarly, the `class:`, `prop:`, and `style:` syntaxes map directly onto [`."
-"class()`](https://docs.rs/leptos/latest/leptos/attr/global/trait."
-"ClassAttribute.html#tymethod.class), [`.prop()`](https://docs.rs/leptos/"
-"latest/leptos/attr/global/trait.PropAttribute.html#tymethod.prop), and [`."
-"style()`](https://docs.rs/leptos/latest/leptos/attr/global/trait."
-"StyleAttribute.html#tymethod.style) methods."
+"Similarly, the `class:`, `prop:`, and `style:` syntaxes map directly onto "
+"[`.class()`](https://docs.rs/leptos/latest/leptos/attr/global/"
+"trait.ClassAttribute.html#tymethod.class), [`.prop()`](https://docs.rs/"
+"leptos/latest/leptos/attr/global/trait.PropAttribute.html#tymethod.prop), "
+"and [`.style()`](https://docs.rs/leptos/latest/leptos/attr/global/"
+"trait.StyleAttribute.html#tymethod.style) methods."
 msgstr ""
 
 #: src/view/builder.md:50

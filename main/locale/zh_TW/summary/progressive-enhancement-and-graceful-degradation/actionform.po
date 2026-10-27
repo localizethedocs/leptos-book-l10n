@@ -17,10 +17,10 @@ msgstr ""
 
 #: src/progressive_enhancement/action_form.md:3
 msgid ""
-"[`<ActionForm/>`](https://docs.rs/leptos/latest/leptos/form/fn.ActionForm."
-"html) is a specialized `<Form/>` that takes a server action, and "
-"automatically dispatches it on form submission. This allows you to call a "
-"server function directly from a `<form>`, even without JS/WASM."
+"[`<ActionForm/>`](https://docs.rs/leptos/latest/leptos/form/"
+"fn.ActionForm.html) is a specialized `<Form/>` that takes a server action, "
+"and automatically dispatches it on form submission. This allows you to call "
+"a server function directly from a `<form>`, even without JS/WASM."
 msgstr ""
 
 #: src/progressive_enhancement/action_form.md:5
@@ -30,8 +30,8 @@ msgstr ""
 #: src/progressive_enhancement/action_form.md:7
 msgid ""
 "Define a server function using the [`#[server]` macro](https://docs.rs/"
-"leptos/latest/leptos/attr.server.html) (see [Server Functions](../"
-"server/25_server_functions.md).)"
+"leptos/latest/leptos/attr.server.html) (see [Server Functions](../server/"
+"25_server_functions.md).)"
 msgstr ""
 
 #: src/progressive_enhancement/action_form.md:8
@@ -123,9 +123,9 @@ msgstr ""
 
 #: src/progressive_enhancement/action_form.md:47
 msgid ""
-"The [`FromFormData`](https://docs.rs/leptos/latest/leptos/form/trait."
-"FromFormData.html) trait can be helpful here, for attempting to parse your "
-"server function’s data type from the submitted form."
+"The [`FromFormData`](https://docs.rs/leptos/latest/leptos/form/"
+"trait.FromFormData.html) trait can be helpful here, for attempting to parse "
+"your server function’s data type from the submitted form."
 msgstr ""
 
 #: src/progressive_enhancement/action_form.md:52

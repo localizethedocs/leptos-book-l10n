@@ -46,16 +46,16 @@ msgstr ""
 
 #: src/router/18_params_and_queries.md:14
 msgid ""
-"[`use_query`](https://docs.rs/leptos_router/latest/leptos_router/hooks/fn."
-"use_query.html) or [`use_query_map`](https://docs.rs/leptos_router/latest/"
+"[`use_query`](https://docs.rs/leptos_router/latest/leptos_router/hooks/"
+"fn.use_query.html) or [`use_query_map`](https://docs.rs/leptos_router/latest/"
 "leptos_router/hooks/fn.use_query_map.html)"
 msgstr ""
 
 #: src/router/18_params_and_queries.md:15
 msgid ""
-"[`use_params`](https://docs.rs/leptos_router/latest/leptos_router/hooks/fn."
-"use_params.html) or [`use_params_map`](https://docs.rs/leptos_router/latest/"
-"leptos_router/hooks/fn.use_params_map.html)"
+"[`use_params`](https://docs.rs/leptos_router/latest/leptos_router/hooks/"
+"fn.use_params.html) or [`use_params_map`](https://docs.rs/leptos_router/"
+"latest/leptos_router/hooks/fn.use_params_map.html)"
 msgstr ""
 
 #: src/router/18_params_and_queries.md:17
@@ -82,8 +82,8 @@ msgstr ""
 
 #: src/router/18_params_and_queries.md:38
 msgid ""
-"Note: The `Params` derive macro is located at `leptos_router::params::"
-"Params`."
+"Note: The `Params` derive macro is located at "
+"`leptos_router::params::Params`."
 msgstr ""
 
 #: src/router/18_params_and_queries.md:40

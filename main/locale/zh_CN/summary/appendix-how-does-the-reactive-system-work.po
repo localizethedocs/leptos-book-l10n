@@ -413,8 +413,8 @@ msgid ""
 "marked `Dirty` when it updates, even if its new value is the same as the old "
 "value. Otherwise, we’d have to require `PartialEq` on signals, and this is "
 "actually quite an expensive check on some types. (For example, add an "
-"unnecessary equality check to something like `some_vec_signal.update(|n| n."
-"pop())` when it’s clear that it has in fact changed.)"
+"unnecessary equality check to something like `some_vec_signal.update(|n| "
+"n.pop())` when it’s clear that it has in fact changed.)"
 msgstr ""
 
 #: src/appendix_reactive_graph.md:211

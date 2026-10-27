@@ -84,9 +84,9 @@ msgstr ""
 
 #: src/deployment/sub_path.md:34
 msgid ""
-"If you’re using server rendering, the [`<HydrationScripts/>`](https://docs."
-"rs/leptos/latest/leptos/hydration/fn.HydrationScripts.html) component is "
-"responsible for loading the JS/WASM to hydrate the app. This has its own "
+"If you’re using server rendering, the [`<HydrationScripts/>`](https://"
+"docs.rs/leptos/latest/leptos/hydration/fn.HydrationScripts.html) component "
+"is responsible for loading the JS/WASM to hydrate the app. This has its own "
 "`root` prop that specifies the base path for the hydration scripts. If they "
 "are also being served from a subdirectory, you should include that base path "
 "as the `root` prop."

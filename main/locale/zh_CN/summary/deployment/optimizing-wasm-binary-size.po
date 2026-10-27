@@ -48,8 +48,8 @@ msgstr ""
 
 #: src/deployment/binary_size.md:12
 msgid ""
-"For a `cargo-leptos` project, for example, you can add this to your `Cargo."
-"toml`:"
+"For a `cargo-leptos` project, for example, you can add this to your "
+"`Cargo.toml`:"
 msgstr ""
 
 #: src/deployment/binary_size.md:14
@@ -136,10 +136,10 @@ msgstr ""
 
 #: src/deployment/binary_size.md:54
 msgid ""
-"And you'll need to add `panic = \"abort\"` to `[profile.release]` in `Cargo."
-"toml`. Note that this applies the same `build-std` and panic settings to "
-"your server binary, which may not be desirable. Some further exploration is "
-"probably needed here."
+"And you'll need to add `panic = \"abort\"` to `[profile.release]` in "
+"`Cargo.toml`. Note that this applies the same `build-std` and panic settings "
+"to your server binary, which may not be desirable. Some further exploration "
+"is probably needed here."
 msgstr ""
 
 #: src/deployment/binary_size.md:56
@@ -149,10 +149,10 @@ msgid ""
 "serialize and deserialize resources created with `Resource::new()`. "
 "`leptos_server` includes additional features to activate alternative "
 "encodings by adding additional `new_` methods. For example, activating the "
-"`miniserde` feature on the `leptos_server` crate adds a `Resource::"
-"new_miniserde()` method, and the `serde-lite` feature adds `new_serde_lite`. "
-"`miniserde` and `serde-lite` only implement subsets of `serde`’s "
-"functionality, but typically optimize for binary size over speed."
+"`miniserde` feature on the `leptos_server` crate adds a "
+"`Resource::new_miniserde()` method, and the `serde-lite` feature adds "
+"`new_serde_lite`. `miniserde` and `serde-lite` only implement subsets of "
+"`serde`’s functionality, but typically optimize for binary size over speed."
 msgstr ""
 
 #: src/deployment/binary_size.md:58
@@ -204,8 +204,8 @@ msgid ""
 "(serve|watch|build) --split`, the [`#[lazy]`](https://docs.rs/leptos/latest/"
 "leptos/attr.lazy.html) macro, and the [`#[lazy_route]`](https://docs.rs/"
 "leptos_router/latest/leptos_router/attr.lazy_route.html) macro (paired with "
-"the [`LazyRoute`](https://docs.rs/leptos_router/latest/leptos_router/trait."
-"LazyRoute.html) trait)."
+"the [`LazyRoute`](https://docs.rs/leptos_router/latest/leptos_router/"
+"trait.LazyRoute.html) trait)."
 msgstr ""
 
 #: src/deployment/binary_size.md:70
@@ -291,8 +291,8 @@ msgstr ""
 
 #: src/deployment/binary_size.md:135
 msgid ""
-"You can find more in-depth discussion in [this YouTube video](https://www."
-"youtube.com/watch?v=w5fhcoxQnII), and a full [`lazy_routes`](https://github."
-"com/leptos-rs/leptos/blob/main/examples/lazy_routes/src/app.rs) example in "
-"the repo."
+"You can find more in-depth discussion in [this YouTube video](https://"
+"www.youtube.com/watch?v=w5fhcoxQnII), and a full [`lazy_routes`](https://"
+"github.com/leptos-rs/leptos/blob/main/examples/lazy_routes/src/app.rs) "
+"example in the repo."
 msgstr ""

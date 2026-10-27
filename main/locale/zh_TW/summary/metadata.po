@@ -64,9 +64,9 @@ msgstr ""
 
 #: src/metadata.md:17
 msgid ""
-"[`<Stylesheet/>`](https://docs.rs/leptos_meta/latest/leptos_meta/fn."
-"Stylesheet.html) creates a `<link rel=\"stylesheet\">` with the `href` you "
-"give."
+"[`<Stylesheet/>`](https://docs.rs/leptos_meta/latest/leptos_meta/"
+"fn.Stylesheet.html) creates a `<link rel=\"stylesheet\">` with the `href` "
+"you give."
 msgstr ""
 
 #: src/metadata.md:19

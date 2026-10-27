@@ -45,13 +45,13 @@ msgstr ""
 
 #: src/async/11_suspense.md:40
 msgid ""
-"The [`<Suspense/>`](https://docs.rs/leptos/latest/leptos/suspense/fn."
-"Suspense.html) component lets us do exactly that. You give it a `fallback` "
-"prop and children, one or more of which usually involves reading from a "
-"resource. Reading from a resource “under” a `<Suspense/>` (i.e., in one of "
-"its children) registers that resource with the `<Suspense/>`. If it’s still "
-"waiting for resources to load, it shows the `fallback`. When they’ve all "
-"loaded, it shows the children."
+"The [`<Suspense/>`](https://docs.rs/leptos/latest/leptos/suspense/"
+"fn.Suspense.html) component lets us do exactly that. You give it a "
+"`fallback` prop and children, one or more of which usually involves reading "
+"from a resource. Reading from a resource “under” a `<Suspense/>` (i.e., in "
+"one of its children) registers that resource with the `<Suspense/>`. If it’s "
+"still waiting for resources to load, it shows the `fallback`. When they’ve "
+"all loaded, it shows the children."
 msgstr ""
 
 #: src/async/11_suspense.md:54 src/async/11_suspense.md:85
@@ -78,8 +78,8 @@ msgstr ""
 
 #: src/async/11_suspense.md:72
 msgid ""
-"Using `<Suspense/>` also gives us access to a useful way to directly `."
-"await` resources, allowing us to remove a level of nesting, above. The "
+"Using `<Suspense/>` also gives us access to a useful way to directly "
+"`.await` resources, allowing us to remove a level of nesting, above. The "
 "`Suspend` type lets us create a renderable `Future` which can be used in the "
 "view:"
 msgstr ""

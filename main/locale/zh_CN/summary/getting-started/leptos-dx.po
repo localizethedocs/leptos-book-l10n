@@ -204,8 +204,8 @@ msgstr ""
 
 #: src/getting_started/leptos_dx.md:121
 msgid ""
-"// Settings in here override those in \"LSP-rust-analyzer/LSP-rust-analyzer."
-"sublime-settings\"\n"
+"// Settings in here override those in \"LSP-rust-analyzer/LSP-rust-"
+"analyzer.sublime-settings\"\n"
 msgstr ""
 
 #: src/getting_started/leptos_dx.md:125
@@ -232,8 +232,8 @@ msgstr ""
 msgid ""
 "How to enable these features varies by your IDE, we've listed some common "
 "ones below. If your IDE is not listed, you can usually find the setting by "
-"searching for `rust-analyzer.cargo.features` or `rust-analyzer.cargo."
-"allFeatures`."
+"searching for `rust-analyzer.cargo.features` or `rust-"
+"analyzer.cargo.allFeatures`."
 msgstr ""
 
 #: src/getting_started/leptos_dx.md:137
@@ -340,8 +340,8 @@ msgstr ""
 msgid ""
 "If you wish to set up your editor to work with `leptosfmt`, or if you wish "
 "to customize your `leptosfmt` experience, please see the instructions "
-"available on the [`leptosfmt` github repo's README.md page](https://github."
-"com/bram209/leptosfmt)."
+"available on the [`leptosfmt` github repo's README.md page](https://"
+"github.com/bram209/leptosfmt)."
 msgstr ""
 
 #: src/getting_started/leptos_dx.md:215

@@ -286,8 +286,8 @@ msgid ""
 "Because it offers the best blend of performance characteristics, Leptos "
 "defaults to out-of-order streaming. But it’s really simple to opt into these "
 "different modes. You do it by adding an `ssr` property onto one or more of "
-"your `<Route/>` components, like in the [`ssr_modes` example](https://github."
-"com/leptos-rs/leptos/blob/main/examples/ssr_modes/src/app.rs)."
+"your `<Route/>` components, like in the [`ssr_modes` example](https://"
+"github.com/leptos-rs/leptos/blob/main/examples/ssr_modes/src/app.rs)."
 msgstr ""
 
 #: src/ssr/23_ssr_modes.md:85 src/ssr/23_ssr_modes.md:144
@@ -389,9 +389,9 @@ msgstr ""
 
 #: src/ssr/23_ssr_modes.md:141
 msgid ""
-"Combined with the following route definition, which uses `SsrMode::"
-"PartiallyBlocked`, the blocking resource will be fully rendered on the "
-"server side, making it accessible to users who disable WebAssembly or "
+"Combined with the following route definition, which uses "
+"`SsrMode::PartiallyBlocked`, the blocking resource will be fully rendered on "
+"the server side, making it accessible to users who disable WebAssembly or "
 "JavaScript."
 msgstr ""
 

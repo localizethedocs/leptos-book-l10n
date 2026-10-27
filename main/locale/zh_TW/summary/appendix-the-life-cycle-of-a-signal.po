@@ -256,8 +256,8 @@ msgid ""
 "exactly that!) Using something like an event handler in Rust traditionally "
 "relies on primitives for communicating via shared memory with interior "
 "mutability (`Rc<RefCell<_>>`, `Arc<Mutex<_>>`) or for shared memory by "
-"communicating via channels, either of which often requires explicit `."
-"clone()`ing to be moved into an event listener. This is kind of fine, but "
+"communicating via channels, either of which often requires explicit "
+"`.clone()`ing to be moved into an event listener. This is kind of fine, but "
 "also an enormous inconvenience."
 msgstr ""
 
@@ -346,8 +346,8 @@ msgid ""
 "it down to a `<Todo/>`, that signal is not automatically disposed when you "
 "remove the todo from the list, but must be manually disposed, or it will "
 "\"leak\" for as long as its owner is still alive. (See the [TodoMVC example]"
-"(https://github.com/leptos-rs/leptos/blob/main/examples/todomvc/src/lib."
-"rs#L77-L85) for more discussion.)"
+"(https://github.com/leptos-rs/leptos/blob/main/examples/todomvc/src/"
+"lib.rs#L77-L85) for more discussion.)"
 msgstr ""
 
 #: src/appendix_life_cycle.md:156
@@ -389,9 +389,9 @@ msgstr ""
 
 #: src/appendix_life_cycle.md:168
 msgid ""
-"See the use of `ArcRwSignal<i32>` in the [`counters` example](https://github."
-"com/leptos-rs/leptos/blob/main/examples/counters/src/lib.rs) for a more "
-"concrete example."
+"See the use of `ArcRwSignal<i32>` in the [`counters` example](https://"
+"github.com/leptos-rs/leptos/blob/main/examples/counters/src/lib.rs) for a "
+"more concrete example."
 msgstr ""
 
 #: src/appendix_life_cycle.md:170

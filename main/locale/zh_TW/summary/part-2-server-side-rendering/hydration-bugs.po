@@ -23,8 +23,8 @@ msgstr ""
 msgid ""
 "Let’s try an experiment to test your intuitions. Open up an app you’re "
 "server-rendering with `cargo-leptos`. (If you’ve just been using `trunk` so "
-"far to play with examples, go [clone a `cargo-leptos` template]"
-"(./21_cargo_leptos.md) just for the sake of this exercise.)"
+"far to play with examples, go [clone a `cargo-leptos` template](./"
+"21_cargo_leptos.md) just for the sake of this exercise.)"
 msgstr ""
 
 #: src/ssr/24_hydration_bugs.md:7
@@ -394,9 +394,9 @@ msgid ""
 "In particular, you’ll sometimes see errors about the crate `mio` or missing "
 "things from `core`. This is generally a sign that you are trying to compile "
 "something to WASM that can’t be compiled to WASM. If you’re adding server-"
-"only dependencies, you’ll want to mark them `optional = true` in your `Cargo."
-"toml` and then enable them in the `ssr` feature definition. (Check out one "
-"of the template `Cargo.toml` files to see more details.)"
+"only dependencies, you’ll want to mark them `optional = true` in your "
+"`Cargo.toml` and then enable them in the `ssr` feature definition. (Check "
+"out one of the template `Cargo.toml` files to see more details.)"
 msgstr ""
 
 #: src/ssr/24_hydration_bugs.md:244

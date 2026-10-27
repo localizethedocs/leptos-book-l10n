@@ -265,13 +265,14 @@ msgstr ""
 
 #: src/deployment/ssr.md:158
 msgid ""
-"One option for deploying your Leptos SSR app is to use a service like [Fly."
-"io](https://fly.io/), which takes a Dockerfile definition of your Leptos app "
-"and runs it in a quick-starting micro-VM; Fly also offers a variety of "
-"storage options and managed DBs to use with your projects. The following "
-"example will show how to deploy a simple Leptos starter app, just to get you "
-"up and going; [see here for more about working with storage options on Fly."
-"io](https://fly.io/docs/database-storage-guides/) if and when required."
+"One option for deploying your Leptos SSR app is to use a service like "
+"[Fly.io](https://fly.io/), which takes a Dockerfile definition of your "
+"Leptos app and runs it in a quick-starting micro-VM; Fly also offers a "
+"variety of storage options and managed DBs to use with your projects. The "
+"following example will show how to deploy a simple Leptos starter app, just "
+"to get you up and going; [see here for more about working with storage "
+"options on Fly.io](https://fly.io/docs/database-storage-guides/) if and when "
+"required."
 msgstr ""
 
 #: src/deployment/ssr.md:160

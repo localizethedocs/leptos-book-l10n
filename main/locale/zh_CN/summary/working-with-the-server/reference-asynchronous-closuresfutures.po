@@ -195,8 +195,8 @@ msgid ""
 "standalone endpoint handlers, thus they will run without any of the contexts "
 "that the application have set up.  Hence the use of `expect_context` and "
 "`use_context` on types that are set up by the application will not work, "
-"unless the values were provided to context by `."
-"leptos_routes_with_context()`."
+"unless the values were provided to context by "
+"`.leptos_routes_with_context()`."
 msgstr ""
 
 #: src/server/28_async_quick_reference.md:23

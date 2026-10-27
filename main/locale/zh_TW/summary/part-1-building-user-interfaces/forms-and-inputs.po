@@ -50,8 +50,8 @@ msgid ""
 "The `value` _attribute_ only sets the initial value of the input, i.e., it "
 "only updates the input up to the point that you begin typing. The `value` "
 "_property_ continues updating the input after that. You usually want to set "
-"`prop:value` for this reason. (The same is true for `checked` and `prop:"
-"checked` on an `<input type=\"checkbox\">`.)"
+"`prop:value` for this reason. (The same is true for `checked` and "
+"`prop:checked` on an `<input type=\"checkbox\">`.)"
 msgstr ""
 
 #: src/view/05_forms.md:26 src/view/05_forms.md:80 src/view/05_forms.md:296
@@ -191,9 +191,9 @@ msgid ""
 "Leptos also includes a special `bind:` syntax for inputs that allows you to "
 "automatically bind signals to inputs. They do exactly the same thing as the "
 "“controlled input” pattern above: create an event listener that updates the "
-"signal, and a dynamic property that reads from the signal. You can use `bind:"
-"value` for text inputs, `bind:checked` for checkboxes, and `bind:group` for "
-"radio button groups."
+"signal, and a dynamic property that reads from the signal. You can use "
+"`bind:value` for text inputs, `bind:checked` for checkboxes, and "
+"`bind:group` for radio button groups."
 msgstr ""
 
 #: src/view/05_forms.md:81

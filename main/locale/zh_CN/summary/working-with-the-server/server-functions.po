@@ -156,9 +156,9 @@ msgstr ""
 
 #: src/server/25_server_functions.md:67
 msgid ""
-"Server functions are created by using the [`#[server]` macro](https://docs."
-"rs/leptos/latest/leptos/attr.server.html) to annotate a top-level function, "
-"which can be defined anywhere."
+"Server functions are created by using the [`#[server]` macro](https://"
+"docs.rs/leptos/latest/leptos/attr.server.html) to annotate a top-level "
+"function, which can be defined anywhere."
 msgstr ""
 
 #: src/server/25_server_functions.md:69

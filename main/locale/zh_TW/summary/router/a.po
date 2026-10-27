@@ -106,8 +106,8 @@ msgstr ""
 msgid ""
 "On occasion, though, you’ll want to navigate programmatically, i.e., call a "
 "function that can navigate to a new page. In that case, you should use the "
-"[`use_navigate`](https://docs.rs/leptos_router/latest/leptos_router/hooks/fn."
-"use_navigate.html) function."
+"[`use_navigate`](https://docs.rs/leptos_router/latest/leptos_router/hooks/"
+"fn.use_navigate.html) function."
 msgstr ""
 
 #: src/router/19_a.md:29

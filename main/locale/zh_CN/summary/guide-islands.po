@@ -47,8 +47,8 @@ msgstr ""
 
 #: src/islands.md:11
 msgid ""
-"You can read more in the chapters on [server-side rendering](./"
-"ssr/22_life_cycle.md)."
+"You can read more in the chapters on [server-side rendering](./ssr/"
+"22_life_cycle.md)."
 msgstr ""
 
 #: src/islands.md:13

@@ -233,10 +233,10 @@ msgstr ""
 
 #: src/15_global_state.md:133
 msgid ""
-"Clicking this button only updates `state.count`. If we read from `state."
-"name` somewhere else, click the button won’t notify it. This allows you to "
-"combine the benefits of a top-down data flow and of fine-grained reactive "
-"updates."
+"Clicking this button only updates `state.count`. If we read from "
+"`state.name` somewhere else, click the button won’t notify it. This allows "
+"you to combine the benefits of a top-down data flow and of fine-grained "
+"reactive updates."
 msgstr ""
 
 #: src/15_global_state.md:137
